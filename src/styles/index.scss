@@ -1,0 +1,55 @@
+body,
+html,
+input,
+h1,
+h2,
+h3,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  scroll-behavior: smooth;
+  background-color: #fff;
+  position: relative;
+  font-size: 12px;
+}
+
+.Page__Wrap {
+  min-height: calc(100vh - 57px - 369px);
+}
+
+.cover {
+  position: absolute;
+  top: 3.5rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #101010;
+  opacity: 0.3;
+  z-index: 3;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-button {
+  height: 0;
+  background-color: #a8a7a7;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a6a6a6;
+}
+

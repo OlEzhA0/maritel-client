@@ -1,0 +1,220 @@
+@import "../../styles/vars.scss";
+
+.HambMenu {
+  &__Stick {
+    width: 16px;
+    height: 3px;
+    background-color: #101010;
+    position: relative;
+
+    &::after,
+    &::before {
+      width: 16px;
+      height: 3px;
+      content: "";
+      position: absolute;
+      background-color: #101010;
+      left: 0;
+      box-sizing: border-box;
+      transition: all 0.3s;
+    }
+
+    &::after {
+      top: -180%;
+    }
+
+    &::before {
+      top: 180%;
+    }
+
+    &--open {
+      transform: rotate(45deg);
+
+      &::after {
+        transform: rotate(90deg);
+        top: 0;
+      }
+
+      &::before {
+        transform: rotate(0);
+        top: 0;
+      }
+    }
+  }
+
+  &__Wrapper {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  &__Menu {
+    overflow: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+    width: 27.5rem;
+    transform: translateX(-30rem);
+    transition: all 0.3s;
+    height: calc(100vh - 3.5rem);
+    background-color: #fff;
+    z-index: 4;
+    &--open {
+      transform: translateX(0);
+    }
+  }
+
+  &__List {
+    list-style-type: none;
+    box-sizing: border-box;
+    padding-top: 28px;
+    transition: all 0.3s;
+    &--close {
+      position: absolute;
+      transform: translateX(-30rem);
+    }
+  }
+
+  &__Item {
+    box-sizing: border-box;
+    padding: 0 16px;
+    margin-bottom: 24px;
+  }
+
+  &__Categ {
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    color: #101010;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &__ChoosedCateg {
+    transform: translateX(30rem);
+    transition: all 0.3s;
+    box-sizing: border-box;
+    padding-top: 23px;
+    position: absolute;
+    top: 0;
+
+    &--open {
+      position: relative;
+      transform: translateX(0);
+    }
+  }
+
+  &__Back {
+    display: flex;
+    height: 3rem;
+    width: 100%;
+    align-items: center;
+    font-size: 12px;
+
+    &:hover {
+      background-color: rgba($color: #010101, $alpha: 0.05);
+      cursor: pointer;
+    }
+  }
+
+  &__BackArrow {
+    margin-right: 10px;
+    transform: rotate(180deg);
+  }
+
+  &__SubGeneral {
+    color: #101010;
+    box-sizing: border-box;
+    padding: 0 16px;
+    letter-spacing: 0.08em;
+    font-weight: 800;
+  }
+
+  &__Main {
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    color: #101010;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  &__SubLink {
+    color: #101010;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 17px 0;
+
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__SubLinkMain {
+    padding: 15px 16px 18px;
+    transition: all 0.3s;
+    position: relative;
+    &:hover {
+      background-color: rgba($color: #010101, $alpha: 0.05);
+      cursor: pointer;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: #ccc;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  &__SubItem {
+    text-transform: uppercase;
+    font-size: 14px;
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: "";
+      height: 1px;
+      width: 100%;
+      background-color: #ccc;
+      bottom: 0;
+      left: 0;
+    }
+
+    &:hover {
+      background-color: rgba($color: #010101, $alpha: 0.05);
+    }
+  }
+  &__Settings {
+    margin-top: 45px;
+  }
+
+  &__SettingsLink {
+    display: flex;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: #101010;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 16px;
+  }
+
+  &__SettingsItem {
+    margin-bottom: 2rem;
+  }
+}

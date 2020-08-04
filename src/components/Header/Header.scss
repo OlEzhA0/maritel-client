@@ -1,0 +1,228 @@
+@import "../../styles/vars.scss";
+
+.Header {
+  width: 100%;
+  height: 4.75rem;
+
+  @media screen and (max-width: 768px) {
+    height: 3.5rem;
+  }
+
+  &__Nav {
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__MainPC {
+    height: 4.75rem;
+    display: flex;
+    padding: 0 2.5rem;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    position: relative;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__Phone {
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    height: 100%;
+    justify-content: space-between;
+    position: relative;
+
+    @media screen and (min-width: 769px) {
+      display: none;
+    }
+  }
+
+  &__Title {
+    font-weight: bold;
+    letter-spacing: 0.16em;
+    color: #101010;
+    text-transform: uppercase;
+  }
+
+  &__Logo {
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @media screen and (max-width: 768px) {
+      top: 6px;
+    }
+  }
+
+  &__LogoImg {
+    width: 9rem;
+    height: 3.75rem;
+
+    @media screen and (max-width: 768px) {
+      width: 5rem;
+      height: 2rem;
+    }
+  }
+
+  &__General {
+    display: flex;
+    align-items: center;
+  }
+
+  &__GeneralSearch {
+    display: flex;
+  }
+
+  &__Search {
+    width: 6rem;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin-right: 4px;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    background-color: #fff;
+    position: relative;
+
+    &:focus {
+      border-bottom: 1px solid #101010;
+      width: 19rem;
+
+      @media screen and (max-width: 930px) {
+        width: 10rem;
+      }
+    }
+  }
+
+  &__MobileSearch {
+    position: absolute;
+    width: 100vw;
+    left: 0;
+    top: 100%;
+    transform: translateX(-200%);
+    height: 100%;
+    background-color: #000;
+    transition: all 0.5s;
+    z-index: 5;
+    box-sizing: border-box;
+    padding: 0 16px;
+    color: #fff;
+    border: 0;
+    outline: 0;
+
+    &--open {
+      transform: translateX(0);
+    }
+
+    &::placeholder {
+      color: rgb(204, 202, 202);
+    }
+  }
+
+  &__Login {
+    font-weight: bold;
+    color: #101010;
+    letter-spacing: 0.16em;
+    margin: 0 2rem;
+    text-decoration: none;
+  }
+
+  &__Cart {
+    width: 18px;
+    height: 22.5px;
+
+    &--mobile {
+      margin-right: 24px;
+    }
+  }
+
+  &__Nav {
+    height: 5rem;
+    background-color: #101010;
+    opacity: 0.9;
+    box-sizing: border-box;
+  }
+
+  &__NavList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    list-style-type: none;
+  }
+
+  &__NavItem {
+    height: 100%;
+    position: relative;
+  }
+
+  &__NavLink {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 0.16em;
+    color: #ffffff;
+    opacity: 0.5;
+    box-sizing: border-box;
+    padding: 0 2.5rem;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    font-size: 1rem;
+
+    &--hover {
+      font-size: 1rem;
+      opacity: 1;
+      font-weight: bold;
+    }
+
+    &:hover,
+    &--hovered {
+      opacity: 0.95;
+      color: #bb2a36;
+      background-color: #000;
+    }
+  }
+
+  &__NavSubList {
+    min-width: 100%;
+    white-space: nowrap;
+    position: absolute;
+    box-sizing: border-box;
+    padding: 2.5rem;
+    list-style-type: none;
+    background-color: #101010;
+    opacity: 0.98;
+  }
+
+  &__NavSubItem {
+    margin-bottom: 24px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__NavSubLink {
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    font-weight: normal;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      color: #bb2a36;
+    }
+  }
+
+  &__SearchIcon {
+    cursor: pointer;
+  }
+}
