@@ -1,4 +1,9 @@
-import { SET_CATEGORIES, SET_SPEC_CATEGORIES, SET_BACKGROUND } from "./actions";
+import {
+  SET_CATEGORIES,
+  SET_SPEC_CATEGORIES,
+  SET_BACKGROUND,
+  SET_PRODUCTS,
+} from "./actions";
 
 export const setCategories = (categories: CategoriesTypes[]) => ({
   type: SET_CATEGORIES,
@@ -13,4 +18,9 @@ export const setSpecCategories = (categories: SpecProdsCategory[]) => ({
 export const setMenuStatus = (status: boolean) => ({
   type: SET_BACKGROUND,
   status,
+});
+
+export const setProducts = (products: Products[]) => ({
+  type: SET_PRODUCTS,
+  products,
 });

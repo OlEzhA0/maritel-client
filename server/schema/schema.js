@@ -10,10 +10,33 @@ const {
   GraphQLID,
 } = graphql;
 
+const Product = require('../models/product');
 
 const Category = require('../models/category');
 const SpecCategs = require('../models/specCategs');
 const Subscr = require('../models/subscrByMail')
+
+const ProductType = new GraphQLObjectType({
+  name: 'Product',
+  fields: () => ({
+    id: { type: GraphQLID },
+    uuid: { type: GraphQLString },
+    title: { type: GraphQLString },
+    descr: { type: GraphQLString },
+    color: { type: GraphQLString },
+    price: { type: GraphQLString },
+    gender: { type: GraphQLString },
+    modelParam: { type: GraphQLString },
+    care: { type: GraphQLString },
+    composition: { type: GraphQLString },
+    sizes: { type: GraphQLString },
+    lastPrice: { type: GraphQLString },
+    type: { type: GraphQLString },
+    photos: { type: new GraphQLList(GraphQLString) },
+    previewPhoto: { type: GraphQLString },
+    timestamp: { type: GraphQLString },
+  }),
+});
 
 const SpecCategType = new GraphQLObjectType({
   name: "SpecCateg",
@@ -74,7 +97,20 @@ const Query = new GraphQLObjectType({
       resolve() {
         return SpecCategs.find({})
       }
-    }
+    },
+    product: {
+      type: ProductType,
+      args: { uuid: { type: GraphQLString } },
+      resolve(parent, args) {
+        return Product.findOne({ uuid: args.uuid, });
+      },
+    },
+    products: {
+      type: new GraphQLList(ProductType),
+      resolve() {
+        return Product.find({});
+      },
+    },
   }
 })
 

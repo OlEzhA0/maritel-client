@@ -4,11 +4,13 @@ import thunk from "redux-thunk";
 import CategoriesReducer from "./categories";
 import SpecCategoriesReducer from "./specCategories";
 import BackgroundCoverReducer from "./mobileMenu";
+import ProductsReducer from "./products";
 
 const rootReducer = combineReducers({
   categories: CategoriesReducer,
   specCategories: SpecCategoriesReducer,
   background: BackgroundCoverReducer,
+  products: ProductsReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

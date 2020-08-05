@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
-import { getCategoriesQuery, getSpecCategQuery } from "./helpers";
+import {
+  getCategoriesQuery,
+  getSpecCategQuery,
+  productsQuery,
+} from "./helpers";
 import { HomePage } from "./pages";
 import {
   setCategories,
@@ -15,6 +19,7 @@ import { getMenuStatus } from "./store/actionsTypes";
 import "./styles/index.scss";
 
 function App() {
+  const products = useQuery(productsQuery);
   const { data } = useQuery(getCategoriesQuery);
   const specCategs = useQuery(getSpecCategQuery);
   const dispatch = useDispatch();
@@ -45,6 +50,7 @@ function App() {
 
   useEffect(() => {
     if (data && data.categories) {
+      console.log(data.categories);
       const categories: CategoriesTypes[] = data.categories.map(
         (category: CategoriesFromDB) => ({
           ...category,
@@ -58,7 +64,7 @@ function App() {
         )
       );
     }
-  }, [data, dispatch]);
+  }, [data, dispatch, products]);
 
   useEffect(() => {
     if (specCategs.data && specCategs.data.getSpecCateg) {

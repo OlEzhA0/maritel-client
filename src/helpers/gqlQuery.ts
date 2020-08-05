@@ -20,3 +20,48 @@ export const getSpecCategQuery = gql`
   }
 `;
 
+export const productsQuery = gql`
+  query productsQuery {
+    products {
+      id
+      uuid
+      title
+      descr
+      color
+      price
+      gender
+      modelParam
+      composition
+      sizes
+      lastPrice
+      type
+      care
+      photos
+      previewPhoto
+      timestamp
+    }
+  }
+`;
+
+export const productQuery = gql`
+  query productQuery($uuid: String!) {
+    product(uuid: $uuid) {
+      id
+      uuid
+      title
+      descr
+      color
+      price
+      gender
+      modelParam
+      composition
+      sizes
+      lastPrice
+      care
+      type
+      photos
+      previewPhoto
+      timestamp
+    }
+  }
+`;
