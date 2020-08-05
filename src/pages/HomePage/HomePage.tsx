@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { getCategories, getSpecCateg } from "../../store/actionsTypes";
 import { Link } from "react-router-dom";
 import { SubscribeByMail } from "../../components/SubscribeByMail";
+import { BackgroundMainImg } from "../../components/BackgroundMainImg";
 
 export const HomePage = () => {
   const categories = useSelector(getCategories);
@@ -12,9 +13,7 @@ export const HomePage = () => {
   return (
     <div className="HomePage">
       <div className="HomePage__BackgroundWrap">
-        <div className="HomePage__ImgWrap">
-          <div className="HomePage__BackImg" />
-        </div>
+        <BackgroundMainImg />
         <ul className="HomePage__List">
           {categories.map((categ) => (
             <li key={categ.id} className="HomePage__Item">
