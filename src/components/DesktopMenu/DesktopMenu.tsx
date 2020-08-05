@@ -20,6 +20,7 @@ export const DesktopMenu: React.FC<Props> = ({
 }) => {
   const categories = useSelector(getCategories);
   const specCateg = useSelector(getSpecCateg);
+
   return (
     <nav className="Header__Nav">
       <ul className="Header__NavList">
@@ -57,6 +58,7 @@ export const DesktopMenu: React.FC<Props> = ({
               >
                 {category.subCategories.map((subCateg) => (
                   <li key={subCateg.id} className="Header__NavSubItem">
+                    {console.log(1)}
                     <Link to="/" className="Header__NavSubLink">
                       {subCateg.subs}
                     </Link>

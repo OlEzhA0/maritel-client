@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import { Link } from "react-router-dom";
 import cn from "classnames";
 import { HambMenu } from "../HambMenu";
 import { DesktopMenu } from "../DesktopMenu";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMenuStatus } from "../../store/actionCreators";
+import { getMenuStatus } from "../../store/actionsTypes";
 
 export const Header = () => {
   const [openSearch, setOpenSearch] = useState(false);
@@ -16,6 +17,19 @@ export const Header = () => {
   const [hoveredItem, setHoveredItem] = useState("");
 
   const dispatch = useDispatch();
+  const menuStatus = useSelector(getMenuStatus);
+
+  useEffect(() => {
+    if (menuStatus) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [menuStatus]);
 
   return (
     <header className="Header">

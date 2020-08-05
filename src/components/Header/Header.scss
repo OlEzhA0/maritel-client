@@ -8,6 +8,10 @@
     height: 3.5rem;
   }
 
+  @media screen and (min-width: 769px) {
+    height: 9.75rem;
+  }
+
   &__Nav {
     @media screen and (max-width: 768px) {
       display: none;
@@ -170,7 +174,6 @@
     font-weight: bold;
     letter-spacing: 0.16em;
     color: #ffffff;
-    opacity: 0.5;
     box-sizing: border-box;
     padding: 0 2.5rem;
     text-transform: uppercase;
@@ -179,8 +182,8 @@
 
     &--hover {
       font-size: 1rem;
-      opacity: 1;
       font-weight: bold;
+      opacity: 0.5;
     }
 
     &:hover,
@@ -200,6 +203,7 @@
     list-style-type: none;
     background-color: #101010;
     opacity: 0.98;
+    z-index: 10;
   }
 
   &__NavSubItem {

@@ -1,0 +1,138 @@
+@import "../../styles/vars.scss";
+
+.SubscribeByMail {
+  &__Invite {
+    display: flex;
+    padding: 2rem 0;
+    justify-content: center;
+
+    @media screen and (max-width: 1080px) {
+      flex-direction: column;
+      align-items: center;
+      padding: 4.5rem 0;
+    }
+
+    @media screen and (max-width: 450px) {
+      padding: 40px 16px 50px;
+    }
+  }
+
+  &__Info {
+    margin-right: 5rem;
+
+    @media screen and (max-width: 1080px) {
+      margin-right: 0;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    @media screen and (max-width: 450px) {
+      text-align: start;
+    }
+  }
+
+  &__Title {
+    color: #101010;
+    letter-spacing: 0.08em;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 15px;
+
+    @media screen and (max-width: 1080px) {
+      font-size: 22px;
+    }
+  }
+
+  &__Discount {
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: #101010;
+    opacity: 0.8;
+  }
+
+  &__InputInvite {
+    width: 25.75rem;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid #cccccc;
+    font-size: 14px;
+    color: #101010;
+    padding-left: 10px;
+    outline: 0;
+    transition: all 0.3s;
+
+    &--success {
+      border: 1px solid rgb(60, 209, 60);
+    }
+
+    &::placeholder {
+      color: #969696;
+      opacity: 0.8;
+    }
+
+    @media screen and (max-width: 1080px) {
+      width: 19.25rem;
+    }
+  }
+
+  &__FormWrap {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 11px;
+  }
+
+  &__Form {
+    @media screen and (max-width: 450px) {
+      width: 100%;
+    }
+  }
+
+  &__ButtonInvite {
+    background: #101010;
+    font-weight: 800;
+    font-size: 13px;
+    color: #ffffff;
+    border: 0;
+    outline: 0;
+    height: 40px;
+    padding: 0 38px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    cursor: pointer;
+    @media screen and (max-width: 1080px) {
+      font-size: 10px;
+      padding: 0 14px;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: no-drop;
+    }
+  }
+
+  &__Privacy {
+    display: flex;
+
+    @media screen and (max-width: 1080px) {
+      justify-content: center;
+    }
+
+    @media screen and (max-width: 450px) {
+      justify-content: flex-start;
+    }
+  }
+
+  &__InviteCheckbox {
+    margin-right: 5px;
+    cursor: pointer;
+  }
+
+  &__PrivacyText {
+    font-weight: 500;
+    font-size: 12px;
+    color: #101010;
+    opacity: 0.8;
+  }
+}

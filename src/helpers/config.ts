@@ -49,7 +49,7 @@ export const FOOTER_INFO: FooterInfo[] = [
         link: "/payment",
       },
       {
-        name: "Политика конфиденциальностика",
+        name: "Политика конфиденциальности",
         link: "/privacy-policy",
       },
       {

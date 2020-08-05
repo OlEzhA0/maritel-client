@@ -13,6 +13,7 @@ const {
 
 const Category = require('../models/category');
 const SpecCategs = require('../models/specCategs');
+const Subscr = require('../models/subscrByMail')
 
 const SpecCategType = new GraphQLObjectType({
   name: "SpecCateg",
@@ -30,6 +31,33 @@ const CategoriesType = new GraphQLObjectType({
     category: { type: GraphQLString },
     subCategories: { type: GraphQLString }
   })
+})
+
+const SubscribeType = new GraphQLObjectType({
+  name: "SubscribeByMail",
+  fields: () => ({
+    id: { type: GraphQLID },
+    email: { type: GraphQLString }
+  })
+})
+
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addSubscribe: {
+      type: SubscribeType,
+      args: {
+        email: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, { email }) {
+        const sub = new Subscr({
+          email
+        })
+
+        sub.save()
+      }
+    }
+  }
 })
 
 const Query = new GraphQLObjectType({
@@ -51,5 +79,6 @@ const Query = new GraphQLObjectType({
 })
 
 module.exports = new GraphQLSchema({
+  mutation: Mutation,
   query: Query,
 })
