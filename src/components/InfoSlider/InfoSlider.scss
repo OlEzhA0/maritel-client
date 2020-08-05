@@ -1,0 +1,65 @@
+@import "../../styles/vars.scss";
+
+.InfoSlider {
+  height: 29px;
+  width: 100%;
+  background-color: #fff;
+  transition: all 0.3s;
+  display: flex;
+  justify-content: center;
+
+  &--up {
+    transform: translateY(-5rem);
+  }
+
+  &__Wrap {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 60%;
+    justify-content: space-between;
+
+    @media screen and (max-width: 1048px) {
+      width: 90%;
+    }
+  }
+
+  &__Button {
+    background-color: #fff;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+  }
+
+  &__LeftArr {
+    transform: rotate(-180deg);
+  }
+
+  &__Current {
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #101010;
+    opacity: 0.8;
+    list-style-type: none;
+    white-space: nowrap;
+    min-width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+
+    @media screen and (max-width: 769px) {
+      white-space: normal;
+      text-align: center;
+    }
+  }
+
+  &__List {
+    display: flex;
+    margin: 0;
+  }
+
+  &__Wrapper {
+    overflow: hidden;
+  }
+}

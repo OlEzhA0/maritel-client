@@ -7,8 +7,13 @@ import { DesktopMenu } from "../DesktopMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { setMenuStatus } from "../../store/actionCreators";
 import { getMenuStatus } from "../../store/actionsTypes";
+import { InfoSlider } from "../InfoSlider";
 
-export const Header = () => {
+interface Props {
+  visible: boolean;
+}
+
+export const Header: React.FC<Props> = ({ visible }) => {
   const [openSearch, setOpenSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchPlaceholder, setSearchPlaceholder] = useState("");
@@ -32,8 +37,18 @@ export const Header = () => {
   }, [menuStatus]);
 
   return (
-    <header className="Header">
-      <div className="Header__PC">
+    <header
+      className={cn({
+        Header: true,
+        "Header--desktopFull": visible,
+      })}
+    >
+      <div
+        className={cn({
+          Header__PC: true,
+          "Header__PC--nonVisible": !visible,
+        })}
+      >
         <div className="Header__MainPC">
           <div className="Header__Title">Find a store</div>
           <div className="Header__Logo">
@@ -80,42 +95,51 @@ export const Header = () => {
           isHover={isHover}
           setHoveredItem={setHoveredItem}
           setIsHover={setIsHover}
+          visible={visible}
         />
+        <InfoSlider visible={visible} />
       </div>
 
       <div className="Header__Phone">
-        <HambMenu />
-        <div className="Header__Logo">
-          <Link to="/">
-            <img src="images/logo.svg" alt="logo" className="Header__LogoImg" />
-          </Link>
+        <div className="Header__PhoneWrap">
+          <HambMenu />
+          <div className="Header__Logo">
+            <Link to="/">
+              <img
+                src="images/logo.svg"
+                alt="logo"
+                className="Header__LogoImg"
+              />
+            </Link>
+          </div>
+          <div className="Header__General">
+            <img
+              src="images/header/backet.svg"
+              alt="backet"
+              className="Header__Cart--mobile"
+            />
+            <img
+              src="images/header/zoom.svg"
+              alt="zoom"
+              onClick={() => {
+                setOpenSearch(!openSearch);
+                dispatch(setMenuStatus(false));
+              }}
+              className="Header__SearchIcon"
+            />
+            <input
+              type="text"
+              className={cn({
+                Header__MobileSearch: true,
+                "Header__MobileSearch--open": openSearch,
+              })}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+              placeholder="Что вы ищите?"
+            />
+          </div>
         </div>
-        <div className="Header__General">
-          <img
-            src="images/header/backet.svg"
-            alt="backet"
-            className="Header__Cart--mobile"
-          />
-          <img
-            src="images/header/zoom.svg"
-            alt="zoom"
-            onClick={() => {
-              setOpenSearch(!openSearch);
-              dispatch(setMenuStatus(false));
-            }}
-            className="Header__SearchIcon"
-          />
-          <input
-            type="text"
-            className={cn({
-              Header__MobileSearch: true,
-              "Header__MobileSearch--open": openSearch,
-            })}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            value={searchQuery}
-            placeholder="Что вы ищите?"
-          />
-        </div>
+        <InfoSlider />
       </div>
     </header>
   );

@@ -71,6 +71,10 @@
       opacity: 0.8;
     }
 
+    &:focus {
+      border: 1px solid #bb2a36;
+    }
+
     @media screen and (max-width: 1080px) {
       width: 19.25rem;
     }
@@ -94,16 +98,27 @@
     font-weight: 800;
     font-size: 13px;
     color: #ffffff;
-    border: 0;
+    border: 1px solid #101010;
+    box-sizing: border-box;
     outline: 0;
     height: 40px;
     padding: 0 38px;
     text-transform: uppercase;
-    transition: all 0.3s;
     cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: #fff;
+      color: #101010;
+    }
+
     @media screen and (max-width: 1080px) {
       font-size: 10px;
       padding: 0 14px;
+    }
+
+    &:active {
+      border: 1px solid #bb2a36;
     }
 
     &:disabled {

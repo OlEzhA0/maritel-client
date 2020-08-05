@@ -39,7 +39,9 @@ export const SubscribeByMail = () => {
         onSubmit={(e) => e.preventDefault()}
       >
         <div className="SubscribeByMail__FormWrap">
+          <label htmlFor="inputSubs"></label>
           <input
+            id="inputSubs"
             type="text"
             className={cn({
               SubscribeByMail__InputInvite: true,

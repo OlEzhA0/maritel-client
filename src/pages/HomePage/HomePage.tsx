@@ -1,17 +1,17 @@
 import React from "react";
-import "./HomePage.scss";
 import { useSelector } from "react-redux";
-import { getCategories, getSpecCateg } from "../../store/actionsTypes";
 import { Link } from "react-router-dom";
-import { SubscribeByMail } from "../../components/SubscribeByMail";
 import { BackgroundMainImg } from "../../components/BackgroundMainImg";
+import { SubscribeByMail } from "../../components/SubscribeByMail";
+import { getCategories, getSpecCateg } from "../../store/actionsTypes";
+import "./HomePage.scss";
 
 export const HomePage = () => {
   const categories = useSelector(getCategories);
   const specCategs = useSelector(getSpecCateg);
 
   return (
-    <div className="HomePage">
+    <div className="HomePage Page__Wrap">
       <div className="HomePage__BackgroundWrap">
         <BackgroundMainImg />
         <ul className="HomePage__List">

@@ -1,3 +1,92 @@
 .DesktopMenu {
-  
+  &__Nav {
+    height: 5rem;
+    background-color: #101010;
+    opacity: 0.9;
+    box-sizing: border-box;
+    z-index: -1;
+    transform: translateY(-5rem);
+    width: 100%;
+    transition: transform 0.3s;
+
+    &--visible {
+      transition-delay: 0.01s;
+      z-index: 2;
+      transform: translateY(0);
+    }
+  }
+
+  &__NavList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    list-style-type: none;
+  }
+
+  &__NavItem {
+    height: 100%;
+    position: relative;
+  }
+
+  &__NavLink {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 0.16em;
+    color: #ffffff;
+    box-sizing: border-box;
+    padding: 0 2.5rem;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    font-size: 1rem;
+
+    &--hover {
+      font-size: 1rem;
+      font-weight: bold;
+      opacity: 0.5;
+    }
+
+    &:hover,
+    &--hovered {
+      opacity: 0.95;
+      color: #bb2a36;
+      background-color: #000;
+    }
+  }
+
+  &__NavSubList {
+    min-width: 100%;
+    white-space: nowrap;
+    position: absolute;
+    box-sizing: border-box;
+    padding: 2.5rem;
+    list-style-type: none;
+    background-color: #101010;
+    opacity: 0.98;
+    z-index: 10;
+  }
+
+  &__NavSubItem {
+    margin-bottom: 24px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__NavSubLink {
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    font-weight: normal;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      color: #bb2a36;
+    }
+  }
 }

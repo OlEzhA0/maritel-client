@@ -21,7 +21,12 @@ html {
 }
 
 .Page__Wrap {
-  min-height: calc(100vh - 57px - 369px);
+  @media screen and (min-width: 769px) {
+    margin-top: 9.75rem;
+  }
+  @media screen and (max-width: 768px) {
+    margin-top: 3.5rem;
+  }
 }
 
 .cover {

@@ -73,6 +73,8 @@
     box-sizing: border-box;
     padding-top: 28px;
     transition: all 0.3s;
+    text-transform: uppercase;
+    
     &--close {
       position: absolute;
       transform: translateX(-30rem);
@@ -81,8 +83,10 @@
 
   &__Item {
     box-sizing: border-box;
-    padding: 0 16px;
-    margin-bottom: 24px;
+    transition: all 0.3s;
+    &:hover {
+      background: rgba($color: #101010, $alpha: 0.05);
+    }
   }
 
   &__Categ {
@@ -95,6 +99,8 @@
     align-items: center;
     text-decoration: none;
     cursor: pointer;
+    padding: 11px 16px;
+
   }
 
   &__ChoosedCateg {

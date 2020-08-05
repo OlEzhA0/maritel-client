@@ -10,6 +10,7 @@ interface Props {
   isHover: boolean;
   setIsHover: (status: boolean) => void;
   setHoveredItem: (status: string) => void;
+  visible: boolean;
 }
 
 export const DesktopMenu: React.FC<Props> = ({
@@ -17,21 +18,27 @@ export const DesktopMenu: React.FC<Props> = ({
   isHover,
   setHoveredItem,
   setIsHover,
+  visible,
 }) => {
   const categories = useSelector(getCategories);
   const specCateg = useSelector(getSpecCateg);
 
   return (
-    <nav className="Header__Nav">
-      <ul className="Header__NavList">
+    <nav
+      className={cn({
+        DesktopMenu__Nav: true,
+        "DesktopMenu__Nav--visible": visible,
+      })}
+    >
+      <ul className="DesktopMenu__NavList">
         {categories.map((category) => (
-          <li className="Header__NavItem" key={category.id}>
+          <li className="DesktopMenu__NavItem" key={category.id}>
             <Link
               to="/"
               className={cn({
-                Header__NavLink: true,
-                "Header__NavLink--hover": isHover,
-                "Header__NavLink--hovered": category.id === hoveredItem,
+                DesktopMenu__NavLink: true,
+                "DesktopMenu__NavLink--hover": isHover,
+                "DesktopMenu__NavLink--hovered": category.id === hoveredItem,
               })}
               onMouseEnter={() => {
                 setIsHover(true);
@@ -46,7 +53,7 @@ export const DesktopMenu: React.FC<Props> = ({
             </Link>
             {category.id === hoveredItem && category.subCategories.length > 0 && (
               <ul
-                className="Header__NavSubList"
+                className="DesktopMenu__NavSubList"
                 onMouseEnter={() => {
                   setIsHover(true);
                   setHoveredItem(category.id);
@@ -57,9 +64,8 @@ export const DesktopMenu: React.FC<Props> = ({
                 }}
               >
                 {category.subCategories.map((subCateg) => (
-                  <li key={subCateg.id} className="Header__NavSubItem">
-                    {console.log(1)}
-                    <Link to="/" className="Header__NavSubLink">
+                  <li key={subCateg.id} className="DesktopMenu__NavSubItem">
+                    <Link to="/" className="DesktopMenu__NavSubLink">
                       {subCateg.subs}
                     </Link>
                   </li>
@@ -69,13 +75,13 @@ export const DesktopMenu: React.FC<Props> = ({
           </li>
         ))}
         {specCateg.map((categ) => (
-          <li key={categ.id} className="Header__NavItem">
+          <li key={categ.id} className="DesktopMenu__NavItem">
             <Link
               to="/"
               className={cn({
-                Header__NavLink: true,
-                "Header__NavLink--hover": isHover,
-                "Header__NavLink--hovered": categ.id === hoveredItem,
+                DesktopMenu__NavLink: true,
+                "DesktopMenu__NavLink--hover": isHover,
+                "DesktopMenu__NavLink--hovered": categ.id === hoveredItem,
               })}
               onMouseEnter={() => {
                 setIsHover(true);
