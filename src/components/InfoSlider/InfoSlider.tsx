@@ -25,7 +25,7 @@ export const InfoSlider: React.FC<Props> = ({ visible }) => {
     if (menuStatus) {
       dispatch(setMenuStatus(false));
     }
-  
+
     const nextWidth = left + itemWidth * path;
     const pos = nextWidth / itemWidth;
 
@@ -62,6 +62,7 @@ export const InfoSlider: React.FC<Props> = ({ visible }) => {
 
   useEffect(() => {
     if (screenWidth < 430) {
+      setItemWidth(280);
     } else if (screenWidth < 600) {
       setItemWidth(330);
     } else if (screenWidth < 880) {
