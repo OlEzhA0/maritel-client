@@ -4,12 +4,54 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
-    <meta name="description" content="maritel shop">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;800&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.png" type="image/png" />
+    <meta name="description" content="maritel shop" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;800&display=swap"
+      rel="stylesheet"
+    />
     <title>Maritel</title>
+    <style>
+      .full-page-loader {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+      }
+
+      .full-page-loader > img {
+        animation: 1.8s infinite heartbeat;
+      }
+
+      @keyframes heartbeat {
+        0% {
+          transform: scale(1);
+        }
+        25% {
+          transform: scale(1.05);
+        }
+        50% {
+          transform: scale(1);
+        }
+        75% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="full-page-loader">
+        <img width="200" src="images/logo.svg" alt="logo" />
+      </div>
+    </div>
   </body>
 </html>
