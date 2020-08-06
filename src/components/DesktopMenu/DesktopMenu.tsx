@@ -24,6 +24,13 @@ export const DesktopMenu: React.FC<Props> = ({
   const categories = useSelector(getCategories);
   const specCateg = useSelector(getSpecCateg);
 
+  const handleTranslit = (str: string) => {
+    return `${new cyrillicToTranslit().transform(
+      `${str.toLocaleLowerCase()}`,
+      "+"
+    )}`;
+  };
+
   return (
     <nav
       className={cn({
@@ -37,11 +44,8 @@ export const DesktopMenu: React.FC<Props> = ({
             <Link
               to={
                 category.subCategories.length > 0
-                  ? `${new cyrillicToTranslit().transform(
-                      `${category.category.toLocaleLowerCase()}`,
-                      "+"
-                    )}`
-                  : `/#`
+                  ? `/${handleTranslit(category.category)}`
+                  : `/${handleTranslit(category.category)}/Vse-tovari`
               }
               className={cn({
                 DesktopMenu__NavLink: true,

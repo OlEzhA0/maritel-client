@@ -1,0 +1,34 @@
+@import "../../styles/vars.scss";
+
+.ProductsList {
+
+  &__Title {
+    font-weight: 800;
+    font-size: 26px;
+    align-items: center;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    color: #101010;
+    margin-bottom: 31px;  
+  }
+
+  &__Wrap {
+    padding-top: 33px;
+  }
+
+  &__ProductsWrap {
+    padding: 0 30px;
+    display: flex;
+  }
+  
+  &__Filters {
+    min-width: 310px;
+    height: 5px;
+  }
+
+  &__Prods {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
