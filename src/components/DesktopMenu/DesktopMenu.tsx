@@ -4,6 +4,7 @@ import cn from "classnames";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getCategories, getSpecCateg } from "../../store/actionsTypes";
+import cyrillicToTranslit from "cyrillic-to-translit-js";
 
 interface Props {
   hoveredItem: string;
@@ -34,7 +35,14 @@ export const DesktopMenu: React.FC<Props> = ({
         {categories.map((category) => (
           <li className="DesktopMenu__NavItem" key={category.id}>
             <Link
-              to="/"
+              to={
+                category.subCategories.length > 0
+                  ? `${new cyrillicToTranslit().transform(
+                      `${category.category.toLocaleLowerCase()}`,
+                      "+"
+                    )}`
+                  : `/#`
+              }
               className={cn({
                 DesktopMenu__NavLink: true,
                 "DesktopMenu__NavLink--hover": isHover,

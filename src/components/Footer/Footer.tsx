@@ -3,6 +3,7 @@ import "./Footer.scss";
 import { FOOTER_INFO } from "../../helpers";
 import { Link } from "react-router-dom";
 import cn from "classnames";
+import { SubscribeByMail } from "../SubscribeByMail";
 
 export const Footer = () => {
   const [isOpenInfo, setIsOpenInfo] = useState<string[]>([]);
@@ -19,6 +20,8 @@ export const Footer = () => {
 
   return (
     <footer className="Footer">
+      <SubscribeByMail />
+
       <nav className="Footer__Info">
         <ul className="Footer__InfoList">
           {FOOTER_INFO.map((info) => (

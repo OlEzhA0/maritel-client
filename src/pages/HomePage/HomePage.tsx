@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BackgroundMainImg } from "../../components/BackgroundMainImg";
-import { SubscribeByMail } from "../../components/SubscribeByMail";
 import { getCategories, getSpecCateg } from "../../store/actionsTypes";
 import "./HomePage.scss";
 
@@ -31,7 +30,6 @@ export const HomePage = () => {
           ))}
         </ul>
       </div>
-      <SubscribeByMail />
     </div>
   );
 };

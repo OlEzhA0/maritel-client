@@ -182,7 +182,12 @@
     transition: all 0.3s;
     display: flex;
     justify-content: center;
+    position: relative;
+    z-index: -1;
 
+    @media screen and (max-width: 768px) {
+      z-index: 1;
+    }
     &--up {
       transform: translateY(-5rem);
     }

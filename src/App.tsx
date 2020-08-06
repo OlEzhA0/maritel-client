@@ -1,24 +1,28 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useQuery } from "react-apollo";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import {
   getCategoriesQuery,
   getSpecCategQuery,
   productsQuery,
+  splitValue,
 } from "./helpers";
 import { HomePage } from "./pages";
 import {
   setCategories,
   setMenuStatus,
   setSpecCategories,
+  setProducts,
 } from "./store/actionCreators";
 import { getMenuStatus } from "./store/actionsTypes";
 import "./styles/index.scss";
+import { CategoryPage } from "./pages/CategoryPage";
 
 function App() {
+  const location = useLocation();
   const products = useQuery(productsQuery);
   const { data } = useQuery(getCategoriesQuery);
   const specCategs = useQuery(getSpecCategQuery);
@@ -49,8 +53,8 @@ function App() {
   }, [scrollPos, handleScroll]);
 
   useEffect(() => {
-    if (data && data.categories) {
-      console.log(data.categories);
+    if (data && data.categories && products && products.data) {
+      const goods: Products[] = products.data.products;
       const categories: CategoriesTypes[] = data.categories.map(
         (category: CategoriesFromDB) => ({
           ...category,
@@ -58,9 +62,26 @@ function App() {
         })
       );
 
+      const preparedCategs = categories.filter((categ) =>
+        goods.some((good) => good.type.split(splitValue)[0] === categ.id)
+      );
+
+      const subCategs = goods
+        .map((good) => good.type.split(splitValue)[1])
+        .filter((good) => good);
+
+      const visibleSubCategs = preparedCategs.map((categ) => ({
+        ...categ,
+        subCategories: categ.subCategories.filter((subCateg) =>
+          subCategs.some((subs) => subs === subCateg.id)
+        ),
+      }));
+
+      dispatch(setProducts(goods));
+
       dispatch(
         setCategories(
-          categories.sort((a, b) => a.category.localeCompare(b.category))
+          visibleSubCategs.sort((a, b) => a.category.localeCompare(b.category))
         )
       );
     }
@@ -72,10 +93,15 @@ function App() {
     }
   }, [specCategs, dispatch]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   return (
     <>
       <Header visible={headerVisible} />
       <Switch>
+        <Route path="/:category" exact component={CategoryPage} />
         <Route path="/" exact component={HomePage} />
       </Switch>
       <Footer />
