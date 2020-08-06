@@ -4,7 +4,7 @@ import cn from "classnames";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getCategories, getSpecCateg } from "../../store/actionsTypes";
-import cyrillicToTranslit from "cyrillic-to-translit-js";
+import { handleTranslit } from "../../helpers/links";
 
 interface Props {
   hoveredItem: string;
@@ -24,12 +24,7 @@ export const DesktopMenu: React.FC<Props> = ({
   const categories = useSelector(getCategories);
   const specCateg = useSelector(getSpecCateg);
 
-  const handleTranslit = (str: string) => {
-    return `${new cyrillicToTranslit().transform(
-      `${str.toLocaleLowerCase()}`,
-      "+"
-    )}`;
-  };
+  
 
   return (
     <nav
@@ -77,7 +72,12 @@ export const DesktopMenu: React.FC<Props> = ({
               >
                 {category.subCategories.map((subCateg) => (
                   <li key={subCateg.id} className="DesktopMenu__NavSubItem">
-                    <Link to="/" className="DesktopMenu__NavSubLink">
+                    <Link
+                      to={`/${handleTranslit(
+                        category.category
+                      )}/${handleTranslit(subCateg.subs)}`}
+                      className="DesktopMenu__NavSubLink"
+                    >
                       {subCateg.subs}
                     </Link>
                   </li>
@@ -89,7 +89,7 @@ export const DesktopMenu: React.FC<Props> = ({
         {specCateg.map((categ) => (
           <li key={categ.id} className="DesktopMenu__NavItem">
             <Link
-              to="/"
+              to={`/${handleTranslit(categ.name)}/Specialnoe`}
               className={cn({
                 DesktopMenu__NavLink: true,
                 "DesktopMenu__NavLink--hover": isHover,

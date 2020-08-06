@@ -6,6 +6,7 @@ import { getCategories, getProducts } from "../../store/actionsTypes";
 import translit from "cyrillic-to-translit-js";
 import { splitValue } from "../../helpers";
 import { BackgroundMainImg } from "../../components/BackgroundMainImg";
+import { handleTranslit } from "../../helpers/links";
 
 export const CategoryPage = () => {
   const location = useLocation();
@@ -55,7 +56,15 @@ export const CategoryPage = () => {
         <ul className="CategoryPage__List">
           {products.map((prod) => (
             <li className="CategoryPage__Item" key={prod.id}>
-              <Link to="/">
+              <Link
+                to={`/${handleTranslit(
+                  category?.category || ""
+                )}/${handleTranslit(
+                  category?.subCategories.find(
+                    (sub) => sub.id === prod.type.split(splitValue)[1]
+                  )?.subs || ""
+                )}`}
+              >
                 <img
                   src={prod.previewPhoto}
                   alt="preview ph"

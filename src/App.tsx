@@ -103,6 +103,8 @@ function App() {
       <Header visible={headerVisible} />
       <Switch>
         <Route path="/:category/Vse-tovari" exact component={ProductsList} />
+        <Route path="/:category/Specialnoe" exact component={ProductsList} />
+        <Route path="/:category/:sub" exact component={ProductsList} />
         <Route path="/:category" exact component={CategoryPage} />
         <Route path="/" exact component={HomePage} />
       </Switch>

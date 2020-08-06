@@ -9,7 +9,7 @@ import {
 } from "../../store/actionsTypes";
 import { setMenuStatus } from "../../store/actionCreators";
 import { Link } from "react-router-dom";
-import translit from "cyrillic-to-translit-js";
+import { handleTranslit } from "../../helpers/links";
 
 export const HambMenu = () => {
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ export const HambMenu = () => {
             <li key={category.id} className="HambMenu__Item">
               {category.subCategories.length === 0 && (
                 <Link
-                  to="/"
+                  to={`/${handleTranslit(category.category)}/Vse-tovari`}
                   className="HambMenu__Categ"
                   onClick={() => dispatch(setMenuStatus(false))}
                 >
@@ -73,7 +73,11 @@ export const HambMenu = () => {
           ))}
           {specCateg.map((categ) => (
             <li key={categ.id} className="HambMenu__Item">
-              <Link to="/" className="HambMenu__Categ" onClick={closeMenu}>
+              <Link
+                to={`/${handleTranslit(categ.name)}/Specialnoe`}
+                className="HambMenu__Categ"
+                onClick={closeMenu}
+              >
                 {categ.name}{" "}
                 <img src="images/menu/categArrow.svg" alt="arrow" />
               </Link>
@@ -99,10 +103,9 @@ export const HambMenu = () => {
           </li>
           <li className="HambMenu__Main">
             <Link
-              to={`${new translit().transform(
+              to={`/${handleTranslit(
                 categories.find((categ) => categ.id === openSubMenu)
-                  ?.category.toLocaleLowerCase() as string,
-                "+"
+                  ?.category || ""
               )}`}
               className="HambMenu__SubLink HambMenu__SubLinkMain"
               onClick={closeMenu}
@@ -121,7 +124,10 @@ export const HambMenu = () => {
                 >
                   <Link
                     className="HambMenu__SubLink"
-                    to="/"
+                    to={`/${handleTranslit(
+                      categories.find((categ) => categ.id === openSubMenu)
+                        ?.category || ""
+                    )}/${handleTranslit(subCateg.subs)}`}
                     onClick={closeMenu}
                   >
                     {subCateg.subs}

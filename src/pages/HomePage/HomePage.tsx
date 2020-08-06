@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { BackgroundMainImg } from "../../components/BackgroundMainImg";
 import { getCategories, getSpecCateg } from "../../store/actionsTypes";
 import "./HomePage.scss";
+import { handleTranslit } from "../../helpers/links";
 
 export const HomePage = () => {
   const categories = useSelector(getCategories);
@@ -16,14 +17,21 @@ export const HomePage = () => {
         <ul className="HomePage__List">
           {categories.map((categ) => (
             <li key={categ.id} className="HomePage__Item">
-              <Link to="/" className="HomePage__Link">
+              <Link
+                to={
+                  categ.subCategories.length > 0
+                    ? `/${handleTranslit(categ.category)}`
+                    : `/${handleTranslit(categ.category)}/Vse-tovari`
+                }
+                className="HomePage__Link"
+              >
                 {categ.category}
               </Link>
             </li>
           ))}
           {specCategs.map((categ) => (
             <li key={categ.id} className="HomePage__Item">
-              <Link to="/" className="HomePage__Link">
+              <Link to={`/${handleTranslit(categ.name)}/Specialnoe`} className="HomePage__Link">
                 {categ.name}
               </Link>
             </li>
