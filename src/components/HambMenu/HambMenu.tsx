@@ -9,6 +9,7 @@ import {
 } from "../../store/actionsTypes";
 import { setMenuStatus } from "../../store/actionCreators";
 import { Link } from "react-router-dom";
+import translit from "cyrillic-to-translit-js";
 
 export const HambMenu = () => {
   const dispatch = useDispatch();
@@ -98,7 +99,11 @@ export const HambMenu = () => {
           </li>
           <li className="HambMenu__Main">
             <Link
-              to="/"
+              to={`${new translit().transform(
+                categories.find((categ) => categ.id === openSubMenu)
+                  ?.category.toLocaleLowerCase() as string,
+                "+"
+              )}`}
               className="HambMenu__SubLink HambMenu__SubLinkMain"
               onClick={closeMenu}
             >
