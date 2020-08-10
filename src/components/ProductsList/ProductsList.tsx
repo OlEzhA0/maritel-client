@@ -38,6 +38,11 @@ export const ProductsList = () => {
   const filterColor = useMemo(() => searchParams.get("Цвет"), [searchParams]);
   const filterSizes = useMemo(() => searchParams.get("Размер"), [searchParams]);
 
+  const openFilters = () => {
+    setIsOpen(!isOpen);
+    window.scrollTo(0, 0);
+  };
+
   useEffect(() => {
     if (!currentPage && products.length) {
       console.log("in");
@@ -159,6 +164,12 @@ export const ProductsList = () => {
       <div className="ProductsList__Wrap">
         <h1 className="ProductsList__Title">{handleCreateTitle()}</h1>
         <div className="ProductsList__Info">
+          <div
+            className="ProductsList__FilterName ProductsList__FilterName--tablet"
+            onClick={openFilters}
+          >
+            ФИЛЬТР
+          </div>
           <p className="ProductsList__InfoCount">{`${
             currentPage && +currentPage * perPage > products.length
               ? products.length
@@ -176,12 +187,6 @@ export const ProductsList = () => {
         </div>
         <div className="ProductsList__ProductsWrap">
           <div
-            className="ProductsList__FilterName ProductsList__FilterName--tablet"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            ФИЛЬТР
-          </div>
-          <div
             className={cn({
               ProductsList__Filters: true,
               "ProductsList__Filters--open": isOpen,
@@ -189,10 +194,7 @@ export const ProductsList = () => {
           >
             <div className="ProductsList__TabletFilter">
               <p className="ProductsList__TabletText">ФИЛЬТР</p>
-              <div
-                className="ProductsList__TabletX"
-                onClick={() => setIsOpen(!isOpen)}
-              />
+              <div className="ProductsList__TabletX" onClick={openFilters} />
             </div>
             <div className="ProductsList__FilterName">ФИЛЬТР</div>
             <div className="ProductsList__FilterTabletWrap">
