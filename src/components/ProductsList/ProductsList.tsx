@@ -24,7 +24,7 @@ export const ProductsList = () => {
   const [specCategory, setSpecCategory] = useState<SpecProdsCategory>();
   const [colors, setColors] = useState<ColorTypes[]>([]);
   const [subsName, setSubsName] = useState("");
-  const perPage = 6;
+  const perPage = 18;
   const [isOpen, setIsOpen] = useState(false);
 
   const goods = useSelector(types.getProducts);
