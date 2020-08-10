@@ -177,10 +177,10 @@ export const ProductsList = () => {
             ФИЛЬТР
           </div>
           <p className="ProductsList__InfoCount">{`${
-            currentPage && +currentPage * perPage > products.length
-              ? products.length
+            currentPage && +currentPage * perPage > pagProducts.length
+              ? pagProducts.length
               : currentPage && +currentPage * perPage
-          } из ${products.length}`}</p>
+          } из ${pagProducts.length}`}</p>
           <div className="ProductsList__SelectWrap">
             <SelectDropDown
               values={[
@@ -237,7 +237,7 @@ export const ProductsList = () => {
               }}
             >
               {pagProducts.map((prod) => (
-                <ProductCard prod={prod} key={prod.id} />
+                <ProductCard prod={prod} key={prod.id} products={pagProducts} />
               ))}
             </ul>
           </div>

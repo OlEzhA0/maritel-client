@@ -3,6 +3,7 @@
 .ProductCard {
   display: flex;
   flex-direction: column;
+  position: relative;
   &__ImgWrap {
     width: 100%;
     flex-grow: 1;
@@ -14,6 +15,10 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+    display: none;
+    &--loaded {
+      display: block;
+    }
   }
 
   &__Title {
@@ -64,5 +69,34 @@
     font-weight: 800;
     font-size: 14px;
     letter-spacing: 0.08em;
+  }
+
+  &__RelatedProducts {
+    position: absolute;
+    bottom: -13px;
+  }
+
+  &__RelatedList {
+    display: flex;
+    list-style-type: none;
+    
+  }
+
+  &__RelatedItem {
+    width: 8px;
+    height: 8px;
+    margin-right: 4px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.5px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  &__RelatedColor {
+    width: 8px;
+    height: 8px;
   }
 }
