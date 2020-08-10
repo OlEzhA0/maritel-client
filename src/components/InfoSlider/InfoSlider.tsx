@@ -4,7 +4,7 @@ import { INFO_SLIDER } from "../../helpers";
 import "./InfoSlider.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { getMenuStatus } from "../../store/actionsTypes";
-import { setMenuStatus } from "../../store/actionCreators";
+import { setMenuStatus, setDeviceStatus } from "../../store/actionCreators";
 
 type TransitionMS = 4 | 0;
 
@@ -52,6 +52,14 @@ export const InfoSlider: React.FC<Props> = ({ visible }) => {
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
   };
+
+  useEffect(() => {
+    if (screenWidth < 1024) {
+      dispatch(setDeviceStatus(true));
+    } else {
+      dispatch(setDeviceStatus(false));
+    }
+  }, [screenWidth, dispatch]);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);

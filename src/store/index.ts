@@ -5,12 +5,14 @@ import CategoriesReducer from "./categories";
 import SpecCategoriesReducer from "./specCategories";
 import BackgroundCoverReducer from "./mobileMenu";
 import ProductsReducer from "./products";
+import IsTabletReducer from "./isTablet";
 
 const rootReducer = combineReducers({
   categories: CategoriesReducer,
   specCategories: SpecCategoriesReducer,
   background: BackgroundCoverReducer,
   products: ProductsReducer,
+  isTablet: IsTabletReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

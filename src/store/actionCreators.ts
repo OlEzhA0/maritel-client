@@ -3,6 +3,7 @@ import {
   SET_SPEC_CATEGORIES,
   SET_BACKGROUND,
   SET_PRODUCTS,
+  SET_TABLET,
 } from "./actions";
 
 export const setCategories = (categories: CategoriesTypes[]) => ({
@@ -23,4 +24,9 @@ export const setMenuStatus = (status: boolean) => ({
 export const setProducts = (products: Products[]) => ({
   type: SET_PRODUCTS,
   products,
+});
+
+export const setDeviceStatus = (status: boolean) => ({
+  type: SET_TABLET,
+  status,
 });

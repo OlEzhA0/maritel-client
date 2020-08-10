@@ -38,6 +38,12 @@ export const ProductsList = () => {
   const filterColor = useMemo(() => searchParams.get("Цвет"), [searchParams]);
   const filterSizes = useMemo(() => searchParams.get("Размер"), [searchParams]);
 
+  const isTablet = useSelector(types.getIsTablet);
+
+  useEffect(() => {
+    setSubsName("");
+  }, [location]);
+
   const openFilters = () => {
     setIsOpen(!isOpen);
     window.scrollTo(0, 0);
@@ -222,7 +228,11 @@ export const ProductsList = () => {
               className="ProductsList__Prods"
               style={{
                 gridTemplateRows: `repeat(${Math.ceil(
-                  isOpen ? 2 : pagProducts.length / 3
+                  isTablet
+                    ? pagProducts.length / 2
+                    : isOpen
+                    ? 2
+                    : pagProducts.length / 3
                 )}, minmax(337px, 1fr))`,
               }}
             >
