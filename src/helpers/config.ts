@@ -67,3 +67,4 @@ export const INFO_SLIDER: string[] = [
 ];
 
 export const splitValue = ' / '
+export const sortBy = 'sortBy';

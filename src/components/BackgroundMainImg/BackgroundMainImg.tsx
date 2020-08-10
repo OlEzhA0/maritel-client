@@ -1,6 +1,6 @@
+import cn from "classnames";
 import React, { useState } from "react";
 import "./BackgroundMainImg.scss";
-import cn from "classnames";
 export const BackgroundMainImg = () => {
   const [showImg, setShowImg] = useState(false);
 

@@ -14,7 +14,8 @@ const Product = require('../models/product');
 
 const Category = require('../models/category');
 const SpecCategs = require('../models/specCategs');
-const Subscr = require('../models/subscrByMail')
+const Subscr = require('../models/subscrByMail');
+const Colors = require('../models/colors')
 
 const ProductType = new GraphQLObjectType({
   name: 'Product',
@@ -46,6 +47,17 @@ const SpecCategType = new GraphQLObjectType({
     products: { type: new GraphQLList(GraphQLString) },
   })
 })
+
+const ColorsType = new GraphQLObjectType({
+  name: "Colors",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    link: { type: GraphQLString },
+  })
+})
+
+
 
 const CategoriesType = new GraphQLObjectType({
   name: "Categories",
@@ -110,6 +122,12 @@ const Query = new GraphQLObjectType({
       resolve() {
         return Product.find({});
       },
+    },
+    colors: {
+      type: new GraphQLList(ColorsType),
+      resolve() {
+        return Colors.find({})
+      }
     },
   }
 })

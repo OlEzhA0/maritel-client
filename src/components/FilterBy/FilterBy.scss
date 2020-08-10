@@ -1,0 +1,80 @@
+@import "../../styles/vars.scss";
+
+.FilterBy {
+  position: relative;
+  transition: all 0.3s;
+  @media screen and (max-width: 1024px) {
+    width: calc(100% - 30px);
+  }
+
+  &__Name {
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+    letter-spacing: 0.08em;
+    color: #101010;
+    cursor: pointer;
+    @media screen and (max-width: 1024px) {
+      padding: 15px;
+    }
+  }
+
+  &__ArrowImg {
+    margin-right: 12px;
+    transition: all 0.3s;
+
+    &--open {
+      transform: rotate(90deg);
+    }
+  }
+
+  &__List {
+    list-style-type: none;
+    position: absolute;
+    top: 18px;
+    opacity: 0;
+    z-index: -1;
+    overflow: hidden;
+    transition: all 0.3s;
+    transform: translateY(-1rem);
+    &--open {
+      opacity: 1;
+      transform: translateY(0);
+      z-index: 1;
+
+      @media screen and (max-width: 1024px) {
+        width: 100%;
+        background-color: #fff;
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
+      top: 40px;
+      height: calc(100% - 46px);
+    }
+  }
+
+  &__Item {
+    margin-top: 13px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &--dis {
+      opacity: 0.6;
+      cursor: no-drop;
+    }
+  }
+
+  &__Value {
+    margin-left: 8px;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: #101010;
+  }
+}

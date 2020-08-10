@@ -65,3 +65,13 @@ export const productQuery = gql`
     }
   }
 `;
+
+export const getColorsQuery = gql`
+  query getColorsQuery {
+    colors {
+      id
+      name
+      link
+    }
+  }
+`;

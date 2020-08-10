@@ -1,0 +1,57 @@
+@import "../../styles/vars.scss";
+.Banner {
+  &__ImgWrap {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    position: relative;
+    @media screen and (max-width: 768px) {
+      height: 555px;
+    }
+  }
+
+  &__Img {
+    display: none;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+
+    &--loaded {
+      display: block;
+    }
+  }
+
+  &__Preload {
+    width: 100%;
+    height: 100%;
+    background: #5182a3;
+    opacity: 0.3;
+  }
+
+  &__Settings {
+    position: absolute;
+    z-index: 3;
+    left: 10%;
+    top: 50%;
+
+    transform: translateY(-40%);
+  }
+
+  &__Text {
+    width: 26rem;
+    font-weight: bold;
+    font-size: 28px;
+    margin-bottom: 40px;
+    color: #ffffff;
+  }
+
+  &__Link {
+    background-color: #fff;
+    padding: 21px 34px;
+    font-weight: 800;
+    font-size: 14px;
+    color: #101010;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+}

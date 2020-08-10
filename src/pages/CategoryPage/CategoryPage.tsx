@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import { getCategories, getProducts } from "../../store/actionsTypes";
 import translit from "cyrillic-to-translit-js";
 import { splitValue } from "../../helpers";
-import { BackgroundMainImg } from "../../components/BackgroundMainImg";
 import { handleTranslit } from "../../helpers/links";
+import { Banner } from "../../components/Banner";
 
 export const CategoryPage = () => {
   const location = useLocation();
@@ -50,7 +50,12 @@ export const CategoryPage = () => {
 
   return (
     <div className="CategoryPage Page__Wrap">
-      <BackgroundMainImg />
+      <Banner
+        imgLink="images/homepage/main.webp"
+        text="Влюбитесь с первого взгляда"
+        link=""
+        buttonText="Перейти к летним новинкам"
+      />
       <div className="CategoryPage__Wrap">
         <h2 className="CategoryPage__Title">категории</h2>
         <ul className="CategoryPage__List">
@@ -82,7 +87,12 @@ export const CategoryPage = () => {
           ))}
         </ul>
       </div>
-      <BackgroundMainImg />
+      <Banner
+        imgLink="images/homepage/main.webp"
+        text="Влюбитесь с первого взгляда"
+        link=""
+        buttonText="Узнать больше"
+      />
     </div>
   );
 };

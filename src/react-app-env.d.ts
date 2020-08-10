@@ -5,6 +5,8 @@ interface SubCateg {
   subs: string;
 }
 
+type SortBy = "Новизне" | "От дешевых к дорогим" | "От дорогих к дешевым"
+
 interface CategoriesTypes {
   id: string;
   category: string;
@@ -50,7 +52,7 @@ interface Products {
   gender: string;
   care: string;
   composition: string;
-  sizes: string;
+  sizes: Sizes[];
   lastPrice: string;
   type: string;
   photos: string[];
@@ -74,4 +76,15 @@ interface LocalProduct {
   photos: string[];
   previewPhoto: string;
   timestamp: string;
+}
+
+interface ColorTypes {
+  id: string;
+  name: string;
+  link: string;
+}
+
+interface SortOptions {
+  name: string;
+  count: number;
 }

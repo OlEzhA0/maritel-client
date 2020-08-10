@@ -7,12 +7,12 @@
   z-index: 20;
   top: 0;
   transition: all 0.3s;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     height: 3.5rem;
   }
 
   &--desktopFull {
-    @media screen and (min-width: 769px) {
+    @media screen and (min-width: 1025px) {
       height: 9.75rem;
     }
   }
@@ -21,7 +21,7 @@
     top: 0;
     background-color: #fff;
     height: 100%;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1024px) {
       display: none;
     }
 
@@ -41,7 +41,7 @@
     z-index: 10;
     background-color: #fff;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1024px) {
       display: none;
     }
   }
@@ -50,10 +50,10 @@
     position: relative;
     background-color: #fff;
 
-    @media screen and (min-width: 769px) {
+    @media screen and (min-width: 1025px) {
       display: none;
     }
-    @media screen and (max-width: 769px) {
+    @media screen and (max-width: 1024px) {
       height: calc(100% + 32px);
     }
   }
@@ -83,7 +83,7 @@
     left: 50%;
     transform: translateX(-50%);
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1024px) {
       top: 6px;
     }
   }
@@ -92,7 +92,7 @@
     width: 9rem;
     height: 3.75rem;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1024px) {
       width: 5rem;
       height: 2rem;
     }
@@ -185,7 +185,7 @@
     position: relative;
     z-index: -1;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1024px) {
       z-index: 1;
     }
     &--up {

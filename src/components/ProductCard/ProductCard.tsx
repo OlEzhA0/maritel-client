@@ -18,13 +18,17 @@ export const ProductCard: React.FC<Props> = ({ prod }) => {
           alt="preview ph"
           className="ProductCard__Img"
         />
-        <div className="ProductCard__SpecCateg">
-          {
-            specCateg.find((spec) =>
-              spec.products.some((specProd) => specProd === prod.id)
-            )?.name
-          }
-        </div>
+        {specCateg.find((spec) =>
+          spec.products.some((specProd) => specProd === prod.id)
+        )?.name && (
+          <div className="ProductCard__SpecCateg">
+            {
+              specCateg.find((spec) =>
+                spec.products.some((specProd) => specProd === prod.id)
+              )?.name
+            }
+          </div>
+        )}
       </div>
       <p className="ProductCard__Title">{prod.title}</p>
       <div className="ProductCard__Price">
