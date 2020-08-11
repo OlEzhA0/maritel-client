@@ -11,6 +11,7 @@ import { CategoryPage } from "./pages/CategoryPage";
 import * as aCreator from "./store/actionCreators";
 import { getMenuStatus } from "./store/actionsTypes";
 import "./styles/index.scss";
+import { ProductPage } from "./pages/ProductPage";
 
 function App() {
   const location = useLocation();
@@ -97,12 +98,11 @@ function App() {
     window.scrollTo(0, 0);
   }, [location]);
 
- 
-
   return (
     <>
       <Header visible={headerVisible} />
       <Switch>
+        <Route path="/:category/:sub/:name/:id" exact component={ProductPage} />
         <Route path="/:category/Vse-tovari" exact component={ProductsList} />
         <Route path="/:category/Specialnoe" exact component={ProductsList} />
         <Route path="/:category/:sub" exact component={ProductsList} />

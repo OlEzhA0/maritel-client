@@ -6,6 +6,8 @@ import { SpinnerLoader } from "../SpinnerLoader";
 import cn from "classnames";
 import { getColorsQuery } from "../../helpers";
 import { useQuery } from "react-apollo";
+import { Link, useLocation } from "react-router-dom";
+import { handleTranslit } from "../../helpers/links";
 
 interface Props {
   prod: Products;
@@ -13,6 +15,7 @@ interface Props {
 }
 
 export const ProductCard: React.FC<Props> = ({ prod, products }) => {
+  const location = useLocation();
   const specCateg = useSelector(getSpecCateg);
   const [showImg, setShowImg] = useState(false);
   const getColors = useQuery(getColorsQuery);
@@ -42,60 +45,64 @@ export const ProductCard: React.FC<Props> = ({ prod, products }) => {
 
   return (
     <li className="ProductCard">
-      <div className="ProductCard__ImgWrap">
-        <img
-          src={prod.previewPhoto}
-          alt="preview ph"
-          className={cn({
-            ProductCard__Img: true,
-            "ProductCard__Img--loaded": showImg,
-          })}
-          onLoad={() => setShowImg(true)}
-        />
-        {!showImg && <SpinnerLoader />}
-        {specCateg.find((spec) =>
-          spec.products.some((specProd) => specProd === prod.id)
-        )?.name && (
-          <div className="ProductCard__SpecCateg">
-            {
-              specCateg.find((spec) =>
-                spec.products.some((specProd) => specProd === prod.id)
-              )?.name
-            }
-          </div>
-        )}
-      </div>
-      <p className="ProductCard__Title">{prod.title}</p>
-      <div className="ProductCard__Price">
-        {prod.lastPrice ? (
-          <>
-            <span className="ProductCard__LastPrice">{prod.lastPrice} грн</span>
-            <span className="ProductCard__CurrentPrice ProductCard__HotPrice">
-              {prod.price} грн
-            </span>
-          </>
-        ) : (
-          <span className="ProductCard__CurrentPrice">{prod.price} грн</span>
-        )}
-      </div>
-      <div className="ProductCard__RelatedProducts">
-        {relatedColors.length > 1 && (
-          <ul className="ProductCard__RelatedList">
-            {relatedColors.map((rel) => (
-              <li
-                key={rel}
-                className="ProductCard__RelatedItem"
-              >
-                <img
-                  src={rel}
-                  alt="color"
-                  className="ProductCard__RelatedColor"
-                />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <Link
+        to={`${location.pathname}/${handleTranslit(prod.title)}/${prod.uuid}`}
+        className="ProductCard__Link"
+      >
+        <div className="ProductCard__ImgWrap">
+          <img
+            src={prod.previewPhoto}
+            alt="preview ph"
+            className={cn({
+              ProductCard__Img: true,
+              "ProductCard__Img--loaded": showImg,
+            })}
+            onLoad={() => setShowImg(true)}
+          />
+          {!showImg && <SpinnerLoader />}
+          {specCateg.find((spec) =>
+            spec.products.some((specProd) => specProd === prod.id)
+          )?.name && (
+            <div className="ProductCard__SpecCateg">
+              {
+                specCateg.find((spec) =>
+                  spec.products.some((specProd) => specProd === prod.id)
+                )?.name
+              }
+            </div>
+          )}
+        </div>
+        <p className="ProductCard__Title">{prod.title}</p>
+        <div className="ProductCard__Price">
+          {prod.lastPrice ? (
+            <>
+              <span className="ProductCard__LastPrice">
+                {prod.lastPrice} грн
+              </span>
+              <span className="ProductCard__CurrentPrice ProductCard__HotPrice">
+                {prod.price} грн
+              </span>
+            </>
+          ) : (
+            <span className="ProductCard__CurrentPrice">{prod.price} грн</span>
+          )}
+        </div>
+        <div className="ProductCard__RelatedProducts">
+          {relatedColors.length > 1 && (
+            <ul className="ProductCard__RelatedList">
+              {relatedColors.map((rel) => (
+                <li key={rel} className="ProductCard__RelatedItem">
+                  <img
+                    src={rel}
+                    alt="color"
+                    className="ProductCard__RelatedColor"
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </Link>
     </li>
   );
 };

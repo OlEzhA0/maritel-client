@@ -31,12 +31,7 @@
   }
 
   &__MainPC {
-    height: 4.75rem;
-    display: flex;
-    padding: 0 2.5rem;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
+
     position: relative;
     z-index: 10;
     background-color: #fff;
@@ -44,6 +39,17 @@
     @media screen and (max-width: 1024px) {
       display: none;
     }
+  }
+
+  &__MainPCWrap {
+    height: 4.75rem;
+    box-sizing: border-box;
+    display: flex;
+    padding: 0 2.5rem;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1600px;
+    margin: 0 auto;
   }
 
   &__Phone {
@@ -66,8 +72,13 @@
     justify-content: space-between;
     box-sizing: border-box;
     align-items: center;
-    padding: 0 16px;
+    padding: 0 2rem;
     height: calc(100% - 32px);
+
+    @media screen and (max-width: 414px) {
+      padding: 0 16px;
+
+    }
   }
 
   &__Title {

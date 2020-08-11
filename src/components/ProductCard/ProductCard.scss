@@ -4,6 +4,15 @@
   display: flex;
   flex-direction: column;
   position: relative;
+
+  &__Link {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    text-decoration: none;
+    height: 100%;
+  }
+
   &__ImgWrap {
     width: 100%;
     flex-grow: 1;

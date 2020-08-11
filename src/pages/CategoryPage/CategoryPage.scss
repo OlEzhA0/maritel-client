@@ -11,12 +11,11 @@
       align-items: center;
     }
 
-    @media screen and (max-width: 655px) {
-      padding: 0 6rem;
+    @media screen and (max-width: 1024px) {
+      padding: 0 2rem;
     }
-
-    @media screen and (max-width: 490px) {
-      padding: 0 3rem;
+    @media screen and (max-width: 414px) {
+      padding: 0 16px;
     }
   }
   &__List {
@@ -37,13 +36,8 @@
 
   &__Item {
     overflow: hidden;
-    height: 403px;
     position: relative;
     cursor: pointer;
-
-    @media screen and (max-width: 655px) {
-      height: 550px;
-    }
   }
 
   &__Img {

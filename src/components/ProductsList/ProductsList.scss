@@ -228,6 +228,16 @@
       font-size: 13px;
       color: #58ba87;
     }
+
+    &--accept {
+      background-color: #58ba87;
+      color: #fff;
+      transition: all 0.3s;
+      &:hover {
+        background-color: #fff;
+        color: #58ba87;
+      }
+    }
   }
 
   &__FilterTabletWrap {

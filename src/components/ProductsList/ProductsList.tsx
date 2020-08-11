@@ -212,14 +212,14 @@ export const ProductsList = () => {
               Очистить все
             </p>
             <div className="ProductsList__ClearTabl">
-              <p onClick={clearAll} className="ProductsList__ClearTabl--clear">
-                Очистить все
-              </p>
               <p
                 onClick={() => setIsOpen(!isOpen)}
-                className="ProductsList__ClearTabl--clear"
+                className="ProductsList__ClearTabl--clear ProductsList__ClearTabl--accept"
               >
-                Ок
+                Применить
+              </p>
+              <p onClick={clearAll} className="ProductsList__ClearTabl--clear">
+                Очистить все
               </p>
             </div>
           </div>

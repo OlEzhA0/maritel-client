@@ -50,44 +50,46 @@ export const Header: React.FC<Props> = ({ visible }) => {
         })}
       >
         <div className="Header__MainPC">
-          <div className="Header__Title">Find a store</div>
-          <div className="Header__Logo">
-            <Link to="/">
+          <div className="Header__MainPCWrap">
+            <div className="Header__Title">Find a store</div>
+            <div className="Header__Logo">
+              <Link to="/">
+                <img
+                  src="images/logo.svg"
+                  alt="logo"
+                  className="Header__LogoImg"
+                />
+              </Link>
+            </div>
+            <div className="Header__General">
+              <label className="Header__GeneralSearch">
+                <input
+                  type="text"
+                  className="Header__Search"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    if (!e.target.value) {
+                      setSearchPlaceholder("Что вы ищите?");
+                    }
+                    setSearchQuery(e.target.value);
+                  }}
+                  placeholder={searchPlaceholder}
+                  onFocus={() => setSearchPlaceholder("Что вы ищите?")}
+                  onBlur={() => setSearchPlaceholder("")}
+                />
+                <img src="images/header/zoom.svg" alt="zoom" />
+              </label>
+              <Link to="/login" className="Header__Login">
+                войти
+              </Link>
               <img
-                src="images/logo.svg"
-                alt="logo"
-                className="Header__LogoImg"
+                src="images/header/backet.svg"
+                alt="backet"
+                className={cn({
+                  Header__Cart: true,
+                })}
               />
-            </Link>
-          </div>
-          <div className="Header__General">
-            <label className="Header__GeneralSearch">
-              <input
-                type="text"
-                className="Header__Search"
-                value={searchQuery}
-                onChange={(e) => {
-                  if (!e.target.value) {
-                    setSearchPlaceholder("Что вы ищите?");
-                  }
-                  setSearchQuery(e.target.value);
-                }}
-                placeholder={searchPlaceholder}
-                onFocus={() => setSearchPlaceholder("Что вы ищите?")}
-                onBlur={() => setSearchPlaceholder("")}
-              />
-              <img src="images/header/zoom.svg" alt="zoom" />
-            </label>
-            <Link to="/login" className="Header__Login">
-              войти
-            </Link>
-            <img
-              src="images/header/backet.svg"
-              alt="backet"
-              className={cn({
-                Header__Cart: true,
-              })}
-            />
+            </div>
           </div>
         </div>
         <DesktopMenu
