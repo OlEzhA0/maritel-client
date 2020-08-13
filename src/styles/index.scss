@@ -21,6 +21,8 @@ html {
 }
 
 .Page__Wrap {
+  position: relative;
+  min-height: 30vh;
   @media screen and (min-width: 769px) {
     margin-top: calc(9.75rem + 29px);
   }

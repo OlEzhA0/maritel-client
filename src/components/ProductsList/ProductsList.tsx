@@ -51,7 +51,6 @@ export const ProductsList = () => {
 
   useEffect(() => {
     if (!currentPage && products.length) {
-      console.log("in");
       searchParams.set("page", "1");
 
       history.push({
@@ -233,7 +232,7 @@ export const ProductsList = () => {
                     : isOpen
                     ? 2
                     : pagProducts.length / 3
-                )}, minmax(337px, 1fr))`,
+                )}, minmax(${isTablet ? 210 : 337}px, 1fr))`,
               }}
             >
               {pagProducts.map((prod) => (

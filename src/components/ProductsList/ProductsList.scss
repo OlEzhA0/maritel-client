@@ -24,6 +24,10 @@
     @media screen and (max-width: 1024px) {
       flex-direction: column;
     }
+
+    @media screen and (max-width: 414px) {
+      padding: 0 16px;
+    }
   }
 
   &__Filters {
@@ -60,7 +64,8 @@
     margin-bottom: 79px;
 
     @media screen and (max-width: 1024px) {
-      grid-template-columns: repeat(2, minmax(150px, 1fr));
+      grid-template-columns: repeat(2, minmax(130px, 1fr));
+      grid-row-gap: 130px;
     }
   }
 

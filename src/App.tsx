@@ -90,7 +90,13 @@ function App() {
 
   useEffect(() => {
     if (specCategs.data && specCategs.data.getSpecCateg) {
-      dispatch(aCreator.setSpecCategories(specCategs.data.getSpecCateg));
+      dispatch(
+        aCreator.setSpecCategories(
+          specCategs.data.getSpecCateg.filter(
+            (categ: SpecProdsCategory) => !!categ.products.length
+          )
+        )
+      );
     }
   }, [specCategs, dispatch]);
 

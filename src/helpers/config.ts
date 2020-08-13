@@ -66,5 +66,32 @@ export const INFO_SLIDER: string[] = [
   "БЕСПЛАТНАЯ ДОСТАВКА ПРИ ЗАКАЗЕ НА СУММУ ОТ 1502 ГРН",
 ];
 
-export const splitValue = ' / '
-export const sortBy = 'sortBy';
+export const splitValue = " / ";
+export const sortBy = "sortBy";
+
+export const SIZES_CONFIG: string[] = [
+  "XXS",
+  "XS",
+  "S",
+  "M",
+  "L",
+  "XL",
+  "XXL",
+  "XXXL",
+];
+
+export const SHOES_SIZES_CONFIG: string[] = [
+  "35",
+  "36",
+  "37",
+  "38",
+  "39",
+  "40",
+  "41",
+  "42",
+  "43",
+  "44",
+  "45",
+  "46",
+  "47",
+];

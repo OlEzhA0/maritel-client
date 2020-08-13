@@ -2,7 +2,7 @@ import cn from "classnames";
 import React, { useMemo, useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import "./FilterBy.scss";
-
+import { v4 } from "uuid";
 interface Props {
   name: string;
   options: SortOptions[];
@@ -79,7 +79,7 @@ export const FilterBy: React.FC<Props> = ({ name, options }) => {
         })}
       >
         {options.map((option) => (
-          <li key={option.count + new Date().getTime() + Math.random()}>
+          <li key={v4()}>
             <label
               className={cn({
                 FilterBy__Item: true,

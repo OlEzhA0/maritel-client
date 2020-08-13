@@ -72,35 +72,39 @@ export const ProductCard: React.FC<Props> = ({ prod, products }) => {
             </div>
           )}
         </div>
-        <p className="ProductCard__Title">{prod.title}</p>
-        <div className="ProductCard__Price">
-          {prod.lastPrice ? (
-            <>
-              <span className="ProductCard__LastPrice">
-                {prod.lastPrice} грн
-              </span>
-              <span className="ProductCard__CurrentPrice ProductCard__HotPrice">
+        <div className="ProductCard__InfoWrap">
+          <p className="ProductCard__Title">{prod.title}</p>
+          <div className="ProductCard__Price">
+            {prod.lastPrice ? (
+              <>
+                <span className="ProductCard__LastPrice">
+                  {prod.lastPrice} грн
+                </span>
+                <span className="ProductCard__CurrentPrice ProductCard__HotPrice">
+                  {prod.price} грн
+                </span>
+              </>
+            ) : (
+              <span className="ProductCard__CurrentPrice">
                 {prod.price} грн
               </span>
-            </>
-          ) : (
-            <span className="ProductCard__CurrentPrice">{prod.price} грн</span>
-          )}
-        </div>
-        <div className="ProductCard__RelatedProducts">
-          {relatedColors.length > 1 && (
-            <ul className="ProductCard__RelatedList">
-              {relatedColors.map((rel) => (
-                <li key={rel} className="ProductCard__RelatedItem">
-                  <img
-                    src={rel}
-                    alt="color"
-                    className="ProductCard__RelatedColor"
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
+            )}
+          </div>
+          <div className="ProductCard__RelatedProducts">
+            {relatedColors.length > 1 && (
+              <ul className="ProductCard__RelatedList">
+                {relatedColors.map((rel) => (
+                  <li key={rel} className="ProductCard__RelatedItem">
+                    <img
+                      src={rel}
+                      alt="color"
+                      className="ProductCard__RelatedColor"
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </Link>
     </li>

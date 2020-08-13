@@ -1,0 +1,71 @@
+@import "../../styles/vars.scss";
+
+.ProductPageSizes {
+  margin-bottom: 52px;
+  &__Title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__Text,
+  &__Sheets {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: #969696;
+  }
+
+  &__Sheets {
+    color: #101010;
+  }
+
+  &__List {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 71px);
+    list-style-type: none;
+    grid-gap: 10px;
+  }
+
+  &__Size {
+    width: 71px;
+    height: 35px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: #ccc;
+    position: relative;
+    cursor: no-drop;
+    transition: all 0.3s;
+
+    &::after {
+      position: absolute;
+      content: "";
+      opacity: 0.5;
+      background-color: #ccc;
+      width: 120%;
+      height: 1px;
+      transform: rotate(154.44deg);
+    }
+
+    &--active {
+      color: #101010;
+      cursor: pointer;
+      &::after {
+        display: none;
+      }
+    }
+
+    &--choosen {
+      background: #bb2a36;
+      color: #fff;
+      border: 1px solid #bb2a36;
+    }
+  }
+}
