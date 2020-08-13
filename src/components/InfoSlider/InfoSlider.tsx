@@ -96,7 +96,7 @@ export const InfoSlider: React.FC<Props> = ({ visible }) => {
           onClick={() => handleCarousel(-1)}
         >
           <img
-            src="images/menu/subCategArrow.svg"
+            src="/images/menu/subCategArrow.svg"
             alt="arrow left"
             className="InfoSlider__LeftArr InfoSlider__Arr"
           />
@@ -126,7 +126,7 @@ export const InfoSlider: React.FC<Props> = ({ visible }) => {
           onClick={() => handleCarousel(1)}
         >
           <img
-            src="images/menu/subCategArrow.svg"
+            src="/images/menu/subCategArrow.svg"
             alt="arrow left"
             className="InfoSlider__RightArr InfoSlider__Arr"
           />

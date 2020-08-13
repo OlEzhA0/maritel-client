@@ -41,7 +41,7 @@ export const ProductPageQuantity: React.FC<Props> = ({
         >
           {quantity}{" "}
           <img
-            src="images/productPage/arrowSelect.svg"
+            src="/images/productPage/arrowSelect.svg"
             alt="arrow"
             className={cn({
               ProductPageQuantity__Arrow: true,

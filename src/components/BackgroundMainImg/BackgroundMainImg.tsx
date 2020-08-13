@@ -7,7 +7,7 @@ export const BackgroundMainImg = () => {
   return (
     <div className="BackgroundMainImg__ImgWrap">
       <img
-        src="images/homepage/main.webp"
+        src="/images/homepage/main.webp"
         alt="main"
         className={cn({
           BackgroundMainImg__Img: true,

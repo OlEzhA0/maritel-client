@@ -57,7 +57,7 @@ export const HambMenu = () => {
                   onClick={() => dispatch(setMenuStatus(false))}
                 >
                   {category.category}{" "}
-                  <img src="images/menu/categArrow.svg" alt="arrow" />
+                  <img src="/images/menu/categArrow.svg" alt="arrow" />
                 </Link>
               )}
               {category.subCategories.length > 0 && (
@@ -66,7 +66,7 @@ export const HambMenu = () => {
                   onClick={() => setOpenSubMenu(category.id)}
                 >
                   {category.category}{" "}
-                  <img src="images/menu/categArrow.svg" alt="arrow" />
+                  <img src="/images/menu/categArrow.svg" alt="arrow" />
                 </p>
               )}
             </li>
@@ -79,7 +79,7 @@ export const HambMenu = () => {
                 onClick={closeMenu}
               >
                 {categ.name}{" "}
-                <img src="images/menu/categArrow.svg" alt="arrow" />
+                <img src="/images/menu/categArrow.svg" alt="arrow" />
               </Link>
             </li>
           ))}
@@ -95,7 +95,7 @@ export const HambMenu = () => {
             className="HambMenu__Back HambMenu__SubGeneral"
           >
             <img
-              src="images/menu/categArrow.svg"
+              src="/images/menu/categArrow.svg"
               alt="arrow"
               className="HambMenu__BackArrow"
             />{" "}
@@ -111,7 +111,7 @@ export const HambMenu = () => {
               onClick={closeMenu}
             >
               {categories.find((categ) => categ.id === openSubMenu)?.category}{" "}
-              <img src="images/menu/subCategArrow.svg" alt="arrow" />
+              <img src="/images/menu/subCategArrow.svg" alt="arrow" />
             </Link>
           </li>
           {categories.map(

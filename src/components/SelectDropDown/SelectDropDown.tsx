@@ -44,7 +44,7 @@ export const SelectDropDown: React.FC<Props> = ({ values }) => {
           {sortedValue || "сортировать по"}
         </p>
         <img
-          src="images/goodsList/sortArrow.svg"
+          src="/images/goodsList/sortArrow.svg"
           alt="arrow"
           className={cn({
             SelectDropDown__Arrow: true,

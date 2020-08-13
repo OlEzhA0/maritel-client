@@ -55,7 +55,7 @@ export const Header: React.FC<Props> = ({ visible }) => {
             <div className="Header__Logo">
               <Link to="/">
                 <img
-                  src="images/logo.svg"
+                  src="/images/logo.svg"
                   alt="logo"
                   className="Header__LogoImg"
                 />
@@ -77,13 +77,13 @@ export const Header: React.FC<Props> = ({ visible }) => {
                   onFocus={() => setSearchPlaceholder("Что вы ищите?")}
                   onBlur={() => setSearchPlaceholder("")}
                 />
-                <img src="images/header/zoom.svg" alt="zoom" />
+                <img src="/images/header/zoom.svg" alt="zoom" />
               </label>
               <Link to="/login" className="Header__Login">
                 войти
               </Link>
               <img
-                src="images/header/backet.svg"
+                src="/images/header/backet.svg"
                 alt="backet"
                 className={cn({
                   Header__Cart: true,
@@ -108,7 +108,7 @@ export const Header: React.FC<Props> = ({ visible }) => {
           <div className="Header__Logo">
             <Link to="/">
               <img
-                src="images/logo.svg"
+                src="/images/logo.svg"
                 alt="logo"
                 className="Header__LogoImg"
               />
@@ -116,12 +116,12 @@ export const Header: React.FC<Props> = ({ visible }) => {
           </div>
           <div className="Header__General">
             <img
-              src="images/header/backet.svg"
+              src="/images/header/backet.svg"
               alt="backet"
               className="Header__Cart--mobile"
             />
             <img
-              src="images/header/zoom.svg"
+              src="/images/header/zoom.svg"
               alt="zoom"
               onClick={() => {
                 setOpenSearch(!openSearch);

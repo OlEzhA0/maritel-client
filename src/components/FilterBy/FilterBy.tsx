@@ -63,7 +63,7 @@ export const FilterBy: React.FC<Props> = ({ name, options }) => {
     >
       <p className="FilterBy__Name" onClick={() => setIsOpen(!isOpen)}>
         <img
-          src="images/goodsList/filterArrow.svg"
+          src="/images/goodsList/filterArrow.svg"
           alt="filterArrow"
           className={cn({
             FilterBy__ArrowImg: true,

@@ -40,7 +40,7 @@ export const Footer = () => {
               >
                 {info.name}
                 <img
-                  src="images/footer/arrow.svg"
+                  src="/images/footer/arrow.svg"
                   alt="arrow"
                   className={cn({
                     Footer__InfoArrow: true,
@@ -90,7 +90,7 @@ export const Footer = () => {
             >
               Соц. сети
               <img
-                src="images/footer/arrow.svg"
+                src="/images/footer/arrow.svg"
                 alt="arrow"
                 className={cn({
                   Footer__InfoArrow: true,
@@ -138,10 +138,10 @@ export const Footer = () => {
       </nav>
       <div className="Footer__Social">
         <a href="/#" className="Footer__SocialLink">
-          <img src="images/footer/facebook.svg" alt="facebook" />
+          <img src="/images/footer/facebook.svg" alt="facebook" />
         </a>
         <a href="/#" className="Footer__SocialLink">
-          <img src="images/footer/instagram.svg" alt="instagram" />
+          <img src="/images/footer/instagram.svg" alt="instagram" />
         </a>
       </div>
       <div className="Footer__Rights">

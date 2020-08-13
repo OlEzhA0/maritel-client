@@ -44,7 +44,7 @@ export const Pagination: React.FC<Props> = ({ pagesCount, start }) => {
         onClick={() => handleChangePage(-1)}
       >
         <img
-          src="images/goodsList/pagination.svg"
+          src="/images/goodsList/pagination.svg"
           alt="arrow"
           className="Pagination__Arrow Pagination__Arrow--prev"
         />
@@ -58,7 +58,7 @@ export const Pagination: React.FC<Props> = ({ pagesCount, start }) => {
         onClick={() => handleChangePage(1)}
       >
         <img
-          src="images/goodsList/pagination.svg"
+          src="/images/goodsList/pagination.svg"
           alt="arrow"
           className="Pagination__Arrow"
         />
