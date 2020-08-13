@@ -24,7 +24,7 @@ export const ProductsList = () => {
   const [specCategory, setSpecCategory] = useState<SpecProdsCategory>();
   const [colors, setColors] = useState<ColorTypes[]>([]);
   const [subsName, setSubsName] = useState("");
-  const perPage = 18;
+  const perPage = 5;
   const [isOpen, setIsOpen] = useState(false);
 
   const goods = useSelector(types.getProducts);
@@ -33,7 +33,9 @@ export const ProductsList = () => {
   const getColors = useQuery(getColorsQuery);
 
   const sortedValue = useMemo(() => searchParams.get(sortBy), [searchParams]);
-  const currentPage = useMemo(() => searchParams.get("page"), [searchParams]);
+  const currentPage = useMemo(() => searchParams.get("page") || "1", [
+    searchParams,
+  ]);
   const filterPrice = useMemo(() => searchParams.get("Цена"), [searchParams]);
   const filterColor = useMemo(() => searchParams.get("Цвет"), [searchParams]);
   const filterSizes = useMemo(() => searchParams.get("Размер"), [searchParams]);
@@ -48,16 +50,6 @@ export const ProductsList = () => {
     setIsOpen(!isOpen);
     window.scrollTo(0, 0);
   };
-
-  useEffect(() => {
-    if (!currentPage && products.length) {
-      searchParams.set("page", "1");
-
-      history.push({
-        search: searchParams.toString(),
-      });
-    }
-  }, [currentPage, searchParams, products, history]);
 
   useEffect(() => {
     const category = location.pathname.split("/").filter((c) => c)[0];
@@ -176,10 +168,14 @@ export const ProductsList = () => {
             ФИЛЬТР
           </div>
           <p className="ProductsList__InfoCount">{`${
-            currentPage && +currentPage * perPage > pagProducts.length
+            currentPage &&
+            +currentPage < 1 &&
+            +currentPage * perPage > pagProducts.length
               ? pagProducts.length
-              : currentPage && +currentPage * perPage
-          } из ${pagProducts.length}`}</p>
+              : currentPage && +currentPage * perPage > products.length
+              ? products.length
+              : +currentPage * perPage
+          } из ${products.length}`}</p>
           <div className="ProductsList__SelectWrap">
             <SelectDropDown
               values={[

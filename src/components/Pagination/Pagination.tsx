@@ -11,7 +11,7 @@ export const Pagination: React.FC<Props> = ({ pagesCount, start }) => {
   const location = useLocation();
   const history = useHistory();
   const searchParams = new URLSearchParams(location.search);
-  const page = useMemo(() => searchParams.get("page"), [searchParams]);
+  const page = useMemo(() => searchParams.get("page") || "1", [searchParams]);
 
   const handleChangePage = (path: number) => {
     searchParams.set("page", `${(page ? +page : 1) + path}`);
@@ -36,6 +36,7 @@ export const Pagination: React.FC<Props> = ({ pagesCount, start }) => {
       });
     }
   }, [page, history, pagesCount, searchParams, start]);
+
   return (
     <div className="Pagination">
       <button

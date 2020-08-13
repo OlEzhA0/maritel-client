@@ -13,8 +13,8 @@ export const FilterBy: React.FC<Props> = ({ name, options }) => {
   const history = useHistory();
   const searchParams = new URLSearchParams(location.search);
   const [isOpen, setIsOpen] = useState(false);
-  const height = 20;
-  const margin = 16;
+  const height = 18;
+  const margin = 14;
   const [checkedParams, setCheckedParams] = useState<string[]>([]);
   const params = useMemo(() => searchParams.get(name), [searchParams, name]);
   const price = useMemo(() => searchParams.get("Цена"), [searchParams]);

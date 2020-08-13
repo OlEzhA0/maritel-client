@@ -84,7 +84,9 @@ export const fSizes = (filterSizes: string, filterByColor: Products[]) => {
     filterByColor.forEach((prod) => {
       if (
         sizes.some((size) =>
-          prod.sizes.some((prodSize) => prodSize.size === size)
+          prod.sizes.some(
+            (prodSize) => prodSize.size === size && +prodSize.stock !== 0
+          )
         )
       ) {
         filteredBySizes.push(prod);
@@ -144,7 +146,7 @@ export const gSizes = (filterByColor: Products[], products: Products[]) => {
     let count = 0;
 
     filterByColor.forEach((good) => {
-      if (good.sizes.some((s) => s.size === size)) {
+      if (good.sizes.some((s) => s.size === size && +s.stock !== 0)) {
         count++;
       }
     });
