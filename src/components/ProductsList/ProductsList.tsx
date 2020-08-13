@@ -24,7 +24,7 @@ export const ProductsList = () => {
   const [specCategory, setSpecCategory] = useState<SpecProdsCategory>();
   const [colors, setColors] = useState<ColorTypes[]>([]);
   const [subsName, setSubsName] = useState("");
-  const perPage = 5;
+  const perPage = 18;
   const [isOpen, setIsOpen] = useState(false);
 
   const goods = useSelector(types.getProducts);
@@ -156,6 +156,33 @@ export const ProductsList = () => {
     [filterBySize, currentPage]
   );
 
+  const makeTitle1 = () => {
+    if (
+      +currentPage &&
+      +currentPage > 1 &&
+      +currentPage < Math.ceil(filterBySize.length / perPage)
+    ) {
+      return `${perPage * +currentPage}`;
+    } else if (
+      +currentPage &&
+      +currentPage > 1 &&
+      +currentPage * perPage > products.length
+    ) {
+      if (
+        (filterColor || filterSizes || filterPrice) &&
+        +currentPage === Math.ceil(filterBySize.length / perPage)
+      ) {
+        return `${filterBySize.length}`;
+      }
+      return `${products.length}`;
+    } else {
+      if (+currentPage === Math.ceil(filterBySize.length / perPage)) {
+        return `${filterBySize.length}`;
+      }
+      return `${pagProducts.length}`;
+    }
+  };
+
   return (
     <div className="ProductsList Page__Wrap">
       <div className="ProductsList__Wrap">
@@ -167,15 +194,11 @@ export const ProductsList = () => {
           >
             ФИЛЬТР
           </div>
-          <p className="ProductsList__InfoCount">{`${
-            currentPage &&
-            +currentPage < 1 &&
-            +currentPage * perPage > pagProducts.length
-              ? pagProducts.length
-              : currentPage && +currentPage * perPage > products.length
-              ? products.length
-              : +currentPage * perPage
-          } из ${products.length}`}</p>
+          <p className="ProductsList__InfoCount">{`${makeTitle1()} из ${
+            filterColor || filterPrice || filterSizes
+              ? filterBySize.length
+              : products.length
+          }`}</p>
           <div className="ProductsList__SelectWrap">
             <SelectDropDown
               values={[
@@ -239,7 +262,11 @@ export const ProductsList = () => {
         </div>
       </div>
       <Pagination
-        pagesCount={Math.ceil(products.length / perPage)}
+        pagesCount={
+          filterColor || filterSizes || filterPrice
+            ? Math.ceil(filterBySize.length / perPage)
+            : Math.ceil(products.length / perPage)
+        }
         start={!!products.length}
       />
     </div>

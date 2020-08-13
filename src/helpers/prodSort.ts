@@ -115,7 +115,7 @@ export const gColors = (filterByPrice: Products[], colors: ColorTypes[]) =>
   });
 
 export const gPrices = (products: Products[]) => {
-  const prices = ["500-1000 грн", "1000-1500 грн", "1500-2500 грн"];
+  const prices = ["100-500 грн","500-1000 грн", "1000-1500 грн", "1500-2500 грн"];
   const res = prices.map((price) => {
     let count = 0;
     const [from, to] = price.split(" грн")[0].split("-");

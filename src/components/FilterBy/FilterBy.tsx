@@ -17,10 +17,17 @@ export const FilterBy: React.FC<Props> = ({ name, options }) => {
   const margin = 14;
   const [checkedParams, setCheckedParams] = useState<string[]>([]);
   const params = useMemo(() => searchParams.get(name), [searchParams, name]);
+  const page = useMemo(() => searchParams.get("page"), [searchParams]);
   const price = useMemo(() => searchParams.get("Цена"), [searchParams]);
   const colors = useMemo(() => searchParams.get("Цвет"), [searchParams]);
 
   const handleAddParams = (name: string) => {
+    if (page) {
+      searchParams.set("page", "1");
+      history.push({
+        search: searchParams.toString(),
+      });
+    }
     if (checkedParams.find((param) => param === name)) {
       setCheckedParams(checkedParams.filter((param) => param !== name));
     } else {

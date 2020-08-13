@@ -11,6 +11,7 @@ import { getProducts, getCategories } from "../../store/actionsTypes";
 import { ProductPageRelated } from "../../components/ProductPageRelated";
 import { ProductPageSizes } from "../../components/ProductPageSizes";
 import { ProductPageQuantity } from "../../components/ProductPageQuantity";
+import { ProductPageInfoCard } from "../../components/ProductPageInfoCard";
 
 export const ProductPage = () => {
   const location = useLocation();
@@ -112,36 +113,45 @@ export const ProductPage = () => {
             <span className="ProductPage__OnePrice">{product.price} грн.</span>
           )}
         </div>
-        <div className="ProductPage__ColorInfo">
-          <p className="ProductPage__ColorName">
-            Цвет:{" "}
-            <span className="ProductPage__ColorNameSpan">
-              {colors.find((col) => product.color === col.id)?.name}
-            </span>
-          </p>
-          <ProductPageRelated
-            colors={colors}
-            relatedProds={relatedProds}
+        <div className="ProductPage__ProdGeneralInfo">
+          <div className="ProductPage__ColorInfo">
+            <p className="ProductPage__ColorName">
+              Цвет:{" "}
+              <span className="ProductPage__ColorNameSpan">
+                {colors.find((col) => product.color === col.id)?.name}
+              </span>
+            </p>
+            <ProductPageRelated
+              colors={colors}
+              relatedProds={relatedProds}
+              product={product}
+              generalPathName={generalPathName}
+            />
+          </div>
+          <ProductPageSizes
+            prodType={
+              categories.find(
+                (categ) => categ.id === product.type.split(splitValue)[0]
+              )?.category!
+            }
             product={product}
-            generalPathName={generalPathName}
+            choosenSize={choosenSize}
+            setChoosenSize={setChoosenSize}
           />
-        </div>
-        <ProductPageSizes
-          prodType={
-            categories.find(
-              (categ) => categ.id === product.type.split(splitValue)[0]
-            )?.category!
-          }
-          product={product}
-          choosenSize={choosenSize}
-          setChoosenSize={setChoosenSize}
-        />
-        <ProductPageQuantity quantity={quantity} setQuantity={setQuantity} />
-        <div className="ProductPage__AddCart">
+          <ProductPageQuantity quantity={quantity} setQuantity={setQuantity} />
           <button type="button" className="ProductPage__AddCartButton">
             добавить в корзину
           </button>
         </div>
+        <div className="ProductPage__Descr">
+          <p className="ProductPage__DescrText">{product.descr}</p>
+        </div>
+        <ProductPageInfoCard
+          title="Параметры модели"
+          text={product.modelParam}
+        />
+        <ProductPageInfoCard title="Уход за изделием" text={product.care} />
+        <ProductPageInfoCard title="Состав" text={product.composition} />
       </div>
     </div>
   ) : (

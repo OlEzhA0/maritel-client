@@ -44,23 +44,8 @@
     cursor: no-drop;
     transition: all 0.3s;
 
-    &::after {
-      position: absolute;
-      content: "";
-      opacity: 0.5;
-      background-color: #ccc;
-      width: 120%;
-      height: 1px;
-      transform: rotate(154.44deg);
-    }
-
-    &--active {
-      color: #101010;
-      cursor: pointer;
-      &::after {
-        display: none;
-      }
-    }
+    color: #101010;
+    cursor: pointer;
 
     &--choosen {
       background: #bb2a36;

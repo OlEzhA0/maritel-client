@@ -58,6 +58,7 @@
     width: 50%;
     padding-left: 86px;
     box-sizing: border-box;
+    padding-right: 72px;
   }
 
   &__ShopTitle {
@@ -113,7 +114,7 @@
 
   &__AddCartButton {
     height: 35px;
-    width: 80%;
+    width: 100%;
     border: 1px solid #58ba87;
     box-sizing: border-box;
     font-weight: 800;
@@ -130,7 +131,23 @@
 
     &:hover {
       background-color: #58ba87;
+
       color: #fff;
     }
+  }
+
+  &__ProdGeneralInfo {
+    width: 395px;
+    margin-bottom: 20px;
+  }
+
+  &__Descr {
+    margin-bottom: 30px;
+  }
+
+  &__DescrText {
+    font-weight: 500;
+    font-size: 12px;
+    color: #101010;
   }
 }
