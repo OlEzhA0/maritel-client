@@ -27,7 +27,6 @@ export const ProductsList = () => {
   const perPage = 18;
   const [isOpen, setIsOpen] = useState(false);
   const [lastCurrentProds, setLastCurrentProds] = useState<Products[]>([]);
-  const [lastCurrentColors, setLastCurrentColors] = useState<Products[]>([]);
 
   const goods = useSelector(types.getProducts);
   const categories = useSelector(types.getCategories);
@@ -54,10 +53,6 @@ export const ProductsList = () => {
   };
 
   useEffect(() => {
-    if (products.length) {
-      setLastCurrentColors(products);
-    }
-
     if (products.length && !lastCurrentProds.length) {
       setLastCurrentProds(products);
     }
@@ -154,11 +149,7 @@ export const ProductsList = () => {
   );
 
   const pagProducts = useMemo(() => {
-    if (filterColor && (filterPrice || filterSizes)) {
-      setLastCurrentProds(lastCurrentProds);
-    } else {
-      setLastCurrentProds(filterBySize);
-    }
+    setLastCurrentProds(filterBySize);
 
     return filterBySize.slice(
       perPage * (((currentPage && +currentPage) || 0) - 1),
@@ -166,7 +157,6 @@ export const ProductsList = () => {
     );
     // eslint-disable-next-line
   }, [filterBySize, currentPage]);
-  console.log(lastCurrentColors);
 
   const makeTitle = () => {
     if (
