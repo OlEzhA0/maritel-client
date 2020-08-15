@@ -88,7 +88,6 @@
   &__RelatedList {
     display: flex;
     list-style-type: none;
-    
   }
 
   &__RelatedItem {
@@ -114,4 +113,34 @@
     bottom: 0;
     transform: translateY(100%);
   }
+
+  &__QuickView {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    opacity: 0;
+    backdrop-filter: blur(20px);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: #101010;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    @media screen and (max-width: 1024px) {
+      display: none;
+    }
+  }
+}
+
+.ProductCard:hover .ProductCard__QuickView {
+  opacity: 0.5;
 }

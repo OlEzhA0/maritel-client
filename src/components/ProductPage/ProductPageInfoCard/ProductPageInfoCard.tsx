@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "./ProductPageInfoCard.scss";
 import cn from "classnames";
 interface Props {
@@ -10,10 +10,6 @@ export const ProductPageInfoCard: React.FC<Props> = ({ title, text }) => {
   const [isOpen, setIsOpen] = useState(false);
   const myRef = useRef<HTMLParagraphElement>(null);
 
-  useEffect(() => {
-    console.log(myRef.current?.clientHeight);
-    console.log(myRef.current?.offsetHeight);
-  }, [myRef]);
   return (
     <div className="ProductPageInfoCard">
       <h3
@@ -36,7 +32,6 @@ export const ProductPageInfoCard: React.FC<Props> = ({ title, text }) => {
       <p
         className={cn({
           ProductPageInfoCard__Text: true,
-          "ProductPageInfoCard__Text--visible": isOpen,
         })}
         ref={myRef}
       >

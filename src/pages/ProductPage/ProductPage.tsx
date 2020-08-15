@@ -4,14 +4,9 @@ import { useLocation } from "react-router-dom";
 import { useQuery } from "react-apollo";
 import { productQuery, getColorsQuery, splitValue } from "../../helpers";
 import { SpinnerLoader } from "../../components/SpinnerLoader";
-import cn from "classnames";
-import { ProductPageImg } from "../../components/ProductPageImg";
 import { useSelector } from "react-redux";
 import { getProducts, getCategories } from "../../store/actionsTypes";
-import { ProductPageRelated } from "../../components/ProductPageRelated";
-import { ProductPageSizes } from "../../components/ProductPageSizes";
-import { ProductPageQuantity } from "../../components/ProductPageQuantity";
-import { ProductPageInfoCard } from "../../components/ProductPageInfoCard";
+import * as Prod from "../../components/ProductPage";
 
 export const ProductPage = () => {
   const location = useLocation();
@@ -70,65 +65,24 @@ export const ProductPage = () => {
 
   return product && colors.length ? (
     <div className="ProductPage Page__Wrap">
-      <div className="ProductPage__PhotosWrap">
-        <div className="ProductPage__Photos">
-          {product?.photos.map((ph) => (
-            <ProductPageImg
-              key={ph}
-              ph={ph}
-              generalPhoto={generalPhoto}
-              handleSetGeneralPhoto={handleSetGeneralPhoto}
-              width={74}
-              height={100}
-            />
-          ))}
-        </div>
-        <div className="ProductPage__GeneralContainer">
-          <img
-            src={generalPhoto}
-            alt="general model"
-            className={cn({
-              ProductPage__GeneralImg: true,
-              "ProductPage__GeneralImg--loaded": generalPhotoLoad,
-            })}
-            onLoad={() => setGeneralPhotoLoad(true)}
-          />
-          {!generalPhotoLoad && <SpinnerLoader />}
-        </div>
-      </div>
+      <Prod.ProductPagePhotos
+        product={product}
+        generalPhoto={generalPhoto}
+        handleSetGeneralPhoto={handleSetGeneralPhoto}
+        generalPhotoLoad={generalPhotoLoad}
+        setGeneralPhotoLoad={setGeneralPhotoLoad}
+      />
       <div className="ProductPage__Info">
-        <h2 className="ProductPage__ShopTitle">MARITEL’</h2>
-        <h1 className="ProductPage__ProdTitle">{product.title}</h1>
-        <div className="ProductPage__Price">
-          {product.lastPrice ? (
-            <>
-              <span className="ProductPage__LastPrice">
-                {product.lastPrice} грн.
-              </span>
-              <span className="ProductPage__NewPrice">
-                {product.price} грн.
-              </span>
-            </>
-          ) : (
-            <span className="ProductPage__OnePrice">{product.price} грн.</span>
-          )}
-        </div>
+        <Prod.ProductPageProdInfo product={product} />
         <div className="ProductPage__ProdGeneralInfo">
-          <div className="ProductPage__ColorInfo">
-            <p className="ProductPage__ColorName">
-              Цвет:{" "}
-              <span className="ProductPage__ColorNameSpan">
-                {colors.find((col) => product.color === col.id)?.name}
-              </span>
-            </p>
-            <ProductPageRelated
-              colors={colors}
-              relatedProds={relatedProds}
-              product={product}
-              generalPathName={generalPathName}
-            />
-          </div>
-          <ProductPageSizes
+          <Prod.ProductPageColor colors={colors} product={product} />
+          <Prod.ProductPageRelated
+            colors={colors}
+            relatedProds={relatedProds}
+            product={product}
+            generalPathName={generalPathName}
+          />
+          <Prod.ProductPageSizes
             prodType={
               categories.find(
                 (categ) => categ.id === product.type.split(splitValue)[0]
@@ -138,20 +92,26 @@ export const ProductPage = () => {
             choosenSize={choosenSize}
             setChoosenSize={setChoosenSize}
           />
-          <ProductPageQuantity quantity={quantity} setQuantity={setQuantity} />
-          <button type="button" className="ProductPage__AddCartButton">
-            добавить в корзину
-          </button>
+          <Prod.ProductPageQuantity
+            quantity={quantity}
+            setQuantity={setQuantity}
+            choosenSize={choosenSize}
+            product={product}
+          />
+          <Prod.ProductPageAddCart choosenSize={choosenSize} />
         </div>
         <div className="ProductPage__Descr">
           <p className="ProductPage__DescrText">{product.descr}</p>
         </div>
-        <ProductPageInfoCard
+        <Prod.ProductPageInfoCard
           title="Параметры модели"
           text={product.modelParam}
         />
-        <ProductPageInfoCard title="Уход за изделием" text={product.care} />
-        <ProductPageInfoCard title="Состав" text={product.composition} />
+        <Prod.ProductPageInfoCard
+          title="Уход за изделием"
+          text={product.care}
+        />
+        <Prod.ProductPageInfoCard title="Состав" text={product.composition} />
       </div>
     </div>
   ) : (

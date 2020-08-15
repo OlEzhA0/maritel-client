@@ -1,0 +1,59 @@
+.ProductPageQuickView {
+  display: flex;
+  padding: 79px 52px 73px 15px;
+  box-sizing: border-box;
+  width: 70vw;
+  height: 95vh;
+  position: fixed;
+  overflow: hidden;
+  overflow-y: scroll;
+  background-color: #fff;
+  z-index: 21;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  &__Info {
+    width: 50%;
+    padding-left: 62px;
+    box-sizing: border-box;
+  }
+
+  &__ProdGeneralInfo {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  &__SizesWrap {
+    max-width: 395px;
+    margin-bottom: 20px;
+  }
+
+  &__Descr {
+    margin-bottom: 30px;
+  }
+
+  &__DescrText {
+    font-weight: 500;
+    font-size: 12px;
+    color: #101010;
+  }
+
+  &__CloseLabel {
+    position: fixed;
+    top: 15px;
+    right: 10px;
+    height: 3rem;
+  }
+
+  &__Close {
+    background-color: #fff;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+  }
+
+  &__Img {
+    width: 2rem;
+  }
+
+}

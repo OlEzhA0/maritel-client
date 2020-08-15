@@ -4,15 +4,30 @@ import cn from "classnames";
 interface Props {
   quantity: string;
   setQuantity: (q: string) => void;
+  choosenSize: string;
+  product: Products;
 }
-
-const quantityConf = ["1", "2", "3", "4"];
 
 export const ProductPageQuantity: React.FC<Props> = ({
   quantity,
   setQuantity,
+  choosenSize,
+  product,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [quantityConf, setQuantityConf] = useState<string[]>([
+    "1",
+    "2",
+    "3",
+    "4",
+  ]);
+
+  useEffect(() => {
+    const size = product.sizes.find((s) => s.size === choosenSize);
+    if (choosenSize && size && +size.stock! < 4) {
+      setQuantityConf(new Array(+size.stock).fill(0).map((_, i) => `${i + 1}`));
+    }
+  }, [choosenSize, product]);
 
   const handleChangeQuantity = (q: string) => {
     setQuantity(q);

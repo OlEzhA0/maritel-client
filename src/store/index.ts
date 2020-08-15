@@ -6,6 +6,7 @@ import SpecCategoriesReducer from "./specCategories";
 import BackgroundCoverReducer from "./mobileMenu";
 import ProductsReducer from "./products";
 import IsTabletReducer from "./isTablet";
+import QuickViewReducer from "./quickView";
 
 const rootReducer = combineReducers({
   categories: CategoriesReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   background: BackgroundCoverReducer,
   products: ProductsReducer,
   isTablet: IsTabletReducer,
+  qucikView: QuickViewReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

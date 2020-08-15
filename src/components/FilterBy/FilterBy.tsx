@@ -18,8 +18,6 @@ export const FilterBy: React.FC<Props> = ({ name, options }) => {
   const [checkedParams, setCheckedParams] = useState<string[]>([]);
   const params = useMemo(() => searchParams.get(name), [searchParams, name]);
   const page = useMemo(() => searchParams.get("page"), [searchParams]);
-  const price = useMemo(() => searchParams.get("Цена"), [searchParams]);
-  const colors = useMemo(() => searchParams.get("Цвет"), [searchParams]);
 
   const handleAddParams = (name: string) => {
     if (page) {
@@ -34,12 +32,6 @@ export const FilterBy: React.FC<Props> = ({ name, options }) => {
       setCheckedParams([...checkedParams, name]);
     }
   };
-
-  useEffect(() => {
-    if (name !== "Цена" || !price) {
-      setCheckedParams([]);
-    }
-  }, [price, colors, name]);
 
   useEffect(() => {
     if (params) {

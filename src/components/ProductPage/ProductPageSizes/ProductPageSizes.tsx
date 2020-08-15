@@ -22,20 +22,23 @@ export const ProductPageSizes: React.FC<Props> = ({
     </div>
     <div className="ProductPageSizes__Wrap">
       <ul className="ProductPageSizes__List">
-        {product.sizes.map((size) => (
-          <li
-            key={size.size}
-            className={cn({
-              ProductPageSizes__Size: true,
-              "ProductPageSizes__Size--choosen": size.size === choosenSize,
-            })}
-            onClick={() => {
-              setChoosenSize(size.size);
-            }}
-          >
-            {size.size}
-          </li>
-        ))}
+        {product.sizes.map(
+          (size) =>
+            +size.stock >= 1 && (
+              <li
+                key={size.size}
+                className={cn({
+                  ProductPageSizes__Size: true,
+                  "ProductPageSizes__Size--choosen": size.size === choosenSize,
+                })}
+                onClick={() => {
+                  setChoosenSize(size.size);
+                }}
+              >
+                {size.size}
+              </li>
+            )
+        )}
       </ul>
     </div>
   </div>

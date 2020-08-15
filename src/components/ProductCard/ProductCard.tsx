@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ProductCard.scss";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getSpecCateg } from "../../store/actionsTypes";
 import { SpinnerLoader } from "../SpinnerLoader";
 import cn from "classnames";
@@ -8,6 +8,10 @@ import { getColorsQuery } from "../../helpers";
 import { useQuery } from "react-apollo";
 import { Link, useLocation } from "react-router-dom";
 import { handleTranslit } from "../../helpers/links";
+import {
+  setQucikViewStatus,
+  setQucikViewUuid,
+} from "../../store/actionCreators";
 
 interface Props {
   prod: Products;
@@ -17,6 +21,7 @@ interface Props {
 export const ProductCard: React.FC<Props> = ({ prod, products }) => {
   const location = useLocation();
   const specCateg = useSelector(getSpecCateg);
+  const disptach = useDispatch();
   const [showImg, setShowImg] = useState(false);
   const getColors = useQuery(getColorsQuery);
   const [colors, setColors] = useState<ColorTypes[]>([]);
@@ -107,6 +112,15 @@ export const ProductCard: React.FC<Props> = ({ prod, products }) => {
           </div>
         </div>
       </Link>
+      <div
+        className="ProductCard__QuickView"
+        onClick={() => {
+          disptach(setQucikViewStatus(true));
+          disptach(setQucikViewUuid(prod.uuid));
+        }}
+      >
+        быстрый просмотр
+      </div>
     </li>
   );
 };

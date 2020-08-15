@@ -26,6 +26,8 @@ export const ProductsList = () => {
   const [subsName, setSubsName] = useState("");
   const perPage = 18;
   const [isOpen, setIsOpen] = useState(false);
+  const [lastCurrentProds, setLastCurrentProds] = useState<Products[]>([]);
+  const [lastCurrentColors, setLastCurrentColors] = useState<Products[]>([]);
 
   const goods = useSelector(types.getProducts);
   const categories = useSelector(types.getCategories);
@@ -52,6 +54,18 @@ export const ProductsList = () => {
   };
 
   useEffect(() => {
+    if (products.length) {
+      setLastCurrentColors(products);
+    }
+
+    if (products.length && !lastCurrentProds.length) {
+      setLastCurrentProds(products);
+    }
+
+    // eslint-disable-next-line
+  }, [products]);
+
+  useEffect(() => {
     const category = location.pathname.split("/").filter((c) => c)[0];
     const currentCategory = categories.find(
       (categ) => handleTranslit(categ.category) === category
@@ -68,7 +82,7 @@ export const ProductsList = () => {
       location.pathname,
       setSubsName
     );
-  }, [goods, location, categories, specCategs]);
+  }, [goods, location.pathname, categories, specCategs]);
 
   useEffect(() => {
     if (getColors.data && getColors.data.colors) {
@@ -81,15 +95,6 @@ export const ProductsList = () => {
       search: "",
     });
   };
-
-  useEffect(() => {
-    searchParams.delete("Цвет");
-
-    history.push({
-      search: searchParams.toString(),
-    });
-    // eslint-disable-next-line
-  }, [filterPrice]);
 
   const handleCreateTitle = () => {
     if (category && subsName) {
@@ -113,9 +118,10 @@ export const ProductsList = () => {
     };
   }, [isOpen]);
 
-  const handleGetPrices = useMemo(() => prodsSettings.gPrices(products), [
-    products,
-  ]);
+  const handleGetPrices = useMemo(
+    () => prodsSettings.gPrices(lastCurrentProds),
+    [lastCurrentProds]
+  );
 
   const sortedProducts = useMemo(
     () => prodsSettings.sortByDropDown(sortedValue || "", products),
@@ -128,8 +134,8 @@ export const ProductsList = () => {
   );
 
   const handleGetColors = useMemo(
-    () => prodsSettings.gColors(filterByPrice, colors),
-    [filterByPrice, colors]
+    () => prodsSettings.gColors(lastCurrentProds, colors),
+    [lastCurrentProds, colors]
   );
 
   const filterByColor = useMemo(
@@ -138,8 +144,8 @@ export const ProductsList = () => {
   );
 
   const handleGetSizes = useMemo(
-    () => prodsSettings.gSizes(filterByColor, products),
-    [filterByColor, products]
+    () => prodsSettings.gSizes(lastCurrentProds, products),
+    [lastCurrentProds, products]
   );
 
   const filterBySize = useMemo(
@@ -147,16 +153,22 @@ export const ProductsList = () => {
     [filterSizes, filterByColor]
   );
 
-  const pagProducts = useMemo(
-    () =>
-      filterBySize.slice(
-        perPage * (((currentPage && +currentPage) || 0) - 1),
-        perPage * ((currentPage && +currentPage) || 1)
-      ),
-    [filterBySize, currentPage]
-  );
+  const pagProducts = useMemo(() => {
+    if (filterColor && (filterPrice || filterSizes)) {
+      setLastCurrentProds(lastCurrentProds);
+    } else {
+      setLastCurrentProds(filterBySize);
+    }
 
-  const makeTitle1 = () => {
+    return filterBySize.slice(
+      perPage * (((currentPage && +currentPage) || 0) - 1),
+      perPage * ((currentPage && +currentPage) || 1)
+    );
+    // eslint-disable-next-line
+  }, [filterBySize, currentPage]);
+  console.log(lastCurrentColors);
+
+  const makeTitle = () => {
     if (
       +currentPage &&
       +currentPage > 1 &&
@@ -194,7 +206,7 @@ export const ProductsList = () => {
           >
             ФИЛЬТР
           </div>
-          <p className="ProductsList__InfoCount">{`${makeTitle1()} из ${
+          <p className="ProductsList__InfoCount">{`${makeTitle()} из ${
             filterColor || filterPrice || filterSizes
               ? filterBySize.length
               : products.length

@@ -1,3 +1,5 @@
+@import "../../../styles/vars.scss";
+
 .ProductPageImg {
   &__Wrap {
     position: relative;
@@ -20,15 +22,6 @@
 
     &:last-child {
       margin-bottom: 0;
-    }
-
-    @media screen and (max-width: 1300px) {
-      height: 130px;
-      width: 100px;
-    }
-    @media screen and (max-width: 1150px) {
-      height: 100px;
-      width: 80px;
     }
 
     &--loaded {

@@ -9,9 +9,14 @@ import * as helpers from "./helpers";
 import { HomePage } from "./pages";
 import { CategoryPage } from "./pages/CategoryPage";
 import * as aCreator from "./store/actionCreators";
-import { getMenuStatus } from "./store/actionsTypes";
+import {
+  getMenuStatus,
+  getQickViewStatus,
+  getIsTablet,
+} from "./store/actionsTypes";
 import "./styles/index.scss";
 import { ProductPage } from "./pages/ProductPage";
+import { ProductPageQuickView } from "./components/ProductPageQuickView";
 
 function App() {
   const location = useLocation();
@@ -22,6 +27,8 @@ function App() {
   const backgroundStatus = useSelector(getMenuStatus);
   const [scrollPos, setScrollPos] = useState(0);
   const [headerVisible, setHeaderVisible] = useState(true);
+  const quickViewSt = useSelector(getQickViewStatus);
+  const isTablet = useSelector(getIsTablet);
 
   const handleScroll = useCallback(() => {
     const scrollInfo = document.documentElement.getBoundingClientRect();
@@ -116,11 +123,23 @@ function App() {
         <Route path="/" exact component={HomePage} />
       </Switch>
       <Footer />
-      {backgroundStatus && (
+      {backgroundStatus && isTablet && (
         <div
           className="cover"
           onClick={() => dispatch(aCreator.setMenuStatus(false))}
         />
+      )}
+      {quickViewSt && !isTablet && (
+        <>
+          <div
+            className="full__cover"
+            onClick={() => {
+              dispatch(aCreator.setQucikViewStatus(false));
+              dispatch(aCreator.setQucikViewUuid(""));
+            }}
+          />
+          <ProductPageQuickView />
+        </>
       )}
     </>
   );

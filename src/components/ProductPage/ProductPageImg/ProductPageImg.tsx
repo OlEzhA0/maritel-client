@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ProductPageImg.scss";
 import cn from "classnames";
-import { SpinnerLoader } from "../SpinnerLoader";
+import { SpinnerLoader } from "../../SpinnerLoader";
 
 interface Props {
   ph: string;

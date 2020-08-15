@@ -4,6 +4,8 @@ import {
   SET_BACKGROUND,
   SET_PRODUCTS,
   SET_TABLET,
+  SET_QUICK_VIEW,
+  SET_CURRENT_UUID_QUICK_VIEW,
 } from "./actions";
 
 export const setCategories = (categories: CategoriesTypes[]) => ({
@@ -29,4 +31,14 @@ export const setProducts = (products: Products[]) => ({
 export const setDeviceStatus = (status: boolean) => ({
   type: SET_TABLET,
   status,
+});
+
+export const setQucikViewStatus = (status: boolean) => ({
+  type: SET_QUICK_VIEW,
+  status,
+});
+
+export const setQucikViewUuid = (uuid: string) => ({
+  type: SET_CURRENT_UUID_QUICK_VIEW,
+  uuid,
 });

@@ -1,0 +1,15 @@
+@import "../../../styles/vars.scss";
+
+.ProductPageColor {
+  &__ColorName,
+  &__ColorNameSpan {
+    font-weight: 500;
+    font-size: 14px;
+    color: #969696;
+    margin-right: 6px;
+  }
+
+  &__ColorNameSpan {
+    color: #bb2a36;
+  }
+}

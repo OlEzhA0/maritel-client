@@ -31,7 +31,8 @@ html {
   }
 }
 
-.cover {
+.cover,
+.full__cover {
   position: absolute;
   top: 3.5rem;
   left: 0;
@@ -40,6 +41,11 @@ html {
   background-color: #101010;
   opacity: 0.3;
   z-index: 3;
+}
+
+.full__cover {
+  top: 0;
+  z-index: 20;
 }
 
 ::-webkit-scrollbar {
@@ -63,4 +69,3 @@ html {
 .no-scroll {
   overflow: hidden;
 }
-

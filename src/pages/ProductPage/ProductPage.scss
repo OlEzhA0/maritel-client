@@ -7,52 +7,7 @@
   max-width: 1600px;
   margin: calc(9.75rem + 29px) auto 100px;
   box-sizing: border-box;
-  &__Photos {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__PhotosWrap {
-    width: 50%;
-    display: grid;
-    grid-template-columns: 74px 1fr;
-    grid-column-gap: 30px;
-  }
-
-  &__GeneralImg {
-    object-fit: cover;
-    object-position: center;
-    width: 100%;
-    display: none;
-    &--loaded {
-      display: block;
-    }
-    @media screen and (min-width: 1441px) {
-      height: 580px;
-      width: calc(580px * 0.75);
-    }
-
-    @media screen and (max-width: 1441px) {
-      height: 615px;
-      width: calc(615px * 0.75);
-    }
-
-    @media screen and (max-width: 1300px) {
-      height: 535px;
-      width: calc(535px * 0.75);
-    }
-    @media screen and (max-width: 1150px) {
-      height: 415px;
-      width: calc(415px * 0.75);
-    }
-  }
-
-  &__GeneralContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-  }
+ 
 
   &__Info {
     width: 50%;
@@ -60,81 +15,7 @@
     box-sizing: border-box;
     padding-right: 72px;
   }
-
-  &__ShopTitle {
-    font-weight: 800;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    color: #101010;
-    margin-bottom: 6px;
-  }
-
-  &__ProdTitle {
-    font-weight: 800;
-    font-size: 22px;
-    letter-spacing: 0.08em;
-    color: #bb2a36;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-  }
-
-  &__OnePrice,
-  &__LastPrice,
-  &__NewPrice {
-    font-weight: 800;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    color: #101010;
-    margin-right: 7px;
-  }
-
-  &__LastPrice {
-    text-decoration-line: line-through;
-  }
-
-  &__NewPrice {
-    color: #bb2a36;
-  }
-
-  &__Price {
-    margin-bottom: 21px;
-  }
-
-  &__ColorName,
-  &__ColorNameSpan {
-    font-weight: 500;
-    font-size: 14px;
-    color: #969696;
-    margin-right: 6px;
-  }
-
-  &__ColorNameSpan {
-    color: #bb2a36;
-  }
-
-  &__AddCartButton {
-    height: 35px;
-    width: 100%;
-    border: 1px solid #58ba87;
-    box-sizing: border-box;
-    font-weight: 800;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 0.08em;
-    color: #58ba87;
-    text-transform: uppercase;
-    background-color: #fff;
-    cursor: pointer;
-    transition: all 0.3s;
-
-    &:hover {
-      background-color: #58ba87;
-
-      color: #fff;
-    }
-  }
+ 
 
   &__ProdGeneralInfo {
     width: 395px;

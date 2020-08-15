@@ -1,12 +1,15 @@
 import React from "react";
 import "./ProductPageRelated.scss";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setQucikViewUuid } from "../../../store/actionCreators";
 
 interface Props {
   colors: ColorTypes[];
   relatedProds: Products[];
   product: Products;
   generalPathName: string;
+  popup?: true;
 }
 
 export const ProductPageRelated: React.FC<Props> = ({
@@ -14,7 +17,9 @@ export const ProductPageRelated: React.FC<Props> = ({
   relatedProds,
   product,
   generalPathName,
+  popup,
 }) => {
+  const disptach = useDispatch();
   return (
     <div className="ProductPageRelated__Related">
       <ul className="ProductPageRelated__RelatedList">
@@ -28,7 +33,10 @@ export const ProductPageRelated: React.FC<Props> = ({
           ),
         ].map((prod) =>
           prod.id === product.id ? (
-            <li key={prod.id} className="ProductPageRelated__RelatedItem ProductPageRelated__RelatedItem--choosen">
+            <li
+              key={prod.id}
+              className="ProductPageRelated__RelatedItem ProductPageRelated__RelatedItem--choosen"
+            >
               <img
                 src={colors.find((col) => col.id === product.color)?.link}
                 alt="color ph"
@@ -42,17 +50,33 @@ export const ProductPageRelated: React.FC<Props> = ({
               />
             </li>
           ) : (
-            <li key={prod.id} className="ProductPageRelated__RelatedItem">
-              <Link
-                to={"/" + generalPathName + prod.uuid}
-                className="ProductPageRelated__RelLink"
-              >
+            <li
+              key={prod.id}
+              className="ProductPageRelated__RelatedItem"
+              onClick={() => {
+                if (popup) {
+                  disptach(setQucikViewUuid(prod.uuid));
+                }
+              }}
+            >
+              {popup ? (
                 <img
                   src={colors.find((col) => col.id === prod.color)?.link}
                   alt="color ph"
                   className="ProductPageRelated__RelatedImg"
                 />
-              </Link>
+              ) : (
+                <Link
+                  to={"/" + generalPathName + prod.uuid}
+                  className="ProductPageRelated__RelLink"
+                >
+                  <img
+                    src={colors.find((col) => col.id === prod.color)?.link}
+                    alt="color ph"
+                    className="ProductPageRelated__RelatedImg"
+                  />
+                </Link>
+              )}
             </li>
           )
         )}
