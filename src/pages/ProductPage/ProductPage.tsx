@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./ProductPage.scss";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useQuery } from "react-apollo";
 import { productQuery, getColorsQuery, splitValue } from "../../helpers";
 import { SpinnerLoader } from "../../components/SpinnerLoader";
 import { useSelector } from "react-redux";
-import { getProducts, getCategories } from "../../store/actionsTypes";
+import {
+  getProducts,
+  getCategories,
+  getIsTablet,
+} from "../../store/actionsTypes";
 import * as Prod from "../../components/ProductPage";
+import { handleDecode, handleTranslit } from "../../helpers/links";
 
 export const ProductPage = () => {
   const location = useLocation();
@@ -24,6 +29,7 @@ export const ProductPage = () => {
   const getColors = useQuery(getColorsQuery);
   const products = useSelector(getProducts);
   const categories = useSelector(getCategories);
+  const isTablet = useSelector(getIsTablet);
 
   useEffect(() => {
     if (product && products.length) {
@@ -63,8 +69,42 @@ export const ProductPage = () => {
     setChoosenSize("");
   }, [location]);
 
+  const handleCreateMobileInfo = useMemo(() => {
+    if (isTablet) {
+      const category = handleDecode(
+        location.pathname.split("/")[2].split(/\+|-/g).join(" ")
+      );
+
+      if (category === "ВСЕ ТОВАРИ") {
+        return "ВСЕ ТОВАРЫ";
+      } else if (category === "СПЕCИАЛНОЕ") {
+        return "СПЕЦИАЛЬНОЕ";
+      } else {
+        return categories.find(
+          (cat) =>
+            handleTranslit(cat.category) === location.pathname.split("/")[2]
+        )?.category;
+      }
+    }
+  }, [categories, location.pathname, isTablet]);
+
+  console.log();
+
   return product && colors.length ? (
     <div className="ProductPage Page__Wrap">
+      <Link
+        className="ProductPage__MobileInfo"
+        to={`/${location.pathname.split("/").slice(1, 3).join("/")}`}
+      >
+        <img
+          src="images/productPage/arrowback.svg"
+          alt="arrow"
+          className="ProductPage__MobileInfoBack"
+        />
+        <p className="ProductPage__MobileInfoCateg">
+          {handleCreateMobileInfo?.toLocaleUpperCase()}
+        </p>
+      </Link>
       <Prod.ProductPagePhotos
         product={product}
         generalPhoto={generalPhoto}

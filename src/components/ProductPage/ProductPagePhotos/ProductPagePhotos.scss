@@ -4,6 +4,10 @@
   &__Photos {
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 990px) {
+      margin-top: 10px;
+    }
   }
 
   &__PhotosWrap {
@@ -11,6 +15,12 @@
     display: grid;
     grid-template-columns: 74px 1fr;
     grid-column-gap: 30px;
+
+    @media screen and (max-width: 990px) {
+      width: 100%;
+      display: flex;
+      flex-direction: column-reverse;
+    }
   }
 
   &__GeneralImg {
@@ -33,15 +43,29 @@
       max-width: 100%;
     }
 
-    @media screen and (max-width: 1300px) {
-      height: 535px;
-      width: calc(535px * 0.75);
-      max-width: 100%;
+    @media screen and (max-width: 990px) {
+      width: 100%;
+      height: calc(100% * 0.75);
     }
-    @media screen and (max-width: 1150px) {
-      height: 415px;
-      width: calc(415px * 0.75);
-      max-width: 100%;
+
+    &--popup {
+      @media screen and (max-width: 1441px) {
+        height: 515px;
+        width: calc(515px * 0.75);
+        max-width: 100%;
+      }
+
+      @media screen and (max-width: 1300px) {
+        height: 465px;
+        width: calc(465px * 0.75);
+        max-width: 100%;
+      }
+
+      @media screen and (max-width: 1150px) {
+        height: 365px;
+        width: calc(365px * 0.75);
+        max-width: 100%;
+      }
     }
   }
 
@@ -50,5 +74,9 @@
     display: flex;
     justify-content: center;
     position: relative;
+
+    @media screen and (max-width: 990px) {
+      min-height: 300px;
+    }
   }
 }

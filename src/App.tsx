@@ -111,6 +111,11 @@ function App() {
     window.scrollTo(0, 0);
   }, [location]);
 
+  useEffect(() => {
+    dispatch(aCreator.setQucikViewStatus(false));
+    dispatch(aCreator.setQucikViewUuid(""));
+  }, [isTablet, dispatch]);
+
   return (
     <>
       <Header visible={headerVisible} />
