@@ -48,3 +48,4 @@ export const setBackgroundStatus = (status: boolean) => ({
   type: SET_BACKGROUND_COVER,
   status,
 });
+

@@ -36,7 +36,7 @@ export const ProductPagePhotos: React.FC<Props> = ({
 
   useEffect(() => {
     setHeight(myRef.current?.offsetHeight || 300);
-  }, [myRef, setHeight]);
+  }, [myRef, setHeight, generalPhoto]);
 
   return (
     <div className="ProductPagePhotos__PhotosWrap">
