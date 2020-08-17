@@ -9,6 +9,8 @@ interface Props {
   handleSetGeneralPhoto: (ph: string) => void;
   width: number;
   height: number;
+  handleSlider?: (path: number) => void;
+  i?: number;
 }
 
 export const ProductPageImg: React.FC<Props> = ({

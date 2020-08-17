@@ -10,13 +10,13 @@
   &__Text,
   &__Sheets {
     font-weight: 500;
-    font-size: 12px;
+    font-size: 1rem;
     letter-spacing: 0.08em;
     color: #969696;
   }
 
   &__Sheets {
-    color: #101010;
+    color: $main-color;
   }
 
   &__List {
@@ -44,7 +44,7 @@
     cursor: no-drop;
     transition: all 0.3s;
 
-    color: #101010;
+    color: $main-color;
     cursor: pointer;
 
     &--choosen {

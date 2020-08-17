@@ -26,6 +26,7 @@ export const ProductPage = () => {
   const [relatedProds, setRelatedProds] = useState<Products[]>([]);
   const [choosenSize, setChoosenSize] = useState("");
   const [quantity, setQuantity] = useState("1");
+  const [currentPath, setCurrentPath] = useState(0);
   const getColors = useQuery(getColorsQuery);
   const products = useSelector(getProducts);
   const categories = useSelector(getCategories);
@@ -57,6 +58,14 @@ export const ProductPage = () => {
 
   const handleSetGeneralPhoto = (ph: string) => {
     setGeneralPhoto(ph);
+
+    if (isTablet) {
+      setCurrentPath(
+        product!.photos.findIndex((p) => p === ph) === -1
+          ? 1
+          : product!.photos.findIndex((p) => p === ph)
+      );
+    }
   };
 
   useEffect(() => {
@@ -88,7 +97,16 @@ export const ProductPage = () => {
     }
   }, [categories, location.pathname, isTablet]);
 
-  console.log();
+  const handleSlider = (path: number) => {
+    const photos = product?.photos;
+    const newPath = currentPath + path;
+    if (photos!.length > 1 && newPath < photos!.length && newPath >= 0) {
+      setCurrentPath(newPath);
+      setGeneralPhoto(product!.photos.find((ph, i) => i === newPath)!);
+    } else {
+      return;
+    }
+  };
 
   return product && colors.length ? (
     <div className="ProductPage Page__Wrap">
@@ -111,6 +129,8 @@ export const ProductPage = () => {
         handleSetGeneralPhoto={handleSetGeneralPhoto}
         generalPhotoLoad={generalPhotoLoad}
         setGeneralPhotoLoad={setGeneralPhotoLoad}
+        currentPath={currentPath}
+        handleSlider={handleSlider}
       />
       <div className="ProductPage__Info">
         <Prod.ProductPageProdInfo product={product} />

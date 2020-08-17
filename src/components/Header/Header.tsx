@@ -5,8 +5,11 @@ import cn from "classnames";
 import { HambMenu } from "../HambMenu";
 import { DesktopMenu } from "../DesktopMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { setMenuStatus } from "../../store/actionCreators";
-import { getMenuStatus } from "../../store/actionsTypes";
+import { setMenuStatus, setBackgroundStatus } from "../../store/actionCreators";
+import {
+  getMenuStatus,
+  getBackgroundSearchCover,
+} from "../../store/actionsTypes";
 import { InfoSlider } from "../InfoSlider";
 
 interface Props {
@@ -23,6 +26,7 @@ export const Header: React.FC<Props> = ({ visible }) => {
 
   const dispatch = useDispatch();
   const menuStatus = useSelector(getMenuStatus);
+  const backgournd = useSelector(getBackgroundSearchCover);
 
   useEffect(() => {
     if (menuStatus) {
@@ -126,6 +130,7 @@ export const Header: React.FC<Props> = ({ visible }) => {
               onClick={() => {
                 setOpenSearch(!openSearch);
                 dispatch(setMenuStatus(false));
+                dispatch(setBackgroundStatus(!backgournd));
               }}
               className="Header__SearchIcon"
             />
@@ -133,7 +138,7 @@ export const Header: React.FC<Props> = ({ visible }) => {
               type="text"
               className={cn({
                 Header__MobileSearch: true,
-                "Header__MobileSearch--open": openSearch,
+                "Header__MobileSearch--open": backgournd,
               })}
               onChange={(e) => setSearchQuery(e.target.value)}
               value={searchQuery}

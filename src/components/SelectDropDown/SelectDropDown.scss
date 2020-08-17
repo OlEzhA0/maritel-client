@@ -1,3 +1,5 @@
+@import "../../styles/vars.scss";
+
 .SelectDropDown {
   max-height: 1.5rem;
   position: relative;
@@ -26,7 +28,7 @@
     font-size: 13px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #101010;
+    color: $main-color;
   }
 
   &__List {
@@ -61,7 +63,7 @@
     overflow: hidden;
 
     &:hover {
-      color: #101010;
+      color: $main-color;
     }
   }
 

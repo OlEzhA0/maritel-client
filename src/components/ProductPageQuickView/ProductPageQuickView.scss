@@ -1,3 +1,5 @@
+@import "../../styles/vars.scss";
+
 .ProductPageQuickView {
   display: flex;
   padding: 79px 52px 73px 15px;
@@ -34,8 +36,8 @@
 
   &__DescrText {
     font-weight: 500;
-    font-size: 12px;
-    color: #101010;
+    font-size: 1rem;
+    color: $main-color;
   }
 
   &__CloseLabel {

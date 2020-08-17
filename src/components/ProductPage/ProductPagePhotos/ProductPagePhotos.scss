@@ -7,6 +7,7 @@
 
     @media screen and (max-width: 990px) {
       margin-top: 10px;
+      flex-direction: row;
     }
   }
 
@@ -78,5 +79,34 @@
     @media screen and (max-width: 990px) {
       min-height: 300px;
     }
+  }
+
+  &__Slider {
+    position: absolute;
+    width: 32px;
+    height: 62px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #bb2a36;
+    border: 0;
+    outline: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  &__SliderBack {
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+  &__SliderNext {
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+
+  &__SliderImgNext {
+    transform: matrix(0, 1, 1, 0, 0, 0);
+    transform: rotate(180deg);
   }
 }

@@ -248,7 +248,7 @@ export const ProductsList = () => {
               className="ProductsList__Prods"
               style={{
                 gridTemplateRows: `repeat(${Math.ceil(
-                  isTablet
+                  isTablet && !isOpen
                     ? pagProducts.length / 2
                     : isOpen
                     ? 2

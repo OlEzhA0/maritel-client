@@ -7,3 +7,5 @@ export const getProducts = (state: RootState) => state.products;
 export const getIsTablet = (state: RootState) => state.isTablet;
 export const getQickViewStatus = (state: RootState) => state.qucikView.status;
 export const getQickViewUuid = (state: RootState) => state.qucikView.uuid;
+export const getBackgroundSearchCover = (state: RootState) =>
+  state.searchBackground;

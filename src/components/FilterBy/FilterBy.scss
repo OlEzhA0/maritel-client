@@ -15,7 +15,7 @@
     align-items: center;
     padding: 6px 0;
     letter-spacing: 0.08em;
-    color: #101010;
+    color: $main-color;
     cursor: pointer;
     @media screen and (max-width: 1024px) {
       padding: 15px;
@@ -23,7 +23,7 @@
   }
 
   &__ArrowImg {
-    margin-right: 12px;
+    margin-right: 1rem;
     transition: all 0.3s;
 
     &--open {
@@ -49,11 +49,18 @@
         width: 100%;
         background-color: #fff;
       }
+
+      
     }
 
     @media screen and (max-width: 1024px) {
       top: 40px;
       height: calc(100% - 46px);
+    }
+
+    @media screen and (max-width: 415px) {
+      margin-left: 13px;
+      top: 46px;
     }
   }
 
@@ -75,6 +82,6 @@
     font-weight: 500;
     font-size: 13px;
     letter-spacing: 0.08em;
-    color: #101010;
+    color: $main-color;
   }
 }

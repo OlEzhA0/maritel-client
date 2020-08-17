@@ -3,6 +3,10 @@
 .ProductPageImg {
   &__Wrap {
     position: relative;
+    margin-right: 8px;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
   &__Photo {

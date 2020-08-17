@@ -20,7 +20,7 @@
 
   &__Name {
     font-weight: 500;
-    font-size: 12px;
+    font-size: 1rem;
     color: #969696;
   }
 
@@ -50,7 +50,7 @@
     cursor: pointer;
     padding: 3px 22px 3px 8px;
     &:hover {
-      color: #101010;
+      color: $main-color;
     }
   }
 
@@ -58,7 +58,7 @@
     font-weight: 800;
     font-size: 14px;
     letter-spacing: 0.08em;
-    color: #101010;
+    color: $main-color;
     display: flex;
     align-items: center;
     padding-left: 8px;

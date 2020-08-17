@@ -1,7 +1,9 @@
+@import "../../styles/vars.scss";
+
 .DesktopMenu {
   &__Nav {
     height: 5rem;
-    background-color: #101010;
+    background-color: $main-color;
     opacity: 0.9;
     box-sizing: border-box;
     z-index: -1;
@@ -65,7 +67,7 @@
     box-sizing: border-box;
     padding: 2.5rem;
     list-style-type: none;
-    background-color: #101010;
+    background-color: $main-color;
     opacity: 0.98;
     z-index: 10;
   }

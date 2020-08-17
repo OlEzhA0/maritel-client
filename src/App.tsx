@@ -13,6 +13,7 @@ import {
   getMenuStatus,
   getQickViewStatus,
   getIsTablet,
+  getBackgroundSearchCover,
 } from "./store/actionsTypes";
 import "./styles/index.scss";
 import { ProductPage } from "./pages/ProductPage";
@@ -29,6 +30,7 @@ function App() {
   const [headerVisible, setHeaderVisible] = useState(true);
   const quickViewSt = useSelector(getQickViewStatus);
   const isTablet = useSelector(getIsTablet);
+  const searchBackground = useSelector(getBackgroundSearchCover);
 
   const handleScroll = useCallback(() => {
     const scrollInfo = document.documentElement.getBoundingClientRect();
@@ -132,6 +134,12 @@ function App() {
         <div
           className="cover"
           onClick={() => dispatch(aCreator.setMenuStatus(false))}
+        />
+      )}
+      {searchBackground && (
+        <div
+          className="search__cover"
+          onClick={() => dispatch(aCreator.setBackgroundStatus(false))}
         />
       )}
       {quickViewSt && !isTablet && (

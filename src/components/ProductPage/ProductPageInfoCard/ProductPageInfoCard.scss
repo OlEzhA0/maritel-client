@@ -19,9 +19,9 @@
   }
   &__Title {
     font-weight: 800;
-    font-size: 12px;
+    font-size: 1rem;
     letter-spacing: 0.08em;
-    color: #101010;
+    color: $main-color;
     box-sizing: border-box;
     padding-right: 8px;
     text-transform: uppercase;
@@ -34,16 +34,16 @@
 
   &__Arrow {
     position: relative;
-    background-color: #101010;
-    width: 12px;
+    background-color: $main-color;
+    width: 1rem;
     height: 2px;
 
     &::after {
       transition: all 0.3s;
       position: absolute;
       content: "";
-      background-color: #101010;
-      width: 12px;
+      background-color: $main-color;
+      width: 1rem;
       height: 2px;
       transform: rotate(0);
     }
@@ -58,8 +58,8 @@
 
   &__Text {
     font-weight: 500;
-    font-size: 12px;
-    color: #101010;
+    font-size: 1rem;
+    color: $main-color;
     position: absolute;
     top: 45px;
     opacity: 1;
