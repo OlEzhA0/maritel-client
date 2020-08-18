@@ -7,6 +7,7 @@ import {
   SET_QUICK_VIEW,
   SET_CURRENT_UUID_QUICK_VIEW,
   SET_BACKGROUND_COVER,
+  SET_TO_WISH_LIST,
 } from "./actions";
 
 export const setCategories = (categories: CategoriesTypes[]) => ({
@@ -49,3 +50,7 @@ export const setBackgroundStatus = (status: boolean) => ({
   status,
 });
 
+export const setWishList = (prodId: string) => ({
+  type: SET_TO_WISH_LIST,
+  prodId,
+});

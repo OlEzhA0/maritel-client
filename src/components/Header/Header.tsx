@@ -9,6 +9,7 @@ import { setMenuStatus, setBackgroundStatus } from "../../store/actionCreators";
 import {
   getMenuStatus,
   getBackgroundSearchCover,
+  getWishList,
 } from "../../store/actionsTypes";
 import { InfoSlider } from "../InfoSlider";
 
@@ -27,6 +28,7 @@ export const Header: React.FC<Props> = ({ visible }) => {
   const dispatch = useDispatch();
   const menuStatus = useSelector(getMenuStatus);
   const backgournd = useSelector(getBackgroundSearchCover);
+  const wishList = useSelector(getWishList);
 
   useEffect(() => {
     if (menuStatus) {
@@ -55,7 +57,9 @@ export const Header: React.FC<Props> = ({ visible }) => {
       >
         <div className="Header__MainPC">
           <div className="Header__MainPCWrap">
-            <div className="Header__Title">Find a store</div>
+            <Link className="Header__Title" to="/wish-list">
+              список желаний ({wishList.length})
+            </Link>
             <div className="Header__Logo">
               <Link to="/">
                 <img

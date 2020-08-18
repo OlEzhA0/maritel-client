@@ -132,6 +132,7 @@ export const ProductPageQuickView = () => {
             text={product.care}
           />
           <Prod.ProductPageInfoCard title="Состав" text={product.composition} />
+          <Prod.ProductShareProd />
         </div>
       </div>
     </div>

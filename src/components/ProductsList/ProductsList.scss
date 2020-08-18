@@ -5,6 +5,19 @@
   overflow: hidden;
   max-width: 1600px;
   margin: 0 auto;
+
+  &__NoProd {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 22px;
+    color: #101010;
+    font-weight: 800;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   &__Title {
     font-weight: 800;
     font-size: 26px;
@@ -85,7 +98,7 @@
     }
 
     @media screen and (max-width: 415px) {
-     padding: 0 16px;
+      padding: 0 16px;
     }
   }
 
@@ -224,7 +237,6 @@
 
     @media screen and (max-width: 415px) {
       margin-left: 0;
-
     }
 
     &--clear {

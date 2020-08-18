@@ -14,6 +14,7 @@ import {
   getQickViewStatus,
   getIsTablet,
   getBackgroundSearchCover,
+  getWishList,
 } from "./store/actionsTypes";
 import "./styles/index.scss";
 import { ProductPage } from "./pages/ProductPage";
@@ -31,6 +32,7 @@ function App() {
   const quickViewSt = useSelector(getQickViewStatus);
   const isTablet = useSelector(getIsTablet);
   const searchBackground = useSelector(getBackgroundSearchCover);
+  const wishList = useSelector(getWishList);
 
   const handleScroll = useCallback(() => {
     const scrollInfo = document.documentElement.getBoundingClientRect();
@@ -48,6 +50,10 @@ function App() {
       document.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
+
+  useEffect(() => {
+    localStorage.setItem("wishList", JSON.stringify(wishList));
+  }, [wishList]);
 
   useEffect(() => {
     document.addEventListener("scroll", handleScroll);
@@ -126,6 +132,7 @@ function App() {
         <Route path="/:category/Vse-tovari" exact component={ProductsList} />
         <Route path="/:category/Specialnoe" exact component={ProductsList} />
         <Route path="/:category/:sub" exact component={ProductsList} />
+        <Route path="/wish-list" exact component={ProductsList} />
         <Route path="/:category" exact component={CategoryPage} />
         <Route path="/" exact component={HomePage} />
       </Switch>

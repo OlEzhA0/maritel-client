@@ -32,6 +32,7 @@ export const ProductsList = () => {
   const categories = useSelector(types.getCategories);
   const specCategs = useSelector(types.getSpecCateg);
   const getColors = useQuery(getColorsQuery);
+  const wishList = useSelector(types.getWishList);
 
   const sortedValue = useMemo(() => searchParams.get(sortBy), [searchParams]);
   const currentPage = useMemo(() => searchParams.get("page") || "1", [
@@ -61,6 +62,22 @@ export const ProductsList = () => {
   }, [products]);
 
   useEffect(() => {
+    if (
+      location.pathname.includes("wish-list") &&
+      goods.length &&
+      wishList.length
+    ) {
+      console.log(wishList);
+      setProducts(
+        wishList
+          .map((id) => goods.find((prod) => prod.uuid === id)!)
+          .filter((g) => g)
+      );
+
+      return;
+    }
+    console.log(location.pathname);
+    console.log("ininin");
     const category = location.pathname.split("/").filter((c) => c)[0];
     const currentCategory = categories.find(
       (categ) => handleTranslit(categ.category) === category
@@ -77,7 +94,9 @@ export const ProductsList = () => {
       location.pathname,
       setSubsName
     );
-  }, [goods, location.pathname, categories, specCategs]);
+  }, [goods, location.pathname, categories, specCategs, wishList]);
+
+  console.log(products);
 
   useEffect(() => {
     if (getColors.data && getColors.data.colors) {
@@ -185,10 +204,12 @@ export const ProductsList = () => {
     }
   };
 
-  return (
+  return products.length > 0 ? (
     <div className="ProductsList Page__Wrap">
       <div className="ProductsList__Wrap">
-        <h1 className="ProductsList__Title">{handleCreateTitle()}</h1>
+        <h1 className="ProductsList__Title">
+          {handleCreateTitle() || "Избранные"}
+        </h1>
         <div className="ProductsList__Info">
           <div
             className="ProductsList__FilterName ProductsList__FilterName--tablet"
@@ -271,6 +292,10 @@ export const ProductsList = () => {
         }
         start={!!products.length}
       />
+    </div>
+  ) : (
+    <div className="ProductsList  Page__Wrap">
+      <p className="ProductsList__NoProd">Нет товаров :(</p>
     </div>
   );
 };

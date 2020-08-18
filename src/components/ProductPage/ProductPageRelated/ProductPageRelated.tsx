@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setQucikViewUuid } from "../../../store/actionCreators";
 import { getCategories } from "../../../store/actionsTypes";
-import { splitValue } from "../../../helpers";
-import { handleTranslit } from "../../../helpers/links";
+import { handleCreateLink } from "../../../helpers/createLink";
 
 interface Props {
   colors: ColorTypes[];
@@ -24,26 +23,6 @@ export const ProductPageRelated: React.FC<Props> = ({
 }) => {
   const disptach = useDispatch();
   const categories = useSelector(getCategories);
-
-  const handleCreateLink = (prod: Products) => {
-    const categ = handleTranslit(
-      categories.find((c) => c.id === prod.type.split(splitValue)[0])
-        ?.category || ""
-    );
-    const currentCateg = categories.find(
-      (cat) => cat.id === prod.type.split(splitValue)[0]
-    );
-    let subCat = "Vse-tovari";
-    if (currentCateg?.subCategories.length) {
-      subCat = handleTranslit(
-        currentCateg.subCategories.find(
-          (sub) => sub.id === prod.type.split(splitValue)[1]
-        )?.subs || ""
-      );
-    }
-
-    return `/${categ}/${subCat}/${handleTranslit(prod.title)}/${prod.uuid}`;
-  };
 
   return (
     <div className="ProductPageRelated__Related">
@@ -92,7 +71,7 @@ export const ProductPageRelated: React.FC<Props> = ({
                 />
               ) : (
                 <Link
-                  to={() => handleCreateLink(prod)}
+                  to={() => handleCreateLink(prod, categories)}
                   className="ProductPageRelated__RelLink"
                 >
                   <img

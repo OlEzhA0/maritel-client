@@ -7,3 +7,5 @@ export * from "./ProductPageProdInfo";
 export * from "./ProductPageQuantity";
 export * from "./ProductPageRelated";
 export * from "./ProductPageSizes";
+export * from "./ProductShareProd";
+export * from "./ProductAlsoBuy";

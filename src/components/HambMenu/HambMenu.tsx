@@ -148,7 +148,11 @@ export const HambMenu = () => {
             </Link>
           </li>
           <li className="HambMenu__SettingsItem">
-            <Link to="/" className="HambMenu__SettingsLink" onClick={closeMenu}>
+            <Link
+              to="/wish-list"
+              className="HambMenu__SettingsLink"
+              onClick={closeMenu}
+            >
               мой список желаний
             </Link>
           </li>

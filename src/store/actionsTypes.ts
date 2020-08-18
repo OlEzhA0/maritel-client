@@ -9,3 +9,4 @@ export const getQickViewStatus = (state: RootState) => state.qucikView.status;
 export const getQickViewUuid = (state: RootState) => state.qucikView.uuid;
 export const getBackgroundSearchCover = (state: RootState) =>
   state.searchBackground;
+export const getWishList = (state: RootState) => state.wishList;
