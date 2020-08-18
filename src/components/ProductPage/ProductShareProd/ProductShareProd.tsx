@@ -19,8 +19,12 @@ export const ProductShareProd = () => {
   useEffect(() => {
     if (isPopup) {
       setUuid(isPopup);
+    } else {
+      setUuid(
+        location.pathname.split("/")[location.pathname.split("/").length - 1]
+      );
     }
-  }, [isPopup]);
+  }, [isPopup, location.pathname]);
 
   return (
     <div className="ProductShareProd">

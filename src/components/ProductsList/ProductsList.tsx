@@ -67,7 +67,6 @@ export const ProductsList = () => {
       goods.length &&
       wishList.length
     ) {
-      console.log(wishList);
       setProducts(
         wishList
           .map((id) => goods.find((prod) => prod.uuid === id)!)
@@ -76,8 +75,6 @@ export const ProductsList = () => {
 
       return;
     }
-    console.log(location.pathname);
-    console.log("ininin");
     const category = location.pathname.split("/").filter((c) => c)[0];
     const currentCategory = categories.find(
       (categ) => handleTranslit(categ.category) === category
@@ -95,8 +92,6 @@ export const ProductsList = () => {
       setSubsName
     );
   }, [goods, location.pathname, categories, specCategs, wishList]);
-
-  console.log(products);
 
   useEffect(() => {
     if (getColors.data && getColors.data.colors) {
@@ -208,7 +203,7 @@ export const ProductsList = () => {
     <div className="ProductsList Page__Wrap">
       <div className="ProductsList__Wrap">
         <h1 className="ProductsList__Title">
-          {handleCreateTitle() || "Избранные"}
+          {handleCreateTitle() || "список желаний"}
         </h1>
         <div className="ProductsList__Info">
           <div

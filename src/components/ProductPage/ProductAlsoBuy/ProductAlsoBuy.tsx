@@ -15,12 +15,11 @@ export const ProductAlsoBuy = () => {
   const categories = useSelector(getCategories);
 
   useEffect(() => {
-    const currentProd = goods.find(
-      (good) =>
-        good.uuid ===
-        location.pathname.split("/")[location.pathname.split("/").length - 1]
-    );
+    const uuid = location.pathname.split("/")[
+      location.pathname.split("/").length - 1
+    ];
 
+    const currentProd = goods.find((good) => good.uuid === uuid);
     const prods = goods.filter(
       (good) =>
         good.type === currentProd?.type ||
