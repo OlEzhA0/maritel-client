@@ -1,0 +1,38 @@
+.CartPage {
+  max-width: 1600px;
+  margin: calc(9.75rem + 29px) auto 0;
+  padding: 42px 2.5rem 0;
+
+  &__RegisterOrder {
+    max-width: 800px;
+  }
+
+  &__Hint {
+    font-weight: 500;
+    font-size: 12px;
+    color: #101010;
+    opacity: 0.8;
+    padding-bottom: 10px;
+  }
+
+  &__InfoTitle {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 19px;
+  }
+
+  &__TitlePage {
+    font-weight: 800;
+    font-size: 36px;
+    color: #101010;
+    margin-right: 20px;
+    text-transform: uppercase;
+  }
+
+  &__CountProds {
+    font-weight: 800;
+    font-size: 15px;
+    color: #101010;
+    padding-bottom: 5px;
+  }
+}

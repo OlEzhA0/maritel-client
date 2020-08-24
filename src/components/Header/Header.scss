@@ -111,6 +111,7 @@
   &__General {
     display: flex;
     align-items: center;
+    height: 100%;
   }
 
   &__GeneralSearch {
@@ -170,6 +171,16 @@
     margin: 0 2rem;
     text-decoration: none;
     text-transform: uppercase;
+  }
+
+  &__CartWrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+    width: 36px;
+    transform: translateX(10px);
   }
 
   &__Cart {

@@ -10,3 +10,5 @@ export const getQickViewUuid = (state: RootState) => state.qucikView.uuid;
 export const getBackgroundSearchCover = (state: RootState) =>
   state.searchBackground;
 export const getWishList = (state: RootState) => state.wishList;
+export const getCart = (state: RootState) => state.cart;
+export const getCartPopupStatus = (state: RootState) => state.cartPopupStatus

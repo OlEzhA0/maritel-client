@@ -9,6 +9,8 @@ import IsTabletReducer from "./isTablet";
 import QuickViewReducer from "./quickView";
 import SearchBackgroundReducer from "./backgroundCover";
 import WishListReducer from "./wishList";
+import CartReducer from "./cart";
+import CartPopupReducer from "./cartPopup";
 
 const rootReducer = combineReducers({
   categories: CategoriesReducer,
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
   qucikView: QuickViewReducer,
   searchBackground: SearchBackgroundReducer,
   wishList: WishListReducer,
+  cart: CartReducer,
+  cartPopupStatus: CartPopupReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

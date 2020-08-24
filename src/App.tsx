@@ -15,10 +15,12 @@ import {
   getIsTablet,
   getBackgroundSearchCover,
   getWishList,
+  getCart,
 } from "./store/actionsTypes";
 import "./styles/index.scss";
 import { ProductPage } from "./pages/ProductPage";
 import { ProductPageQuickView } from "./components/ProductPageQuickView";
+import { CartPage } from "./pages/CartPage";
 
 function App() {
   const location = useLocation();
@@ -33,6 +35,7 @@ function App() {
   const isTablet = useSelector(getIsTablet);
   const searchBackground = useSelector(getBackgroundSearchCover);
   const wishList = useSelector(getWishList);
+  const cart = useSelector(getCart);
 
   const handleScroll = useCallback(() => {
     const scrollInfo = document.documentElement.getBoundingClientRect();
@@ -124,6 +127,10 @@ function App() {
     dispatch(aCreator.setQucikViewUuid(""));
   }, [isTablet, dispatch]);
 
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   return (
     <>
       <Header visible={headerVisible} />
@@ -133,6 +140,7 @@ function App() {
         <Route path="/:category/Specialnoe" exact component={ProductsList} />
         <Route path="/:category/:sub" exact component={ProductsList} />
         <Route path="/wish-list" exact component={ProductsList} />
+        <Route path="/cart" exact component={CartPage} />
         <Route path="/:category" exact component={CategoryPage} />
         <Route path="/" exact component={HomePage} />
       </Switch>

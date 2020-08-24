@@ -9,6 +9,7 @@ import {
   getProducts,
   getCategories,
   getIsTablet,
+  getCart,
 } from "../../store/actionsTypes";
 import * as Prod from "../../components/ProductPage";
 import { handleDecode, handleTranslit } from "../../helpers/links";
@@ -32,6 +33,7 @@ export const ProductPage = () => {
   const products = useSelector(getProducts);
   const categories = useSelector(getCategories);
   const isTablet = useSelector(getIsTablet);
+  const cart = useSelector(getCart);
 
   useEffect(() => {
     if (product && products.length) {
@@ -56,6 +58,10 @@ export const ProductPage = () => {
       setGeneralPhoto(getProduct.data.product.previewPhoto);
     }
   }, [getProduct]);
+
+  useEffect(() => {
+    setQuantity("1");
+  }, [choosenSize]);
 
   const handleSetGeneralPhoto = (ph: string) => {
     setGeneralPhoto(ph);
@@ -109,6 +115,11 @@ export const ProductPage = () => {
     }
   };
 
+  useEffect(() => {
+    setQuantity("1");
+    setChoosenSize("");
+  }, [cart]);
+
   return product && colors.length ? (
     <>
       <div className="ProductPage Page__Wrap">
@@ -160,7 +171,11 @@ export const ProductPage = () => {
               choosenSize={choosenSize}
               product={product}
             />
-            <Prod.ProductPageAddCart choosenSize={choosenSize} />
+            <Prod.ProductPageAddCart
+              choosenSize={choosenSize}
+              quantity={quantity}
+              prodUuid={product.uuid}
+            />
           </div>
           <div className="ProductPage__Descr">
             <p className="ProductPage__DescrText">{product.descr}</p>

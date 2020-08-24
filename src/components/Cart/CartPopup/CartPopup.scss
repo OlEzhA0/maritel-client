@@ -1,0 +1,128 @@
+.CartPopup {
+  position: fixed;
+  top: 57px;
+  right: 0;
+  max-height: 47rem;
+  width: 502px;
+  background-color: #fff;
+  filter: drop-shadow(-4px 10px 10px rgba(0, 0, 0, 0.1));
+  z-index: 5;
+  &__False {
+    display: none;
+  }
+
+  &__Prods {
+    background-color: #f8f6f5;
+    max-height: 444px;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 40px 83px 0 50px;
+    box-sizing: border-box;
+  }
+
+  &__Buttons {
+    height: 120px;
+  }
+
+  &__Empty {
+    height: 120px;
+    font-size: 18px;
+    color: #101010;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+  }
+
+  &__ItemPhWrap {
+    width: 100px;
+    height: 134px;
+    margin-right: 45px;
+    position: relative;
+  }
+
+  &__ProdImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: none;
+
+    &--loaded {
+      display: block;
+    }
+  }
+  &__Item {
+    list-style: none;
+  }
+
+  &__Link {
+    display: flex;
+    cursor: pointer;
+    margin-bottom: 64px;
+    text-decoration: none;
+  }
+
+  &__ProdTitle {
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: #bb2a36;
+    text-transform: uppercase;
+    margin-bottom: 9px;
+  }
+
+  &__Info {
+    font-weight: 500;
+    font-size: 13px;
+
+    color: #101010;
+    margin-bottom: 9px;
+  }
+
+  &__Span {
+    margin: 0 10px;
+  }
+
+  &__Price {
+    font-weight: 500;
+    font-size: 13px;
+    color: #101010;
+  }
+
+  &__Buttons {
+    padding: 25px 49px 20px;
+    box-sizing: border-box;
+  }
+
+  &__AllPrice {
+    font-weight: 800;
+    font-size: 12px;
+    color: #101010;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  &__Price {
+    margin-left: 48px;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: #101010;
+  }
+
+  &__LinkToOrder {
+    width: 100%;
+    height: 40px;
+    background: #58ba87;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.08em;
+    color: #fff;
+    text-decoration: none;
+  }
+}

@@ -17,6 +17,7 @@
     background-color: #58ba87;
     cursor: pointer;
     transition: all 0.3s;
+    outline: none;
 
     &:hover {
       background-color: #fff;
@@ -34,5 +35,6 @@
       background-color: #fff;
       color: #58ba87;
     }
+
   }
 }

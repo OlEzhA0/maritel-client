@@ -6,6 +6,7 @@ import {
   getCategories,
   getProducts,
   getQickViewUuid,
+  getCart,
 } from "../../store/actionsTypes";
 import * as Prod from "../ProductPage";
 import { SpinnerLoader } from "../SpinnerLoader";
@@ -29,6 +30,7 @@ export const ProductPageQuickView = () => {
   const [generalPhotoLoad, setGeneralPhotoLoad] = useState(false);
   const [choosenSize, setChoosenSize] = useState("");
   const [quantity, setQuantity] = useState("1");
+  const cart = useSelector(getCart);
 
   useEffect(() => {
     if (product && products.length) {
@@ -64,6 +66,11 @@ export const ProductPageQuickView = () => {
   const handleSetGeneralPhoto = (ph: string) => {
     setGeneralPhoto(ph);
   };
+
+  useEffect(() => {
+    setQuantity("1");
+    setChoosenSize("");
+  }, [cart]);
 
   return product && colors.length ? (
     <div className="ProductPageQuickView">
@@ -118,7 +125,11 @@ export const ProductPageQuickView = () => {
               choosenSize={choosenSize}
               product={product}
             />
-            <Prod.ProductPageAddCart choosenSize={choosenSize} />
+            <Prod.ProductPageAddCart
+              choosenSize={choosenSize}
+              prodUuid={product.uuid}
+              quantity={quantity}
+            />
           </div>
           <div className="ProductPageQuickView__Descr">
             <p className="ProductPageQuickView__DescrText">{product.descr}</p>

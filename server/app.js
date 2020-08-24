@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 
 app.use(express.json({ extended: true }))
 
-mongoose.connect(`mongodb+srv://admin:NfoSAy2ePnJVQE36@mrskai.g24zh.azure.mongodb.net/database?retryWrites=true&w=majority`,
+mongoose.connect(`mongodb+srv://admin:EoRHh9rzLTEJHmXA@maritelgeneral.llqa9.gcp.mongodb.net/maritel?retryWrites=true&w=majority`,
   { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 )
 

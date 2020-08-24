@@ -13,6 +13,7 @@ import { ProductCard } from "../ProductCard";
 import { SelectDropDown } from "../SelectDropDown";
 import "./ProductsList.scss";
 import { Pagination } from "../Pagination";
+import { SpinnerLoader } from "../SpinnerLoader";
 
 export const ProductsList = () => {
   const location = useLocation();
@@ -288,9 +289,13 @@ export const ProductsList = () => {
         start={!!products.length}
       />
     </div>
-  ) : (
+  ) : location.pathname.includes("wish-list") ? (
     <div className="ProductsList  Page__Wrap">
       <p className="ProductsList__NoProd">Нет товаров :(</p>
+    </div>
+  ) : (
+    <div className="Page__Wrap">
+      <SpinnerLoader />
     </div>
   );
 };

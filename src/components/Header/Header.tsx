@@ -5,13 +5,18 @@ import cn from "classnames";
 import { HambMenu } from "../HambMenu";
 import { DesktopMenu } from "../DesktopMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { setMenuStatus, setBackgroundStatus } from "../../store/actionCreators";
+import {
+  setMenuStatus,
+  setBackgroundStatus,
+  SetPopupCartStatus,
+} from "../../store/actionCreators";
 import {
   getMenuStatus,
   getBackgroundSearchCover,
   getWishList,
 } from "../../store/actionsTypes";
 import { InfoSlider } from "../InfoSlider";
+import { CartPopup } from "../Cart/CartPopup";
 
 interface Props {
   visible: boolean;
@@ -49,6 +54,7 @@ export const Header: React.FC<Props> = ({ visible }) => {
         "Header--desktopFull": visible,
       })}
     >
+      <CartPopup />
       <div
         className={cn({
           Header__PC: true,
@@ -69,7 +75,10 @@ export const Header: React.FC<Props> = ({ visible }) => {
                 />
               </Link>
             </div>
-            <div className="Header__General">
+            <div
+              className="Header__General"
+              onMouseLeave={() => dispatch(SetPopupCartStatus(false))}
+            >
               <label className="Header__GeneralSearch">
                 <input
                   type="text"
@@ -90,13 +99,19 @@ export const Header: React.FC<Props> = ({ visible }) => {
               <Link to="/login" className="Header__Login">
                 войти
               </Link>
-              <img
-                src="/images/header/backet.svg"
-                alt="backet"
-                className={cn({
-                  Header__Cart: true,
-                })}
-              />
+              <Link
+                to="/cart"
+                className="Header__CartWrap"
+                onMouseEnter={() => dispatch(SetPopupCartStatus(true))}
+              >
+                <img
+                  src="/images/header/backet.svg"
+                  alt="backet"
+                  className={cn({
+                    Header__Cart: true,
+                  })}
+                />
+              </Link>
             </div>
           </div>
         </div>
