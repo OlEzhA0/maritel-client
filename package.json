@@ -42,7 +42,7 @@
     "uuidv4": "^6.2.2"
   },
   "engines": {
-    "node": "12.11.1"
+    "node": "^12.11.1"
   },
   "scripts": {
     "start": "node server/app.js",
