@@ -41,6 +41,9 @@
     "typescript": "^3.7.5",
     "uuidv4": "^6.2.2"
   },
+  "engines": {
+    "node": "12.11.1"
+  },
   "scripts": {
     "start": "node server/app.js",
     "build": "react-scripts build",
