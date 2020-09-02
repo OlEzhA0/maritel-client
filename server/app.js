@@ -9,10 +9,17 @@ const PORT = process.env.PORT || 5000;
 
 
 app.use((req, res, next) => {
-  res.set('Access-Control-Allow-Origin', `'http://localhost:${PORT}'`);
+  res.set('Access-Control-Allow-Origin', `'${PORT}'`);
   res.set('Access-Control-Allow-Headers', 'origin, contenttype, accept');
   next()
 })
+
+// local settings
+// app.use((req, res, next) => {
+//   res.set('Access-Control-Allow-Origin', `'http://localhost:${PORT}'`);
+//   res.set('Access-Control-Allow-Headers', 'origin, contenttype, accept');
+//   next()
+// })
 
 app.use(express.json({ extended: true }))
 
