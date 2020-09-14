@@ -8,7 +8,36 @@ export const getIsTablet = (state: RootState) => state.isTablet;
 export const getQickViewStatus = (state: RootState) => state.qucikView.status;
 export const getQickViewUuid = (state: RootState) => state.qucikView.uuid;
 export const getBackgroundSearchCover = (state: RootState) =>
-  state.searchBackground;
+    state.searchBackground;
 export const getWishList = (state: RootState) => state.wishList;
 export const getCart = (state: RootState) => state.cart;
-export const getCartPopupStatus = (state: RootState) => state.cartPopupStatus
+export const getCartItemsTotal = (state: RootState) => {
+    const products = getProducts(state);
+    return state.cart.reduce((accum, value) => {
+        const prod = products.find((g) => g.uuid === value.prodUuid)!;
+        if (prod) {
+            const addPrice = +prod.price * +value.quantity;
+            return accum + addPrice;
+        }
+        return accum;
+    }, 0);
+};
+
+export const getOrderTotal = (state: RootState) => {
+    let orderTotal = 0;
+
+    const cartItemsTotal = getCartItemsTotal(state);
+    orderTotal += cartItemsTotal;
+    const shippingCost = getShippingCost(state)
+    orderTotal += shippingCost
+
+    return orderTotal;
+};
+export const getShippingCost = (state: RootState) => {
+    const shippingMethod = state.order.shippingMethod;
+
+    return shippingMethod ? (shippingMethod === "courier" ? 80 : 50) : 0;
+};
+export const getCartPopupStatus = (state: RootState) => state.cartPopupStatus;
+export const getOrderInfo = (state: RootState) => state.order;
+export const getOrderStatus = (state: RootState) => state.orderStatus

@@ -1,92 +1,107 @@
 import {
-  SET_CATEGORIES,
-  SET_SPEC_CATEGORIES,
-  SET_BACKGROUND,
-  SET_PRODUCTS,
-  SET_TABLET,
-  SET_QUICK_VIEW,
-  SET_CURRENT_UUID_QUICK_VIEW,
-  SET_BACKGROUND_COVER,
-  SET_TO_WISH_LIST,
-  ADD_TO_CART,
-  DELETE_FROM_CART,
-  UPDATE_PRODUCT_IN_CART,
-  SET_CART_POPUP_STATUS,
+    SET_CATEGORIES,
+    SET_SPEC_CATEGORIES,
+    SET_BACKGROUND,
+    SET_PRODUCTS,
+    SET_TABLET,
+    SET_QUICK_VIEW,
+    SET_CURRENT_UUID_QUICK_VIEW,
+    SET_BACKGROUND_COVER,
+    SET_TO_WISH_LIST,
+    ADD_TO_CART,
+    DELETE_FROM_CART,
+    UPDATE_PRODUCT_IN_CART,
+    SET_CART_POPUP_STATUS,
+    SET_ORDER_INFO,
+    SET_ORDER_STATUS,
 } from "./actions";
 
+import { SetOrder } from "./order";
+import { OrderStatus } from "./orderStatus";
+
 export const setCategories = (categories: CategoriesTypes[]) => ({
-  type: SET_CATEGORIES,
-  categories,
+    type: SET_CATEGORIES,
+    categories,
 });
 
 export const setSpecCategories = (categories: SpecProdsCategory[]) => ({
-  type: SET_SPEC_CATEGORIES,
-  categories,
+    type: SET_SPEC_CATEGORIES,
+    categories,
 });
 
 export const setMenuStatus = (status: boolean) => ({
-  type: SET_BACKGROUND,
-  status,
+    type: SET_BACKGROUND,
+    status,
 });
 
 export const setProducts = (products: Products[]) => ({
-  type: SET_PRODUCTS,
-  products,
+    type: SET_PRODUCTS,
+    products,
 });
 
 export const setDeviceStatus = (status: boolean) => ({
-  type: SET_TABLET,
-  status,
+    type: SET_TABLET,
+    status,
 });
 
 export const setQucikViewStatus = (status: boolean) => ({
-  type: SET_QUICK_VIEW,
-  status,
+    type: SET_QUICK_VIEW,
+    status,
 });
 
 export const setQucikViewUuid = (uuid: string) => ({
-  type: SET_CURRENT_UUID_QUICK_VIEW,
-  uuid,
+    type: SET_CURRENT_UUID_QUICK_VIEW,
+    uuid,
 });
 
 export const setBackgroundStatus = (status: boolean) => ({
-  type: SET_BACKGROUND_COVER,
-  status,
+    type: SET_BACKGROUND_COVER,
+    status,
 });
 
 export const setWishList = (prodId: string) => ({
-  type: SET_TO_WISH_LIST,
-  prodId,
+    type: SET_TO_WISH_LIST,
+    prodId,
 });
 
 export const addToCart = (
-  prodUuid: string,
-  quantity: string,
-  size: string
+    prodUuid: string,
+    quantity: string,
+    size: string
 ) => ({
-  type: ADD_TO_CART,
-  prodUuid,
-  quantity,
-  size,
+    type: ADD_TO_CART,
+    prodUuid,
+    quantity,
+    size,
 });
 
 export const delFromCart = (prod: string) => ({
-  type: DELETE_FROM_CART,
-  prod,
+    type: DELETE_FROM_CART,
+    prod,
 });
 
 export const updateInCart = (
-  prodUuid: string,
-  quantity: string,
-  size: string
+    prodUuid: string,
+    quantity: string,
+    size: string
 ) => ({
-  type: UPDATE_PRODUCT_IN_CART,
-  prodUuid,
-  quantity,
-  size,
+    type: UPDATE_PRODUCT_IN_CART,
+    prodUuid,
+    quantity,
+    size,
 });
 
 export const SetPopupCartStatus = (status: boolean) => ({
-  type: SET_CART_POPUP_STATUS,
-  status,
+    type: SET_CART_POPUP_STATUS,
+    status,
+});
+
+export const setOrderInfo = (payload: SetOrder["payload"]) => ({
+    type: SET_ORDER_INFO,
+    payload,
+});
+
+export const setOrderStatus = (payload: OrderStatus["payload"]) => ({
+    type: SET_ORDER_STATUS,
+    payload,
 });

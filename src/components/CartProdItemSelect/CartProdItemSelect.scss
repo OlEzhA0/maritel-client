@@ -1,3 +1,9 @@
 .CartProdItemSelect {
-  
+    position: relative;
+    &__Icon {
+        width: 12px;
+        position: absolute;
+        right: 12px;
+        top: 16px;
+    }
 }

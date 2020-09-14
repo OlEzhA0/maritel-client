@@ -11,6 +11,9 @@ import SearchBackgroundReducer from "./backgroundCover";
 import WishListReducer from "./wishList";
 import CartReducer from "./cart";
 import CartPopupReducer from "./cartPopup";
+import OrderStateReducer from  './order'
+import OrderStatusReducer from  './orderStatus'
+
 
 const rootReducer = combineReducers({
   categories: CategoriesReducer,
@@ -23,6 +26,8 @@ const rootReducer = combineReducers({
   wishList: WishListReducer,
   cart: CartReducer,
   cartPopupStatus: CartPopupReducer,
+  order: OrderStateReducer,
+  orderStatus: OrderStatusReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

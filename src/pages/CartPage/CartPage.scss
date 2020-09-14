@@ -1,38 +1,190 @@
 .CartPage {
-  max-width: 1600px;
-  margin: calc(9.75rem + 29px) auto 0;
-  padding: 42px 2.5rem 0;
-
-  &__RegisterOrder {
-    max-width: 800px;
-  }
-
-  &__Hint {
-    font-weight: 500;
-    font-size: 12px;
-    color: #101010;
-    opacity: 0.8;
-    padding-bottom: 10px;
-  }
-
-  &__InfoTitle {
     display: flex;
-    align-items: flex-end;
-    margin-bottom: 19px;
-  }
+    flex-flow: row wrap;
+    max-width: 1600px;
+    margin: calc(9.75rem + 29px) auto 0;
+    padding: 42px 2.5rem 0;
 
-  &__TitlePage {
-    font-weight: 800;
-    font-size: 36px;
-    color: #101010;
-    margin-right: 20px;
-    text-transform: uppercase;
-  }
+    &__Required {
+        color: #bb2a36;
+    }
 
-  &__CountProds {
-    font-weight: 800;
-    font-size: 15px;
-    color: #101010;
-    padding-bottom: 5px;
-  }
+    &__Error {
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        text-align: right;
+        color: #bb2a36;
+    }
+
+    &__PaymentHint {
+        position: absolute;
+        top: 100%;
+        color: #969696;
+    }
+
+    &__RegisterOrder {
+        // max-width: 800px;
+        flex-basis: 55%;
+    }
+
+    &__FormContainer {
+        display: flex;
+        flex-basis: 55%;
+        flex-flow: row wrap;
+    }
+
+    &__InputContainer {
+        position: relative;
+        flex-basis: 48.5%;
+        margin-top: 10px;
+
+        &__Small {
+            display: flex;
+            flex-flow: row wrap;
+            flex-basis: 20%;
+            margin-left: 2%;
+        }
+
+        .CartPage__FormContainer > &:nth-child(2n - 1) {
+            margin-right: 1.5%;
+        }
+
+        .CartPage__FormContainer > &:nth-child(2n) {
+            margin-left: 1.5%;
+        }
+
+        & label {
+            display: block;
+            margin-bottom: 2%;
+        }
+        & > input,
+        .CartPage__Input {
+            width: 100%;
+            padding: 10px 0 10px 20px;
+            border: 1px solid #969696;
+            outline: none;
+            box-sizing: border-box;
+            border-radius: 2px;
+            &:focus {
+                border: 1px solid #101010;
+            }
+            &.CartPage__InputError {
+                border: 1px solid red;
+                &:focus {
+                    border: 1px solid red;
+                }
+            }
+        }
+    }
+
+    &__CourierDelivery {
+        display: flex;
+    }
+
+    &__PaymentServiceContainer {
+        margin-bottom: 1.5%;
+        margin-left: 2%;
+    }
+
+    &__Hint {
+        font-weight: 500;
+        font-size: 12px;
+        color: #101010;
+        opacity: 0.8;
+        padding-bottom: 10px;
+    }
+
+    &__InfoTitle {
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 19px;
+    }
+
+    &__TitlePage {
+        font-weight: 800;
+        font-size: 36px;
+        color: #101010;
+        margin-right: 20px;
+        text-transform: uppercase;
+    }
+
+    &__CountProds {
+        font-weight: 800;
+        font-size: 15px;
+        color: #101010;
+        padding-bottom: 5px;
+    }
+
+    &__StepTitle {
+        flex-basis: 100%;
+        margin: 1% 0;
+        font-size: 15px;
+        font-weight: 800;
+        color: #101010;
+    }
+
+    &__ShippingMethodContainer {
+        display: flex;
+        flex-flow: row wrap;
+        width: 55%;
+        & > div {
+            width: 100%;
+            margin-bottom: 2%;
+        }
+    }
+
+    &__CityName {
+        color: #bb2a36;
+    }
+
+    &__RadioContainer {
+        display: flex;
+        height: 20px;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        padding-left: 35px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        & input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+            &:checked ~ .checkmark {
+                &:after {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
+
+.checkmark:after {
+    content: "";
+    display: none;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    padding: 6px;
+    background-color: #101010;
+    border-radius: 50%;
+    box-shadow: 0px 0px 1px 1px #101010;
 }

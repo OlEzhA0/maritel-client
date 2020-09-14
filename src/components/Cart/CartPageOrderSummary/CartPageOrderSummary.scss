@@ -1,0 +1,46 @@
+.CartPageOrderSummary {
+    position: sticky;
+    top: 20%;
+    flex-basis: 25%;
+    margin: 0 7.5%;
+
+    &__VertLine {
+        height: 1px;
+        margin: 16px 0;
+        background: #101010;
+    }
+
+    &__Title {
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 800;
+    }
+
+    &__Submit {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 8% 0;
+        padding: 4% 0;
+        background: #58ba87;
+        color: #fff;
+        cursor: pointer;
+        &__Error {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+    }
+
+    &__Item {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__ItemsTotal {
+        font-weight: 800;
+    }
+    &__Discount {
+        color: #bb2a36;
+    }
+}
