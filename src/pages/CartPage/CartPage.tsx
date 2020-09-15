@@ -64,6 +64,7 @@ export const CartPage = () => {
     watch("shippingMethod");
     watch("recepient");
     watch("paymentMethod");
+    watch("paymentService");
     watch("deliveryAddress");
 
     register({ name: "city" }, { required: true });
@@ -71,7 +72,7 @@ export const CartPage = () => {
     register({ name: "deliveryAddress.name" }, { required: true });
 
     const formValues = getValues();
-    
+
     useEffect(() => {
         dispatch(setOrderInfo({ ...getValues(), customRecepient: undefined }));
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -110,6 +111,7 @@ export const CartPage = () => {
                     register={register({ required: true, minLength: 4 })}
                     error={typeof errors.payer?.lastName !== "undefined"}
                     errorMessage="Введите свою фамилию"
+                    required={true}
                 />
                 <CartPageInput
                     label="Имя"
@@ -117,6 +119,7 @@ export const CartPage = () => {
                     register={register({ required: true, minLength: 3 })}
                     error={typeof errors.payer?.firstName !== "undefined"}
                     errorMessage="Введите свое имя"
+                    required={true}
                 />
                 <CartPageInput
                     label="Телефон"
@@ -128,6 +131,7 @@ export const CartPage = () => {
                     })}
                     error={typeof errors.payer?.phone !== "undefined"}
                     errorMessage="Укажите мобильный номер"
+                    required={true}
                 />
 
                 <AsyncSelect
@@ -168,7 +172,6 @@ export const CartPage = () => {
                         name="shippingMethod"
                         disabled={!formValues.city?.name}
                         disabledMessage="Пожалуйста, выберите город."
-                        extraMessage="50 грн."
                     />
                     {formValues.shippingMethod === "postOffice" && (
                         <AsyncSelect
@@ -198,7 +201,6 @@ export const CartPage = () => {
                         value="courier"
                         disabled={!formValues.city?.name}
                         disabledMessage="Пожалуйста, выберите город."
-                        extraMessage="80 грн."
                     />
                     {formValues.shippingMethod === "courier" && (
                         <div className="CartPage__CourierDelivery">
@@ -218,6 +220,7 @@ export const CartPage = () => {
                                     "undefined"
                                 }
                                 errorMessage="Укажите улицу"
+                                required={true}
                             />
                             <CartPageInput
                                 label="Дом"
@@ -231,13 +234,12 @@ export const CartPage = () => {
                                         ?.houseNumber !== "undefined"
                                 }
                                 errorMessage="Укажите дом"
+                                required={true}
                             />
                             <CartPageInput
                                 label="Квартира"
                                 name="deliveryAddress.appartment"
-                                register={register({
-                                    required: true,
-                                })}
+                                register={register({})}
                                 className="CartPage__InputContainer__Small"
                                 error={
                                     typeof errors.deliveryAddress
@@ -253,10 +255,7 @@ export const CartPage = () => {
             <div style={{ width: "55%" }}>
                 <div style={{ marginBottom: "2%" }}>
                     <label className="CartPage__RadioContainer">
-                        <span>Наличными</span>
-                        <span className="CartPage__PaymentHint">
-                            Оплата при получении товара (предоплата 200 грн)
-                        </span>
+                        <span>Наличными (наложенный платеж)</span>
                         <input
                             type="radio"
                             value="cash"
@@ -266,26 +265,6 @@ export const CartPage = () => {
                         <span className="checkmark"></span>
                     </label>
                 </div>
-                {formValues.paymentMethod === "cash" && (
-                    <>
-                        <div className="CartPage__PaymentServiceContainer">
-                            <RadioInput
-                                label="LiqPay"
-                                name="paymentService"
-                                value="liqpay"
-                                register={register}
-                            />
-                        </div>
-                        <div className="CartPage__PaymentServiceContainer">
-                            <RadioInput
-                                label="WayForPay"
-                                name="paymentService"
-                                value="wayforpay"
-                                register={register}
-                            />
-                        </div>
-                    </>
-                )}
                 <div style={{ marginBottom: "1.5%" }}>
                     <RadioInput
                         label="Картой онлайн"

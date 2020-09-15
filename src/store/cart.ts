@@ -1,5 +1,6 @@
 import {
     ADD_TO_CART,
+    CLEAR_CART,
     DELETE_FROM_CART,
     UPDATE_PRODUCT_IN_CART,
 } from "./actions";
@@ -21,7 +22,9 @@ type UpdateInCart = Action<typeof UPDATE_PRODUCT_IN_CART> & {
     size: string;
 };
 
-type GeneralType = AddToCart | DeleteFromCart | UpdateInCart;
+type ClearCart = Action<typeof CLEAR_CART>;
+
+type GeneralType = AddToCart | DeleteFromCart | UpdateInCart | ClearCart;
 
 let defaultState: CartProd[] = [];
 
@@ -89,6 +92,9 @@ const reducer = (state = defaultState, actions: GeneralType) => {
 
                 return prod;
             });
+
+        case CLEAR_CART:
+            return [];
 
         default:
             return state;

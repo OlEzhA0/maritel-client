@@ -3,45 +3,53 @@ const Joi = require("joi");
 module.exports.orderSchema = Joi.object().keys({
     payer: Joi.object()
         .keys({
-            lastName: Joi.string()
-                .min(3)
-                .required()
-                .error(() => ({ message: "Введите свою фамилию." })),
-            firstName: Joi.string()
-                .min(3)
-                .required()
-                .error(() => ({ message: "Введите свое имя." })),
-            phone: Joi.string()
-                .min(10)
-                .max(13)
-                .required()
-                .error(() => ({ message: "Введите свой телефон." })),
+            lastName: Joi.string().min(3).required(),
+            firstName: Joi.string().min(3).required(),
+            phone: Joi.string().min(10).max(13).required(),
         })
         .required(),
     customRecepient: Joi.object().keys({
-        lastName: Joi.string()
-            .min(3)
-            .required()
-            .error(() => ({ message: "Введите свою фамилию." })),
-        firstName: Joi.string()
-            .min(3)
-            .required()
-            .error(() => ({ message: "Введите свое имя." })),
-        phone: Joi.string()
-            .min(10)
-            .max(13)
-            .required()
-            .error(() => ({ message: "Введите свой телефон." })),
+        lastName: Joi.string().min(3).required(),
+        firstName: Joi.string().min(3).required(),
+        phone: Joi.string().min(10).max(13).required(),
     }),
     recepient: Joi.string().valid("payer", "custom").required(),
     shippingMethod: Joi.string().valid("postOffice", "courier").required(),
-    deliveryAddress: Joi.string().required(),
+    city: Joi.object()
+        .keys({
+            value: Joi.string(),
+            name: Joi.string().required(),
+        })
+        .required(),
+    deliveryAddress: Joi.object()
+        .keys({
+            street: Joi.object().keys({
+                value: Joi.string(),
+                name: Joi.string(),
+            }),
+            appartment: Joi.string().allow(""),
+            houseNumber: Joi.string(),
+            value: Joi.string(),
+            name: Joi.string(),
+        })
+        .required(),
     paymentMethod: Joi.string().valid("card", "cash").required(),
-    paymentService: Joi.string().valid("wayforpay", "liqpay").required(),
-    items: Joi.array().items(Joi.object().keys({
-        prodUuid: Joi.string(),
-        quantity: Joi.number(),
-        size: Joi.string(),
-    })).required(),
-    city: Joi.any(),
+    paymentService: Joi.string()
+        .when("paymentMethod", {
+            is: "card",
+            then: Joi.string().valid("wayforpay", "liqpay").required(),
+        })
+        .when("paymentMethod", {
+            is: "cash",
+            then: Joi.string().allow(""),
+        }),
+    items: Joi.array()
+        .items(
+            Joi.object().keys({
+                prodUuid: Joi.string(),
+                quantity: Joi.number(),
+                size: Joi.string(),
+            })
+        )
+        .required(),
 });

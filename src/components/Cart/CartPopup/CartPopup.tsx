@@ -37,12 +37,13 @@ export const CartPopup = () => {
               const prod = goods.find((good) => good.uuid === c.prodUuid)!;
               return (
                 <CartPopupItem
-                  key={prod.id + c.size}
-                  previewPhoto={prod.previewPhoto}
-                  title={prod.title}
-                  type={prod.type}
-                  price={prod.price}
+                  key={prod?.id + c.size}
+                  previewPhoto={prod?.previewPhoto}
+                  title={prod?.title}
+                  type={prod?.type}
+                  price={prod?.price}
                   size={c.size}
+                  quantity={c.quantity}
                   prod={prod}
                 />
               );

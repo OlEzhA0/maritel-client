@@ -52,6 +52,7 @@ const OrderStatusPage = () => {
             break;
         case "success":
         case "approved":
+        case "accepted":
             orderText =
                 "ВЫ УСПЕШНО ОФОРМИЛИ ЗАКАЗ. ОЖИДАЙТЕ ЗВОНКА ДЛЯ ПОДТВЕРЖДЕНИЯ ДЕТАЛЕЙ";
             break;

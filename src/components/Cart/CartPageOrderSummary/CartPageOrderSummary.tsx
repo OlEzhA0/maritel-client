@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     getCart,
     getCartItemsTotal,
+    getOrderCommision,
     getOrderInfo,
     getOrderTotal,
     getShippingCost,
 } from "../../../store/actionsTypes";
 import { orderSchema } from "../../../helpers/validationSchemas";
 import { fetchOrderInfo } from "./api";
-import { setOrderStatus } from "../../../store/actionCreators";
+import { clearCart, setOrderStatus } from "../../../store/actionCreators";
 
 export const CartPageOrderSummary = () => {
     const dispatch = useDispatch();
@@ -21,7 +22,12 @@ export const CartPageOrderSummary = () => {
     const shippingCost = useSelector(getShippingCost);
     const orderTotal = useSelector(getOrderTotal);
     const cart = useSelector(getCart);
-    const active = !orderSchema.validate(orderInfo).error;
+
+    const orderCommision = useSelector(getOrderCommision);
+
+    const [active, setActive] = useState(false);
+
+    console.log(orderSchema.validate(orderInfo));
 
     const formRef = useRef(null as null | HTMLFormElement);
 
@@ -30,11 +36,15 @@ export const CartPageOrderSummary = () => {
     );
 
     useEffect(() => {
-        if (active) {
-            fetchOrderInfo(orderInfo, cart).then((data) => setOrderData(data));
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [active]);
+        setActive(!orderSchema.validate(orderInfo).error);
+    }, [orderInfo]);
+
+    // useEffect(() => {
+    //     if (active) {
+    //         fetchOrderInfo(orderInfo, cart).then((data) => setOrderData(data));
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [active]);
 
     const orderDataInputs: ReactElement[] = [];
 
@@ -80,7 +90,16 @@ export const CartPageOrderSummary = () => {
                 <>
                     <div className="CartPageOrderSummary__Item">
                         <span>ДОСТАВКА</span>
-                        <span>{shippingCost} грн.</span>
+                        <span>{shippingCost}</span>
+                    </div>
+                    <div className="CartPageOrderSummary__VertLine" />
+                </>
+            )}
+            {orderInfo.paymentMethod === "card" && (
+                <>
+                    <div className="CartPageOrderSummary__Item">
+                        <span>КОМИССИЯ (2,5%)</span>
+                        <span>{orderCommision} грн.</span>
                     </div>
                     <div className="CartPageOrderSummary__VertLine" />
                 </>
@@ -95,21 +114,30 @@ export const CartPageOrderSummary = () => {
                 }`}
                 onClick={() => {
                     if (active) {
-                        localStorage.setItem(
-                            "orderStatus",
-                            JSON.stringify({
-                                orderId: orderData?.orderId,
-                                status: "pending",
-                            })
-                        );
-                        dispatch(
-                            setOrderStatus({
-                                orderId: orderData?.orderId,
-                                status: "pending",
-                            })
-                        );
-                        formRef?.current?.submit();
-                        window.location.href = "/#order-status";
+                        fetchOrderInfo(orderInfo, cart).then((data) => {
+                            setOrderData(data);
+                            setTimeout(() => {
+                                localStorage.setItem(
+                                    "orderStatus",
+                                    JSON.stringify({
+                                        orderId: orderData?.orderId,
+                                        status: "pending",
+                                    })
+                                );
+                                dispatch(
+                                    setOrderStatus({
+                                        orderId: orderData?.orderId,
+                                        status: "pending",
+                                    })
+                                );
+                                dispatch(clearCart());
+                                if (data?.action) {
+                                    formRef?.current?.submit();
+                                }
+
+                                window.location.href = "/#order-status";
+                            }, 0);
+                        });
                     }
                 }}
             >

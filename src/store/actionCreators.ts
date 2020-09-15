@@ -14,6 +14,7 @@ import {
     SET_CART_POPUP_STATUS,
     SET_ORDER_INFO,
     SET_ORDER_STATUS,
+    CLEAR_CART,
 } from "./actions";
 
 import { SetOrder } from "./order";
@@ -90,6 +91,8 @@ export const updateInCart = (
     quantity,
     size,
 });
+
+export const clearCart = () => ({ type: CLEAR_CART });
 
 export const SetPopupCartStatus = (status: boolean) => ({
     type: SET_CART_POPUP_STATUS,

@@ -7,14 +7,24 @@ type Props = {
     error?: boolean;
     errorMessage?: string;
     className?: string;
+    required?: boolean;
 };
 
 export const CartPageInput = (props: Props) => {
-    const { register, error, name, label, errorMessage, className } = props;
+    const {
+        register,
+        error,
+        name,
+        label,
+        errorMessage,
+        className,
+        required,
+    } = props;
     return (
         <div className={"CartPage__InputContainer " + className}>
             <label>
-                {label} <span className="CartPage__Required">*</span>
+                {label}{" "}
+                <span className="CartPage__Required">{required && "*"}</span>
             </label>
 
             <input

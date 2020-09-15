@@ -23,21 +23,31 @@ export const getCartItemsTotal = (state: RootState) => {
     }, 0);
 };
 
+export const getOrderCommision = (state: RootState) => {
+    if (state.order.paymentMethod === "card") {
+        const cartItemsTotal = getCartItemsTotal(state);
+        return Math.ceil(cartItemsTotal * 0.025);
+    } else {
+        return 0;
+    }
+};
+
 export const getOrderTotal = (state: RootState) => {
     let orderTotal = 0;
 
     const cartItemsTotal = getCartItemsTotal(state);
     orderTotal += cartItemsTotal;
-    const shippingCost = getShippingCost(state)
-    orderTotal += shippingCost
+
+    const orderCommision = getOrderCommision(state);
+    orderTotal += orderCommision;
 
     return orderTotal;
 };
 export const getShippingCost = (state: RootState) => {
     const shippingMethod = state.order.shippingMethod;
 
-    return shippingMethod ? (shippingMethod === "courier" ? 80 : 50) : 0;
+    return shippingMethod ? "По тарифам перевозчика" : 0;
 };
 export const getCartPopupStatus = (state: RootState) => state.cartPopupStatus;
 export const getOrderInfo = (state: RootState) => state.order;
-export const getOrderStatus = (state: RootState) => state.orderStatus
+export const getOrderStatus = (state: RootState) => state.orderStatus;

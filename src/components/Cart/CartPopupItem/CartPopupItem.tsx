@@ -15,6 +15,7 @@ interface Props {
     type: string;
     price: string;
     size: string;
+    quantity: string;
     prod: Products;
 }
 
@@ -25,6 +26,7 @@ export const CartPopupItem: React.FC<Props> = ({
     price,
     size,
     prod,
+    quantity,
 }) => {
     const categories = useSelector(getCategories);
     const [photoLoaded, setPhotoLoaded] = useState(false);
@@ -58,14 +60,14 @@ export const CartPopupItem: React.FC<Props> = ({
                         <span className="CartPopup__Span">|</span>
                         {size}
                     </p>
-                    <p className="CartPopup__Price">{price} грн.</p>
+                    <p className="CartPopup__Price">
+                        {quantity} x {price} грн.
+                    </p>
                 </div>
             </Link>
             <div
                 className="CartPopup__Delete"
-                onClick={() =>
-                    dispatch(delFromCart(prod.uuid + size))
-                }
+                onClick={() => dispatch(delFromCart(prod.uuid + size))}
             >
                 Удалить
             </div>

@@ -27,12 +27,20 @@ export const orderSchema = Joi.object().keys({
                 value: Joi.string(),
                 name: Joi.string(),
             }),
-            appartment: Joi.string(),
+            appartment: Joi.string().allow(""),
             houseNumber: Joi.string(),
             value: Joi.string(),
             name: Joi.string(),
         })
         .required(),
     paymentMethod: Joi.string().valid("card", "cash").required(),
-    paymentService: Joi.string().valid("wayforpay", "liqpay").required(),
+    paymentService: Joi.string()
+        .when("paymentMethod", {
+            is: "card",
+            then: Joi.string().valid("wayforpay", "liqpay").required(),
+        })
+        .when("paymentMethod", {
+            is: "cash",
+            then: Joi.string().allow(""),
+        }),
 });

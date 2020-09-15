@@ -20,50 +20,48 @@ router.post("/order", async (req, res) => {
             paymentMethod,
             paymentService,
             items,
+            city,
         } = req.body;
 
-        const orderTotal = await calculateOrderTotal(items, shippingMethod);
+        const orderTotal = await calculateOrderTotal(
+            items,
+            shippingMethod,
+            paymentMethod
+        );
+
+        console.log(paymentService);
 
         const order = await Order.create({
+            shippingMethod,
+            shippingAddress: deliveryAddress,
+            city,
             payer,
             recepient,
             customReceiver: recepient === "custom",
-            deliveryAddress,
             paymentMethod,
             paymentService,
             items: orderTotal.items,
-            paymentStatus: "pending",
+            paymentStatus: paymentMethod === "card" ? "pending" : "accepted",
             deliveryStatus: "",
             amount: orderTotal.sum,
         });
 
+        if (paymentMethod === "cash") {
+            return res.json({ fields: {}, orderId: order.uuid });
+        }
+
         if (paymentService === "wayforpay") {
-            let data = {};
-            if (paymentMethod === "cash") {
-                data = {
-                    merchantAccount: process.env.WAYFORPAY_MERCHANT_ACCOUNT,
-                    merchantDomainName: process.env.WAYFORPAY_DOMAIN_NAME,
-                    orderReference: order.uuid,
-                    orderDate: new Date(order.date).getTime(),
-                    amount: 200,
-                    currency: "UAH",
-                    productName: ["Предоплата"],
-                    productCount: [1],
-                    productPrice: [200],
-                };
-            } else {
-                data = {
-                    merchantAccount: process.env.WAYFORPAY_MERCHANT_ACCOUNT,
-                    merchantDomainName: process.env.WAYFORPAY_DOMAIN_NAME,
-                    orderReference: order.uuid,
-                    orderDate: new Date(order.date).getTime(),
-                    amount: order.amount,
-                    currency: "UAH",
-                    productName: orderTotal.items.map((item) => item.title),
-                    productCount: orderTotal.items.map((item) => item.quantity),
-                    productPrice: orderTotal.items.map((item) => item.price),
-                };
-            }
+            const data = {
+                merchantAccount: process.env.WAYFORPAY_MERCHANT_ACCOUNT,
+                merchantDomainName: process.env.WAYFORPAY_DOMAIN_NAME,
+                orderReference: order.uuid,
+                orderDate: new Date(order.date).getTime(),
+                amount: order.amount,
+                currency: "UAH",
+                productName: orderTotal.items.map((item) => item.title),
+                productCount: orderTotal.items.map((item) => item.quantity),
+                productPrice: orderTotal.items.map((item) => item.price),
+            };
 
             const keysForSignature = [
                 "merchantDomainName",
@@ -107,37 +105,23 @@ router.post("/order", async (req, res) => {
                 process.env.LIQPAY_PUBLIC_KEY,
                 process.env.LIQPAY_PRIVATE_KEY
             );
-            if (paymentMethod === "cash") {
-                res.json({
-                    ...liqpay.cnb_object({
-                        action: "pay",
-                        amount: 200,
-                        currency: "UAH",
-                        description: "Предоплата",
-                        order_id: order.uuid,
-                        version: 3,
-                        server_url: `${process.env.PAYMENT_HANDLER_SERVER}/orderCheckValidity/liqpay`,
-                    }),
-                    orderId: order.uuid,
-                });
-            } else {
-                res.json({
-                    ...liqpay.cnb_object({
-                        action: "pay",
-                        amount: order.amount,
-                        currency: "UAH",
-                        description: orderTotal.items.reduce(
-                            (acc, item) =>
-                                `${acc} ${item.title} x${item.quantity}\n`,
-                            ""
-                        ),
-                        order_id: order.uuid,
-                        version: 3,
-                        server_url: `${process.env.PAYMENT_HANDLER_SERVER}/orderCheckValidity/liqpay`,
-                    }),
-                    orderId: order.uuid,
-                });
-            }
+
+            res.json({
+                ...liqpay.cnb_object({
+                    action: "pay",
+                    amount: order.amount,
+                    currency: "UAH",
+                    description: orderTotal.items.reduce(
+                        (acc, item) =>
+                            `${acc} ${item.title} x${item.quantity}\n`,
+                        ""
+                    ),
+                    order_id: order.uuid,
+                    version: 3,
+                    server_url: `${process.env.PAYMENT_HANDLER_SERVER}/orderCheckValidity/liqpay`,
+                }),
+                orderId: order.uuid,
+            });
         }
     }
 });
