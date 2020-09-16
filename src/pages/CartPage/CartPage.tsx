@@ -252,10 +252,13 @@ export const CartPage = () => {
                 </div>
             </div>
             <div className="CartPage__StepTitle">3. ОПЛАТА</div>
-            <div style={{ width: "55%" }}>
-                <div style={{ marginBottom: "2%" }}>
+            <div className="CartPage__PaymentMethodContainer">
+                <div className="CartPage__RadioWithHint">
                     <label className="CartPage__RadioContainer">
                         <span>Наличными (наложенный платеж)</span>
+                        <span className="CartPage__PaymentHint">
+                            Оплата при получении товара (предоплата 200 грн)
+                        </span>
                         <input
                             type="radio"
                             value="cash"

@@ -28,6 +28,10 @@
         flex-basis: 55%;
     }
 
+    &__PaymentMethodContainer {
+        flex-basis: 55%;
+    }
+
     &__FormContainer {
         display: flex;
         flex-basis: 55%;
@@ -163,6 +167,10 @@
             }
         }
     }
+
+    &__RadioWithHint {
+        margin-bottom: 2.5%;
+    }
 }
 
 .checkmark {
@@ -187,4 +195,44 @@
     background-color: #101010;
     border-radius: 50%;
     box-shadow: 0px 0px 1px 1px #101010;
+}
+
+@media only screen and (max-device-width: 480px) {
+    .CartPage {
+        width: 100%;
+        padding: 0;
+
+        &__RegisterOrder,
+        &__FormContainer,
+        &__ShippingMethodContainer,
+        &__PaymentMethodContainer {
+            flex-basis: 100%;
+        }
+
+        &__FormContainer,
+        &__StepTitle {
+            padding: 0 16px;
+        }
+        &__RadioContainer {
+            margin: 0 16px;
+        }
+
+        &__InputContainer {
+            flex-basis: 100%;
+            margin: 1% 0 !important;
+        }
+
+        &__StepTitle {
+            margin: 16px 0;
+        }
+        &__ShippingMethodItem &__InputContainer {
+            padding: 10px 4%;
+        }
+        &__PaymentServiceContainer {
+            margin-left: 8.5%;
+        }
+        &__RadioWithHint {
+            margin-bottom: 11%;
+        }
+    }
 }

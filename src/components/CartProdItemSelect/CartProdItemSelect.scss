@@ -1,9 +1,17 @@
 .CartProdItemSelect {
     position: relative;
+
     &__Icon {
         width: 12px;
         position: absolute;
         right: 12px;
         top: 16px;
+    }
+}
+@media only screen and (max-device-width: 480px) {
+    .CartProdItemSelect {
+        position: absolute;
+        left: 35%;
+        bottom: 0;
     }
 }

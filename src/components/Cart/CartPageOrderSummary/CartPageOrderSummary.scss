@@ -44,3 +44,11 @@
         color: #bb2a36;
     }
 }
+
+@media only screen and (max-device-width: 480px) {
+    .CartPageOrderSummary {
+        flex-basis: 100%;
+        order: 20;
+        margin: 16px 4%;
+    }
+}

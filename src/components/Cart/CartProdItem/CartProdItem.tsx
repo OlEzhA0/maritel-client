@@ -62,9 +62,9 @@ export const CartProdItem: React.FC<Props> = ({ uuid, size, quantity }) => {
                                 |
                             </span>
                             {size}
-                            <span className="CartProdItem__Change">
+                            {/* <span className="CartProdItem__Change">
                                 изменить
-                            </span>
+                            </span> */}
                         </p>
                     </div>
                 </div>
@@ -89,11 +89,8 @@ export const CartProdItem: React.FC<Props> = ({ uuid, size, quantity }) => {
                 </div>
             </div>
 
-            <p>
-                <span
-                    className="CartProdItem__Del"
-                    onClick={() => dispatch(delFromCart(uuid + size))}
-                >
+            <p className="CartProdItem__Del">
+                <span onClick={() => dispatch(delFromCart(uuid + size))}>
                     Удалить
                 </span>
             </p>
