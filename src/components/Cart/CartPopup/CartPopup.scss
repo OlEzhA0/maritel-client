@@ -122,3 +122,20 @@
         text-decoration: none;
     }
 }
+
+@media only screen and (max-device-width: 480px) {
+    .CartPopup {
+        width: 100%;
+        top: 42px;
+
+        &__Prods {
+            height: calc(100vh - 162px);
+            max-height: unset;
+            padding: 40px 4% 0;
+        }
+
+        &__Buttons {
+            background: #fff;
+        }
+    }
+}
