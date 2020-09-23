@@ -11,6 +11,8 @@ const orderRouter = require("./routes/order");
 const authRouter = require("./routes/auth");
 const isAuth = require("./helpers/isAuth");
 
+app.use(cors({ credentials: true, origin: `http://localhost:3001` }));
+
 app.use(isAuth);
 
 app.use(cookieParser());
@@ -26,7 +28,6 @@ mongoose.connect(
 );
 
 app.use(express.static("build"));
-app.use(cors({ credentials: true, origin: `http://localhost:3001` }));
 app.use(
     "/graphql",
     graphqlHTTP({

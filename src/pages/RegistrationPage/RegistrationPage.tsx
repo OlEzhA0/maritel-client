@@ -106,9 +106,10 @@ export const RegistrationPage = () => {
         if (!loading && data?.customer) {
             const { customer } = data;
             const defaultFormValues: { [x: string]: any } = {};
+            console.log("customer", customer);
             Object.keys(customer).forEach((key) => {
-                if (customer[key as keyof FormType] !== "") {
-                    if (typeof customer![key as keyof FormType] === "object") {
+                if (customer[key as keyof FormType] !== "" && customer[key as keyof FormType] !== null) {
+                    if (typeof customer[key as keyof FormType] === "object") {
                         defaultFormValues[key] = {
                             ...(customer[key as keyof FormType] as object),
                         };
@@ -119,8 +120,8 @@ export const RegistrationPage = () => {
                     }
                 }
             });
-            console.log("form values", defaultFormValues);
             setValue("shippingMethod", defaultFormValues.shippingMethod);
+            console.log(defaultFormValues);
             reset(defaultFormValues);
             trigger();
         }
