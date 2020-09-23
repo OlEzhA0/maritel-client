@@ -1,0 +1,45 @@
+.LoginPage {
+    & .Maritel__InputContainer label {
+        color: #969696;
+    }
+    display: flex;
+    margin-bottom: 8.5%;
+    &__Title {
+        padding: 16px 0 16px 0;
+        font-size: 15px;
+        font-weight: 800;
+        color: #101010;
+        text-transform: uppercase;
+    }
+    &__LoginFormContainer,
+    &__RegistrationFormContainer {
+        margin: 5% 0 1.5% 0;
+    }
+
+    &__LoginFormContainer {
+        width: 24%;
+        padding: 0 8.5% 0% 2%;
+        border-right: 1px solid black;
+    }
+
+    &__RegistrationFormContainer {
+        width: 33%;
+        padding: 0 2% 0% 8.5%;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    .LoginPage {
+        flex-flow: row wrap;
+        &__LoginFormContainer {
+            width: 100%;
+            padding: 0 16px;
+            border-right: unset;
+        }
+        &__RegistrationFormContainer {
+            width: 100%;
+            margin: 32px 0 0 0;
+            padding: 0 16px;
+        }
+    }
+}

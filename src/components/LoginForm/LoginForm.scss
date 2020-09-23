@@ -1,0 +1,23 @@
+.LoginForm {
+    &__Submit {
+        margin-top: 16px;
+        padding: 3% 14%;
+        border: none;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+
+        color: #fff;
+        background: #58ba87;
+    }
+
+    &__Additional {
+        display: flex;
+        justify-content: space-between;
+        & > span {
+            display: flex;
+            align-items: center;
+            height: 19px;
+            margin-top: 10px;
+        }
+    }
+}

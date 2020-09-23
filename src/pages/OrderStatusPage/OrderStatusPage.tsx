@@ -18,7 +18,7 @@ const OrderStatusPage = () => {
                 )
             )
         );
-        let interval = setInterval(() => {}, 1000000);
+        let interval = setInterval(() => {}, 100000000);
         if (orderStatus.orderId) {
             interval = setInterval(() => {
                 fetchOrderStatus(orderStatus.orderId).then((data) => {

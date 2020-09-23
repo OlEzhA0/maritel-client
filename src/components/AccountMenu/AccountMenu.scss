@@ -1,0 +1,39 @@
+.AccountMenu {
+    margin: 5% 6.25% 10% 9%;
+    text-transform: uppercase;
+    font-weight: 600;
+    & > div {
+        margin-bottom: 16px;
+        & span.selected {
+            color: #bb2a36;
+            border-bottom: 2px solid #bb2a36;
+        }
+    }
+    & a {
+        text-decoration: none;
+        color: #101010;
+    }
+    &__Disabled {
+        cursor: not-allowed;
+    }
+
+    .hide-desktop {
+        display: none;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    .AccountMenu {
+        width: 100%;
+        margin: 0 16px 32px 16px;
+        & > &__Title {
+            margin-bottom: 25px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+    }
+
+    .hide-desktop {
+        display: block !important;
+    }
+}

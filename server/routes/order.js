@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const crypto = require("crypto");
 const Order = require("../models/order");
+const Customer = require("../models/customer");
+
 const { orderSchema } = require("../helpers/validationSchemas");
 const calculateOrderTotal = require("../helpers/calculateOrderTotal");
 const LiqPay = require("../helpers/liqpay.sdk");
@@ -29,7 +31,15 @@ router.post("/order", async (req, res) => {
             paymentMethod
         );
 
-        console.log(paymentService);
+        let customer = { _id: undefined };
+
+        if (req.customer) {
+            try {
+                customer = await Customer.findOne({
+                    _id: req.customer.customerId,
+                });
+            } catch {}
+        }
 
         const order = await Order.create({
             shippingMethod,
@@ -43,8 +53,14 @@ router.post("/order", async (req, res) => {
             items: orderTotal.items,
             paymentStatus: paymentMethod === "card" ? "pending" : "accepted",
             deliveryStatus: "",
+            customer: customer._id,
             amount: orderTotal.sum,
         });
+
+        try {
+            customer.orders.push(order);
+            await customer.save();
+        } catch {}
 
         if (paymentMethod === "cash") {
             return res.json({ fields: {}, orderId: order.uuid });

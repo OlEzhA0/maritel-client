@@ -13,7 +13,7 @@ const ordersSchema = new Schema({
             price: Number,
         },
     ],
-    date: { type: Date, default: Date.now() },
+    date: { type: Date, default: Date.now },
     receiver: {
         firstName: String,
         lastName: String,
@@ -45,7 +45,8 @@ const ordersSchema = new Schema({
     shippingMethod: String,
     amount: Number,
     paymentStatus: String,
+    customer: { type: Schema.Types.ObjectId, ref: "customers" },
     deliveryStatus: String,
 });
 
-module.exports = mongoose.model("order", ordersSchema);
+module.exports = mongoose.model("orders", ordersSchema, "orders");

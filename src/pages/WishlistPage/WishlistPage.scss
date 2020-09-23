@@ -1,0 +1,17 @@
+.WishlistPage {
+    display: flex;
+    padding-top: 50px;
+    &__ProductListContainer {
+        width: 66%;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    .WishlistPage {
+        flex-flow: row wrap;
+        &__ProductListContainer {
+            width: 100%;
+            padding: 0 16px;
+        }
+    }
+}

@@ -17,11 +17,15 @@ export const CartPopup = () => {
     const goods = useSelector(getProducts);
 
     const handleGetAllPrice = () => {
-        return cart.reduce((accum, value) => {
-            const prod = goods.find((g) => g.uuid === value.prodUuid)!;
-            const addPrice = +prod.price * +value.quantity;
-            return accum + addPrice;
-        }, 0);
+        if (goods.length) {
+            return cart.reduce((accum, value) => {
+                const prod = goods.find((g) => g.uuid === value.prodUuid)!;
+                const addPrice = +prod.price * +value.quantity;
+                return accum + addPrice;
+            }, 0);
+        }
+        console.error("error");
+        return 0;
     };
 
     return cartPopupStatus ? (

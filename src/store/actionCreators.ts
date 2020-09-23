@@ -15,7 +15,10 @@ import {
     SET_ORDER_INFO,
     SET_ORDER_STATUS,
     CLEAR_CART,
+    SET_CUSTOMER_INFO,
+    CLEAR_CUSTOMER_INFO,
 } from "./actions";
+import { Customer } from "./customer";
 
 import { SetOrder } from "./order";
 import { OrderStatus } from "./orderStatus";
@@ -107,4 +110,15 @@ export const setOrderInfo = (payload: SetOrder["payload"]) => ({
 export const setOrderStatus = (payload: OrderStatus["payload"]) => ({
     type: SET_ORDER_STATUS,
     payload,
+});
+
+export const setCustomerInfo = (
+    payload: Customer
+): { type: typeof SET_CUSTOMER_INFO; payload: Customer } => ({
+    type: SET_CUSTOMER_INFO,
+    payload,
+});
+
+export const clearCustomerInfo = (): { type: typeof CLEAR_CUSTOMER_INFO } => ({
+    type: CLEAR_CUSTOMER_INFO,
 });

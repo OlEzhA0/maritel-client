@@ -3,6 +3,7 @@ import "./CartPageOrderSummary.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
+    getAccessToken,
     getCart,
     getCartItemsTotal,
     getOrderCommision,
@@ -22,12 +23,11 @@ export const CartPageOrderSummary = () => {
     const shippingCost = useSelector(getShippingCost);
     const orderTotal = useSelector(getOrderTotal);
     const cart = useSelector(getCart);
+    const accessToken = useSelector(getAccessToken);
 
     const orderCommision = useSelector(getOrderCommision);
 
     const [active, setActive] = useState(false);
-
-    console.log(orderSchema.validate(orderInfo));
 
     const formRef = useRef(null as null | HTMLFormElement);
 
@@ -36,15 +36,9 @@ export const CartPageOrderSummary = () => {
     );
 
     useEffect(() => {
+        console.log(orderSchema.validate(orderInfo).error);
         setActive(!orderSchema.validate(orderInfo).error);
     }, [orderInfo]);
-
-    // useEffect(() => {
-    //     if (active) {
-    //         fetchOrderInfo(orderInfo, cart).then((data) => setOrderData(data));
-    //     }
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [active]);
 
     const orderDataInputs: ReactElement[] = [];
 
@@ -114,30 +108,40 @@ export const CartPageOrderSummary = () => {
                 }`}
                 onClick={() => {
                     if (active) {
-                        fetchOrderInfo(orderInfo, cart).then((data) => {
-                            setOrderData(data);
-                            setTimeout(() => {
-                                localStorage.setItem(
-                                    "orderStatus",
-                                    JSON.stringify({
-                                        orderId: orderData?.orderId,
-                                        status: "pending",
-                                    })
-                                );
-                                dispatch(
-                                    setOrderStatus({
-                                        orderId: orderData?.orderId,
-                                        status: "pending",
-                                    })
-                                );
-                                dispatch(clearCart());
-                                if (data?.action) {
-                                    formRef?.current?.submit();
-                                }
+                        fetchOrderInfo(orderInfo, cart, accessToken).then(
+                            (data) => {
+                                setOrderData(data);
+                                setTimeout(() => {
+                                    localStorage.setItem(
+                                        "orderStatus",
+                                        JSON.stringify({
+                                            orderId: orderData?.orderId,
+                                            status:
+                                                orderInfo.paymentMethod ===
+                                                "cash"
+                                                    ? "accepted"
+                                                    : "pending",
+                                        })
+                                    );
+                                    dispatch(
+                                        setOrderStatus({
+                                            orderId: orderData?.orderId,
+                                            status:
+                                                orderInfo.paymentMethod ===
+                                                "cash"
+                                                    ? "accepted"
+                                                    : "pending",
+                                        })
+                                    );
+                                    dispatch(clearCart());
+                                    if (data?.action) {
+                                        formRef?.current?.submit();
+                                    }
 
-                                window.location.href = "/#order-status";
-                            }, 0);
-                        });
+                                    window.location.href = "/#order-status";
+                                }, 0);
+                            }
+                        );
                     }
                 }}
             >

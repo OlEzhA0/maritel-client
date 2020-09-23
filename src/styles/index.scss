@@ -7,71 +7,152 @@ h3,
 p,
 ul,
 li {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 html {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  scroll-behavior: smooth;
-  background-color: #fff;
-  position: relative;
-  font-size: 12px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    scroll-behavior: smooth;
+    background-color: #fff;
+    position: relative;
+    font-size: 12px;
 }
 
 .Page__Wrap {
-  position: relative;
-  min-height: 30vh;
-  @media screen and (min-width: 769px) {
-    margin-top: calc(9.75rem + 29px);
-  }
-  @media screen and (max-width: 1024px) {
-    margin-top: calc(3.5rem + 29px);
-  }
+    position: relative;
+    min-height: 30vh;
+    @media screen and (min-width: 769px) {
+        margin-top: calc(9.75rem + 29px);
+    }
+    @media screen and (max-width: 1024px) {
+        margin-top: calc(3.5rem + 29px);
+    }
+}
+
+.Maritel {
+    &__Required {
+        color: #bb2a36;
+    }
+    &__InputContainer {
+        position: relative;
+        flex-basis: 48.5%;
+        margin-top: 10px;
+
+        &__Small {
+            display: flex;
+            flex-flow: row wrap;
+            flex-basis: 20%;
+            margin-left: 2%;
+        }
+
+        & label {
+            display: block;
+            margin-bottom: 2%;
+        }
+        & > input,
+        .Maritel__Input {
+            width: 100%;
+            padding: 10px 0 10px 20px;
+            border: 1px solid #969696;
+            outline: none;
+            box-sizing: border-box;
+            border-radius: 2px;
+            &:focus {
+                border: 1px solid #101010;
+            }
+            &.Maritel__InputError {
+                border: 1px solid red;
+                &:focus {
+                    border: 1px solid red;
+                }
+            }
+        }
+    }
+    &__Error {
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        text-align: right;
+        color: #bb2a36;
+    }
+}
+
+.Account {
+    &__Greetings {
+        font-weight: 800;
+        font-size: 15px;
+        color: #bb2a36;
+        text-transform: uppercase;
+    }
+
+    &__PageTitle {
+        padding: 24px 0 16px;
+        font-size: 15px;
+        font-weight: 800;
+        text-transform: uppercase;
+        border-bottom: 1px solid #101010;
+        margin-bottom: 35px;
+    }
+}
+
+@media only screen and (min-device-width: 481px) {
+    .hide-desktop {
+        display: none !important;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    .hide-desktop {
+        display: block !important;
+    }
+    .hide-mobile {
+        display: none !important;
+    }
 }
 
 .cover,
 .full__cover,
 .search__cover {
-  position: absolute;
-  top: 3.5rem;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #101010;
-  opacity: 0.3;
-  z-index: 3;
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #101010;
+    opacity: 0.3;
+    z-index: 3;
 }
 
 .search__cover {
-  top: 7rem;
-  opacity: 0.4;
+    top: 7rem;
+    opacity: 0.4;
 }
 
 .full__cover {
-  top: 0;
-  z-index: 20;
+    top: 0;
+    z-index: 20;
 }
 
 ::-webkit-scrollbar {
-  width: 3px;
-  height: 3px;
+    width: 3px;
+    height: 3px;
 }
 
 ::-webkit-scrollbar-button {
-  height: 0;
-  background-color: #a8a7a7;
+    height: 0;
+    background-color: #a8a7a7;
 }
 
 ::-webkit-scrollbar-track-piece {
-  background-color: #fff;
+    background-color: #fff;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #a6a6a6;
+    background-color: #a6a6a6;
 }
 
 .no-scroll {
-  overflow: hidden;
+    overflow: hidden;
 }

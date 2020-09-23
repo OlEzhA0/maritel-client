@@ -53,3 +53,15 @@ module.exports.orderSchema = Joi.object().keys({
         )
         .required(),
 });
+
+module.exports.registerSchema = Joi.object().keys({
+    email: Joi.string().email().required(),
+    password: Joi.string().min(7).required(),
+    subscribe: Joi.boolean(),
+});
+
+module.exports.loginSchema = Joi.object().keys({
+    email: Joi.string().email().required(),
+    password: Joi.string().min(7).required(),
+    remember: Joi.boolean(),
+});

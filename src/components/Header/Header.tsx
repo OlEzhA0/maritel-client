@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./Header.scss";
 import { Link } from "react-router-dom";
 import cn from "classnames";
@@ -15,6 +15,8 @@ import {
     getBackgroundSearchCover,
     getWishList,
     getCartPopupStatus,
+    getAccessToken,
+    getCart,
 } from "../../store/actionsTypes";
 import { InfoSlider } from "../InfoSlider";
 import { CartPopup } from "../Cart/CartPopup";
@@ -36,6 +38,15 @@ export const Header: React.FC<Props> = ({ visible }) => {
     const backgournd = useSelector(getBackgroundSearchCover);
     const wishList = useSelector(getWishList);
     const cartPopupStatus = useSelector(getCartPopupStatus);
+
+    const customerLoggedIn = useSelector(getAccessToken);
+
+    const cartItems = useSelector(getCart);
+
+    const cartItemsCount = useMemo(
+        () => cartItems.reduce((acc, item) => acc + parseInt(item.quantity), 0),
+        [cartItems]
+    );
 
     useEffect(() => {
         if (menuStatus) {
@@ -65,7 +76,7 @@ export const Header: React.FC<Props> = ({ visible }) => {
             >
                 <div className="Header__MainPC">
                     <div className="Header__MainPCWrap">
-                        <Link className="Header__Title" to="/wish-list">
+                        <Link className="Header__Title" to="/wishlist">
                             список желаний ({wishList.length})
                         </Link>
                         <div className="Header__Logo">
@@ -105,9 +116,10 @@ export const Header: React.FC<Props> = ({ visible }) => {
                                 <img src="/images/header/zoom.svg" alt="zoom" />
                             </label>
                             <Link to="/login" className="Header__Login">
-                                войти
+                                {customerLoggedIn ? "аккаунт" : "войти"}
                             </Link>
-                            <div
+                            <Link
+                                to="/cart"
                                 className="Header__CartWrap"
                                 onClick={() => {
                                     dispatch(SetPopupCartStatus(true));
@@ -123,7 +135,8 @@ export const Header: React.FC<Props> = ({ visible }) => {
                                         Header__Cart: true,
                                     })}
                                 />
-                            </div>
+                                <span>({cartItemsCount})</span>
+                            </Link>
                         </div>
                     </div>
                 </div>

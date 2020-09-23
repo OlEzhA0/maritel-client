@@ -1,0 +1,36 @@
+.Maritel__Checkbox {
+    width: 0;
+    height: 0;
+    position: absolute;
+    opacity: 0;
+
+    cursor: pointer;
+    &__Container {
+        display: flex;
+        height: 19px;
+        align-items: center;
+        position: relative;
+        margin-top: 10px;
+        padding-left: 25px;
+        user-select: none;
+    }
+    &__Checkmark {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 15px;
+        height: 15px;
+        border: 2px solid #101010;
+        & svg {
+            display: none;
+            z-index: 1;
+            font-size: 12px;
+        }
+        .Maritel__Checkbox:checked ~ & svg {
+            display: block;
+        }
+    }
+}

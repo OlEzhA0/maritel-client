@@ -51,3 +51,7 @@ export const getShippingCost = (state: RootState) => {
 export const getCartPopupStatus = (state: RootState) => state.cartPopupStatus;
 export const getOrderInfo = (state: RootState) => state.order;
 export const getOrderStatus = (state: RootState) => state.orderStatus;
+export const getCustomerInfo = (state: RootState) => state.customer;
+export const getAccessToken = (state: RootState) => state.customer.accessToken;
+export const getIsLogged = (state: RootState) =>
+    state.customer.accessToken ? true : false;

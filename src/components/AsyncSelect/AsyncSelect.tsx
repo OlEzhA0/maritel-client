@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./AsyncSelect.scss";
+import "../Input/Input.scss";
 
-import { Controller } from "react-hook-form";
+import { Controller, FieldError } from "react-hook-form";
 
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
 type Props = {
-    getOptions: (
-        searchQuery: string
-    ) => Promise<{ name: string; value: string }[]>;
-    onSelect?: (selectedValue: { name: string; value: string }) => void;
+    getOptions: (searchQuery: string) => Promise<OptionType[]>;
+    onSelect?: (selectedValue: OptionType) => void;
     label?: string;
     name: string;
     placeholder?: string;
@@ -18,7 +17,7 @@ type Props = {
     required?: boolean;
     style?: { [x: string]: string | number };
     control: any;
-    error?: boolean;
+    error?: FieldError;
     errorMessage?: string;
 };
 
@@ -37,8 +36,7 @@ const AsyncSelect = (props: Props) => {
     } = props;
 
     const [open, setOpen] = useState(false);
-    const [options, setOptions] = useState([] as any[]);
-    const [inputData, setInputData] = useState({ value: "", input: "" });
+    const [options, setOptions] = useState([] as OptionType[]);
     const [loading, setLoading] = useState(false);
 
     const getOptions = (searchQuery: string) => {
@@ -55,83 +53,84 @@ const AsyncSelect = (props: Props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    useEffect(() => {
-        getOptions(inputData.input);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.getOptions, inputData.input]);
-
     return (
         <Controller
             control={control}
             name={name}
-            defaultValue=""
-            render={({ onChange, onBlur, name }) => (
-                <Autocomplete
-                    onBlur={onBlur}
-                    onChange={({ target }) => {
-                        const index = (target as HTMLLIElement).getAttribute(
-                            "data-option-index"
-                        ) as string;
-                        onChange(options[parseInt(index) as number]);
-                    }}
-                    style={style}
-                    open={open}
-                    onOpen={() => {
-                        setOpen(true);
-                    }}
-                    onClose={() => {
-                        setOpen(false);
-                    }}
-                    getOptionSelected={(option, value) =>
-                        option.name === value.name
-                    }
-                    getOptionLabel={(option) => option.name}
-                    onInput={({ target }) => {
-                        setInputData({
-                            ...inputData,
-                            input: (target as HTMLInputElement).value,
-                        });
-                    }}
-                    options={options}
-                    loading={loading}
-                    loadingText={
-                        inputData.input ? "Загружается..." : "Начните вводить"
-                    }
-                    noOptionsText={"Ничего не найдено."}
-                    className="CartPage__InputContainer"
-                    disabled={disabled}
-                    data-tip={disabled ? disabledMessage : ""}
-                    renderInput={(params) => (
-                        <div ref={params.InputProps.ref}>
-                            {label && (
-                                <label>
-                                    {label}{" "}
-                                    {required && (
-                                        <span className="CartPage__Required">
-                                            *
-                                        </span>
-                                    )}
-                                </label>
-                            )}
+            defaultValue={{}}
+            render={({ onChange, onBlur, name, value }) => {
+                return (
+                    <Autocomplete
+                        onBlur={onBlur}
+                        onChange={({ target }) => {
+                            const index = (target as HTMLLIElement).getAttribute(
+                                "data-option-index"
+                            ) as string;
+                            onChange(options[parseInt(index) as number]);
+                        }}
+                        value={value ? value : null}
+                        style={style}
+                        open={open}
+                        onOpen={() => {
+                            setOpen(true);
+                        }}
+                        onClose={() => {
+                            setOpen(false);
+                        }}
+                        getOptionSelected={(option, value) =>
+                            option?.value === value?.value
+                        }
+                        getOptionLabel={(option) =>
+                            option?.name ? option?.name : ""
+                        }
+                        onInput={({ target }) => {
+                            getOptions((target as HTMLInputElement).value);
+                        }}
+                        options={
+                            options.some((el) => el.value === value?.value)
+                                ? options
+                                : value?.value
+                                ? [...options, value]
+                                : options
+                        }
+                        loading={loading}
+                        loadingText={"Загружается..."}
+                        noOptionsText={"Ничего не найдено."}
+                        className="Maritel__InputContainer"
+                        disabled={disabled}
+                        data-tip={disabled ? disabledMessage : ""}
+                        renderInput={(params) => (
+                            <div ref={params.InputProps.ref}>
+                                {label && (
+                                    <label>
+                                        {label}{" "}
+                                        {required && (
+                                            <span className="Maritel__Required">
+                                                *
+                                            </span>
+                                        )}
+                                    </label>
+                                )}
 
-                            <input
-                                type="text"
-                                placeholder={placeholder}
-                                {...params.inputProps}
-                                className={`CartPage__Input ${
-                                    error && "CartPage__InputError"
-                                }`}
-                                name={name}
-                            />
-                            {error && (
-                                <p className="CartPage__Error">
-                                    {errorMessage}
-                                </p>
-                            )}
-                        </div>
-                    )}
-                />
-            )}
+                                <input
+                                    type="text"
+                                    placeholder={placeholder}
+                                    {...params.inputProps}
+                                    className={`Maritel__Input ${
+                                        error && "Maritel__InputError"
+                                    }`}
+                                    name={name}
+                                />
+                                {error && (
+                                    <p className="Maritel__Error">
+                                        {errorMessage}
+                                    </p>
+                                )}
+                            </div>
+                        )}
+                    />
+                );
+            }}
         />
     );
 };

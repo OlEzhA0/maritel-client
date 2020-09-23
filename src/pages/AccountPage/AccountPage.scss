@@ -1,0 +1,74 @@
+.AccountPage {
+    display: flex;
+    padding-top: 45px;
+
+    &__RightContent {
+        min-width: 70%;
+        margin-top: 40px;
+    }
+
+    &__Change {
+        display: flex;
+        align-items: center;
+        margin-left: 25px;
+        & a {
+            font-size: 10px;
+            font-weight: 600;
+            color: #101010;
+            text-decoration: none;
+            letter-spacing: 0.1rem;
+        }
+    }
+
+    &__InformationList {
+        display: flex;
+        flex-flow: column wrap;
+        width: 100%;
+        height: 12.5vh;
+    }
+    &__InformationItem {
+        display: flex;
+        width: 33.333%;
+        flex-basis: 25%;
+        & > div {
+            width: 50%;
+        }
+        &__Label {
+            font-weight: 600;
+        }
+    }
+}
+
+.Account__PageTitle {
+    position: relative;
+    display: flex;
+}
+
+@media only screen and (max-device-width: 480px) {
+    .AccountPage {
+        flex-flow: row wrap;
+
+        & .Account__PageTitle {
+            margin-bottom: 15px;
+        }
+        &__RightContent {
+            width: 100%;
+            margin-top: 0;
+            padding: 0 16px;
+        }
+        &__InformationList {
+            flex-flow: row wrap;
+            height: unset;
+        }
+        &__InformationItem {
+            margin: 8px 0;
+            flex-basis: 100%;
+            &__ClubID {
+                order: 20;
+            }
+        }
+    }
+    .LoginForm__Submit {
+        width: 100%;
+    }
+}

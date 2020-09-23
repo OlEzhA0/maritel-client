@@ -1,7 +1,4 @@
-type NVSettlement = {
-    value: string;
-    name: string;
-};
+type NVSettlement = OptionType;
 
 export const getNVSettlements = (
     searchQuery: string

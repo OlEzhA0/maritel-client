@@ -22,6 +22,11 @@ import { ProductPage } from "./pages/ProductPage";
 import { ProductPageQuickView } from "./components/ProductPageQuickView";
 import { CartPage } from "./pages/CartPage";
 import OrderStatusPage from "./pages/OrderStatusPage/OrderStatusPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import { AccountPage } from "./pages/AccountPage/AccountPage";
+import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage";
+import { WishlistPage } from "./pages/WishlistPage";
+import { OrderHistoryPage } from "./pages/OrderHistoryPage";
 
 function App() {
     const location = useLocation();
@@ -158,6 +163,11 @@ function App() {
                 <Route path="/wish-list" exact component={ProductsList} />
                 <Route path="/cart" exact component={CartPage} />
                 <Route path="/order-status" exact component={OrderStatusPage} />
+                <Route path="/orders" exact component={OrderHistoryPage} />
+                <Route path="/account" exact component={AccountPage} />
+                <Route path="/wishlist" exact component={WishlistPage} />
+                <Route path="/login" exact component={LoginPage} />
+                <Route path="/register" exact component={RegistrationPage} />
                 <Route path="/:category" exact component={CategoryPage} />
                 <Route path="/" exact component={HomePage} />
             </Switch>

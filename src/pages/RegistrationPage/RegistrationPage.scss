@@ -1,0 +1,61 @@
+.RegistrationPage {
+    justify-content: center;
+    &__Title {
+        width: 65%;
+        margin: 42px auto 16px auto;
+        padding: 32px 0 16px 0;
+        font-size: 24px;
+        letter-spacing: 0.2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        text-align: center;
+        border-bottom: 1px solid #101010;
+    }
+    &__Container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        width: 27%;
+        margin: 16px auto;
+        & > form {
+            width: 100%;
+        }
+    }
+    &__PersonalInformation {
+        text-align: center;
+
+        & > div {
+            margin: 0 0 10px 0;
+        }
+        & span {
+            font-weight: 600;
+        }
+    }
+
+    &__BirthdayContainer {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-end;
+        margin-top: 2%;
+        & > div:nth-child(2) {
+            margin-right: 3%;
+        }
+    }
+
+    &__BirthdayTitle {
+        flex-basis: 100%;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    .RegistrationPage {
+        &__Title {
+            font-size: 15px;
+            letter-spacing: 0;
+        }
+        &__Container {
+            width: unset;
+            margin: 0 16px;
+        }
+    }
+}

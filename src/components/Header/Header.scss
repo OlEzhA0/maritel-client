@@ -1,216 +1,223 @@
 @import "../../styles/vars.scss";
 
 .Header {
-  width: 100%;
-  height: 4.75rem;
-  position: fixed;
-  z-index: 20;
-  top: 0;
-  transition: all 0.3s;
-  @media screen and (max-width: 1024px) {
-    height: 3.5rem;
-  }
-
-  &--desktopFull {
-    @media screen and (min-width: 1025px) {
-      height: 9.75rem;
-    }
-  }
-
-  &__PC {
-    top: 0;
-    background-color: #fff;
-    height: 100%;
-    @media screen and (max-width: 1024px) {
-      display: none;
-    }
-
-    &--nonVisible {
-      background-color: $main-color;
-    }
-  }
-
-  &__MainPC {
-    position: relative;
-    z-index: 10;
-    background-color: #fff;
-
-    @media screen and (max-width: 1024px) {
-      display: none;
-    }
-  }
-
-  &__MainPCWrap {
+    width: 100%;
     height: 4.75rem;
-    box-sizing: border-box;
-    display: flex;
-    padding: 0 2.5rem;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1600px;
-    margin: 0 auto;
-  }
-
-  &__Phone {
-    position: relative;
-    background-color: #fff;
-
-    @media screen and (min-width: 1025px) {
-      display: none;
-    }
-    @media screen and (max-width: 1024px) {
-      height: calc(100% + 32px);
-    }
-  }
-
-  &__PhoneWrap {
-    position: relative;
-    background-color: #fff;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-    align-items: center;
-    padding: 0 2rem;
-    height: calc(100% - 32px);
-
-    @media screen and (max-width: 414px) {
-      padding: 0 16px;
-    }
-  }
-
-  &__Title {
-    font-weight: bold;
-    letter-spacing: 0.16em;
-    color: $main-color;
-    text-transform: uppercase;
-    text-decoration: none;
-  }
-
-  &__Logo {
-    position: absolute;
-    top: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-
-    @media screen and (max-width: 1024px) {
-      top: 6px;
-    }
-  }
-
-  &__LogoImg {
-    width: 9rem;
-    height: 3.75rem;
-
-    @media screen and (max-width: 1024px) {
-      width: 5rem;
-      height: 2rem;
-    }
-  }
-
-  &__General {
-    display: flex;
-    align-items: center;
-    height: 100%;
-  }
-
-  &__GeneralSearch {
-    display: flex;
-  }
-
-  &__Search {
-    width: 6rem;
-    outline: none;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    margin-right: 4px;
+    position: fixed;
+    z-index: 20;
+    top: 0;
     transition: all 0.3s;
-    box-sizing: border-box;
-    background-color: #fff;
-    position: relative;
-
-    &:focus {
-      border-bottom: 1px solid $main-color;
-      width: 19rem;
-
-      @media screen and (max-width: 930px) {
-        width: 10rem;
-      }
-    }
-  }
-
-  &__MobileSearch {
-    position: absolute;
-    width: 100vw;
-    left: 0;
-    top: 100%;
-    transform: translateX(-200%);
-    height: 100%;
-    background-color: #000;
-    transition: all 0.5s;
-    z-index: 5;
-    box-sizing: border-box;
-    padding: 0 16px;
-    color: #fff;
-    border: 0;
-    outline: 0;
-
-    &--open {
-      transform: translateX(0);
-    }
-
-    &::placeholder {
-      color: rgb(204, 202, 202);
-    }
-  }
-
-  &__Login {
-    font-weight: bold;
-    color: $main-color;
-    letter-spacing: 0.16em;
-    margin: 0 2rem;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-
-  &__CartWrap {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    justify-content: center;
-    width: 36px;
-    transform: translateX(10px);
-  }
-
-  &__Cart {
-    width: 18px;
-    height: 22.5px;
-
-    &--mobile {
-      margin-right: 24px;
-    }
-  }
-
-  &__SearchIcon {
-    cursor: pointer;
-  }
-
-  &__Slider {
-    height: 29px;
-    width: 100%;
-    background-color: #fff;
-    transition: all 0.3s;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    z-index: -1;
-
     @media screen and (max-width: 1024px) {
-      z-index: 1;
+        height: 3.5rem;
     }
-    &--up {
-      transform: translateY(-5rem);
+
+    &--desktopFull {
+        @media screen and (min-width: 1025px) {
+            height: 9.75rem;
+        }
     }
-  }
+
+    &__PC {
+        top: 0;
+        background-color: #fff;
+        height: 100%;
+        @media screen and (max-width: 1024px) {
+            display: none;
+        }
+
+        &--nonVisible {
+            background-color: $main-color;
+        }
+    }
+
+    &__MainPC {
+        position: relative;
+        z-index: 10;
+        background-color: #fff;
+
+        @media screen and (max-width: 1024px) {
+            display: none;
+        }
+    }
+
+    &__MainPCWrap {
+        height: 4.75rem;
+        box-sizing: border-box;
+        display: flex;
+        padding: 0 2.5rem;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+
+    &__Phone {
+        position: relative;
+        background-color: #fff;
+
+        @media screen and (min-width: 1025px) {
+            display: none;
+        }
+        @media screen and (max-width: 1024px) {
+            height: calc(100% + 32px);
+        }
+    }
+
+    &__PhoneWrap {
+        position: relative;
+        background-color: #fff;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        box-sizing: border-box;
+        align-items: center;
+        padding: 0 2rem;
+        height: calc(100% - 32px);
+
+        @media screen and (max-width: 414px) {
+            padding: 0 16px;
+        }
+    }
+
+    &__Title {
+        font-weight: bold;
+        letter-spacing: 0.16em;
+        color: $main-color;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+    &__Logo {
+        position: absolute;
+        top: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @media screen and (max-width: 1024px) {
+            top: 6px;
+        }
+    }
+
+    &__LogoImg {
+        width: 9rem;
+        height: 3.75rem;
+
+        @media screen and (max-width: 1024px) {
+            width: 5rem;
+            height: 2rem;
+        }
+    }
+
+    &__General {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    &__GeneralSearch {
+        display: flex;
+    }
+
+    &__Search {
+        width: 6rem;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        margin-right: 4px;
+        transition: all 0.3s;
+        box-sizing: border-box;
+        background-color: #fff;
+        position: relative;
+
+        &:focus {
+            border-bottom: 1px solid $main-color;
+            width: 19rem;
+
+            @media screen and (max-width: 930px) {
+                width: 10rem;
+            }
+        }
+    }
+
+    &__MobileSearch {
+        position: absolute;
+        width: 100vw;
+        left: 0;
+        top: 100%;
+        transform: translateX(-200%);
+        height: 100%;
+        background-color: #000;
+        transition: all 0.5s;
+        z-index: 5;
+        box-sizing: border-box;
+        padding: 0 16px;
+        color: #fff;
+        border: 0;
+        outline: 0;
+
+        &--open {
+            transform: translateX(0);
+        }
+
+        &::placeholder {
+            color: rgb(204, 202, 202);
+        }
+    }
+
+    &__Login {
+        font-weight: bold;
+        color: $main-color;
+        letter-spacing: 0.16em;
+        margin: 0 2rem;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    &__CartWrap {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        justify-content: center;
+        width: 36px;
+        transform: translateX(10px);
+        & > span {
+            margin-left: 10px;
+            color: #101010;
+            font-weight: 600;
+            font-family: "Montserrat";
+            letter-spacing: 0.16em;
+        }
+    }
+
+    &__Cart {
+        width: 18px;
+        height: 22.5px;
+
+        &--mobile {
+            margin-right: 24px;
+        }
+    }
+
+    &__SearchIcon {
+        cursor: pointer;
+    }
+
+    &__Slider {
+        height: 29px;
+        width: 100%;
+        background-color: #fff;
+        transition: all 0.3s;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        z-index: -1;
+
+        @media screen and (max-width: 1024px) {
+            z-index: 1;
+        }
+        &--up {
+            transform: translateY(-5rem);
+        }
+    }
 }

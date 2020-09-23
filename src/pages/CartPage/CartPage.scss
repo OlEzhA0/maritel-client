@@ -9,13 +9,7 @@
         color: #bb2a36;
     }
 
-    &__Error {
-        width: 100%;
-        position: absolute;
-        top: 100%;
-        text-align: right;
-        color: #bb2a36;
-    }
+
 
     &__PaymentHint {
         position: absolute;
@@ -38,48 +32,12 @@
         flex-flow: row wrap;
     }
 
-    &__InputContainer {
-        position: relative;
-        flex-basis: 48.5%;
-        margin-top: 10px;
+    &__FormContainer > .Maritel__InputContainer:nth-child(2n - 1) {
+        margin-right: 1.5%;
+    }
 
-        &__Small {
-            display: flex;
-            flex-flow: row wrap;
-            flex-basis: 20%;
-            margin-left: 2%;
-        }
-
-        .CartPage__FormContainer > &:nth-child(2n - 1) {
-            margin-right: 1.5%;
-        }
-
-        .CartPage__FormContainer > &:nth-child(2n) {
-            margin-left: 1.5%;
-        }
-
-        & label {
-            display: block;
-            margin-bottom: 2%;
-        }
-        & > input,
-        .CartPage__Input {
-            width: 100%;
-            padding: 10px 0 10px 20px;
-            border: 1px solid #969696;
-            outline: none;
-            box-sizing: border-box;
-            border-radius: 2px;
-            &:focus {
-                border: 1px solid #101010;
-            }
-            &.CartPage__InputError {
-                border: 1px solid red;
-                &:focus {
-                    border: 1px solid red;
-                }
-            }
-        }
+    &__FormContainer > .Maritel__InputContainer:nth-child(2n) {
+        margin-left: 1.5%;
     }
 
     &__CourierDelivery {

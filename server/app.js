@@ -3,25 +3,22 @@ const { graphqlHTTP } = require("express-graphql");
 const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 const schema = require("./schema/schema");
 const app = express();
 const PORT = process.env.PORT || 5000;
 const orderRouter = require("./routes/order");
+const authRouter = require("./routes/auth");
+const isAuth = require("./helpers/isAuth");
 
-app.use((req, res, next) => {
-    res.set("Access-Control-Allow-Origin", `http://localhost:${PORT}`);
+app.use(isAuth);
 
-    res.set(
-        "Access-Control-Allow-Headers",
-        "origin, contenttype, content-type, accept"
-    );
-    next();
-});
-
+app.use(cookieParser());
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(orderRouter);
+app.use(authRouter);
 
 mongoose.connect(
     `mongodb+srv://admin:EoRHh9rzLTEJHmXA@maritelgeneral.llqa9.gcp.mongodb.net/maritel?retryWrites=true&w=majority`,
@@ -29,7 +26,7 @@ mongoose.connect(
 );
 
 app.use(express.static("build"));
-app.use(cors());
+app.use(cors({ credentials: true, origin: `http://localhost:3001` }));
 app.use(
     "/graphql",
     graphqlHTTP({

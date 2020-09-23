@@ -13,7 +13,7 @@ import CartReducer from "./cart";
 import CartPopupReducer from "./cartPopup";
 import OrderStateReducer from  './order'
 import OrderStatusReducer from  './orderStatus'
-
+import CustomerReducer  from './customer'
 
 const rootReducer = combineReducers({
   categories: CategoriesReducer,
@@ -27,7 +27,8 @@ const rootReducer = combineReducers({
   cart: CartReducer,
   cartPopupStatus: CartPopupReducer,
   order: OrderStateReducer,
-  orderStatus: OrderStatusReducer
+  orderStatus: OrderStatusReducer,
+  customer: CustomerReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

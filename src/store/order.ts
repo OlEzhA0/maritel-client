@@ -3,19 +3,16 @@ import { SET_ORDER_INFO } from "./actions";
 
 export type SetOrder = Action<typeof SET_ORDER_INFO> & {
     payload: {
-        shippingMethod: "" | "postOffice" | "courier";
+        shippingMethod?: "postOffice" | "courier";
         deliveryAddress: {
-            street?: string;
+            street?: OptionType;
             houseNumber?: string;
             appartment?: string;
             value?: string;
             name?: string;
         };
         recepient: "payer" | "custom";
-        city: {
-            value: string;
-            name: string;
-        };
+        city: OptionType;
         payer: {
             firstName: string;
             lastName: string;
