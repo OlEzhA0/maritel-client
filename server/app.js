@@ -11,7 +11,7 @@ const orderRouter = require("./routes/order");
 const authRouter = require("./routes/auth");
 const isAuth = require("./helpers/isAuth");
 
-app.use(cors({ credentials: true }));
+app.use(cors({ credentials: true, origin: process.env.REACT_APP }));
 
 app.use(isAuth);
 
