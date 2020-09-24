@@ -11,7 +11,7 @@ const orderRouter = require("./routes/order");
 const authRouter = require("./routes/auth");
 const isAuth = require("./helpers/isAuth");
 
-app.use(cors({ credentials: true, origin: `http://localhost:3001` }));
+app.use(cors({ credentials: true }));
 
 app.use(isAuth);
 

@@ -166,7 +166,7 @@ export const CartPage = () => {
                             name="payer.firstName"
                             register={register({
                                 required: true,
-                                minLength: 3,
+                                minLength: 2,
                             })}
                             error={errors.payer?.firstName}
                             errorMessage="Введите свое имя"
@@ -403,7 +403,7 @@ export const CartPage = () => {
                                         }
                                         name="customRecepient.firstName"
                                         ref={register({
-                                            minLength: 3,
+                                            minLength: 2,
                                             required: true,
                                         })}
                                     />

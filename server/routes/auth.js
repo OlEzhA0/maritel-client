@@ -8,7 +8,6 @@ const {
     createAccessToken,
     createRefreshToken,
 } = require("../helpers/createAuthTokens");
-const isAuth = require("../helpers/isAuth");
 const { verify } = require("jsonwebtoken");
 const { sendRefreshToken } = require("../helpers/sendRefreshToken");
 
@@ -99,9 +98,6 @@ router.get("/logout", async (_req, res) => {
     return res.json({ ok: true, accessToken: "" });
 });
 
-router.get("/hello", isAuth, async (req, res) => {
-    res.json({ message: req.customer });
-});
 
 router.post("/refresh_token", async (req, res) => {
     const token = req.cookies.jid;

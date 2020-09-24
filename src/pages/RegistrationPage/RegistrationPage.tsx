@@ -108,7 +108,10 @@ export const RegistrationPage = () => {
             const defaultFormValues: { [x: string]: any } = {};
             console.log("customer", customer);
             Object.keys(customer).forEach((key) => {
-                if (customer[key as keyof FormType] !== "" && customer[key as keyof FormType] !== null) {
+                if (
+                    customer[key as keyof FormType] !== "" &&
+                    customer[key as keyof FormType] !== null
+                ) {
                     if (typeof customer[key as keyof FormType] === "object") {
                         defaultFormValues[key] = {
                             ...(customer[key as keyof FormType] as object),
@@ -136,7 +139,7 @@ export const RegistrationPage = () => {
         );
     }
 
-    if (!isLogged) {
+    if (!isLogged && !data?.customer) {
         return <Redirect to="/login" />;
     }
 
