@@ -1,0 +1,44 @@
+.SizesTable {
+    width: 100.12%;
+    font-size: 15px;
+    font-weight: 800;
+
+    &__Modal {
+        bottom: unset !important;
+    }
+
+    &__Close {
+        position: absolute;
+        right: 10px;
+        bottom: 98%;
+        font-size: 55px;
+        font-weight: 100;
+        color: #fff;
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover {
+            color: #bb2a36;
+        }
+    }
+
+    & th {
+        padding: 10px 20px;
+        text-align: left;
+        background: #000;
+        color: #fff;
+    }
+
+    & tr {
+        &:nth-child(2n -1) {
+            background: rgba(16, 16, 16, 0.03);
+        }
+
+        &:nth-child(2n) {
+            background: rgba(16, 16, 16, 0.1);
+        }
+    }
+
+    & td {
+        padding: 10px 20px;
+    }
+}

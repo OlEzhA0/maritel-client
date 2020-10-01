@@ -36,7 +36,6 @@ export const CartPageOrderSummary = () => {
     );
 
     useEffect(() => {
-        console.log(orderSchema.validate(orderInfo).error);
         setActive(!orderSchema.validate(orderInfo).error);
     }, [orderInfo]);
 

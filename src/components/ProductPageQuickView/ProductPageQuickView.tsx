@@ -29,7 +29,7 @@ export const ProductPageQuickView = () => {
     const [colors, setColors] = useState<ColorTypes[]>([]);
     const [generalPhoto, setGeneralPhoto] = useState("");
     const [generalPhotoLoad, setGeneralPhotoLoad] = useState(false);
-    const [choosenSize, setChoosenSize] = useState("");
+    const [choosenSize, setChoosenSize] = useState<Sizes>({} as Sizes);
     const [quantity, setQuantity] = useState("1");
     const cart = useSelector(getCart);
 
@@ -53,7 +53,7 @@ export const ProductPageQuickView = () => {
             setGeneralPhoto(
                 products.find((prod) => prod.uuid === uuid)?.previewPhoto || ""
             );
-            setChoosenSize("");
+            setChoosenSize({} as Sizes);
             setQuantity("1");
         }
     }, [uuid, products]);
@@ -70,7 +70,7 @@ export const ProductPageQuickView = () => {
 
     useEffect(() => {
         setQuantity("1");
-        setChoosenSize("");
+        setChoosenSize({} as Sizes);
     }, [cart]);
 
     return product && colors.length ? (
@@ -119,19 +119,20 @@ export const ProductPageQuickView = () => {
                                 )?.category!
                             }
                             product={product}
-                            choosenSize={choosenSize}
+                            choosenSize={choosenSize.size}
                             setChoosenSize={setChoosenSize}
                         />
                         <Prod.ProductPageQuantity
                             quantity={quantity}
                             setQuantity={setQuantity}
-                            choosenSize={choosenSize}
+                            choosenSize={choosenSize.size}
                             product={product}
                         />
                         <Prod.ProductPageAddCart
-                            choosenSize={choosenSize}
+                            choosenSize={choosenSize.size}
                             prodUuid={product.uuid}
                             quantity={quantity}
+                            stock={choosenSize.stock}
                         />
                     </div>
                     <div className="ProductPageQuickView__Descr">

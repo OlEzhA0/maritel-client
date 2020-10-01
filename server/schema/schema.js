@@ -16,7 +16,7 @@ const SpecCategs = require("../models/specCategs");
 const Subscr = require("../models/subscrByMail");
 const Colors = require("../models/colors");
 const Customer = require("../models/customer");
-const Order = require("../models/order");
+const ProductSubscriber = require("../models/productSubscriber");
 
 const ProductType = new GraphQLObjectType({
     name: "Product",
@@ -103,6 +103,7 @@ const OrderType = new GraphQLObjectType({
     name: "Orders",
     fields: () => ({
         _id: { type: GraphQLID },
+        orderId: { type: GraphQLString },
         items: { type: new GraphQLList(CartItemsType) },
         city: { type: OptionType },
         customReceiver: { type: graphql.GraphQLBoolean },
@@ -278,6 +279,43 @@ const Mutation = new GraphQLObjectType({
                     });
                 } catch {
                     return {};
+                }
+            },
+        },
+        AddProductSubscriber: {
+            type: graphql.GraphQLBoolean,
+            args: {
+                name: { type: GraphQLString },
+                email: { type: GraphQLString },
+                phone: { type: GraphQLString },
+                product: { type: GraphQLString },
+                size: { type: GraphQLString },
+                subscribe: { type: graphql.GraphQLBoolean },
+            },
+            async resolve(_parent, args) {
+                try {
+                    if (args.subscribe) {
+                        await Subscr.create({ email: args.email });
+                    }
+                } catch {}
+
+                try {
+                    const product = await Product.findOne({
+                        uuid: args.product,
+                    });
+
+                    if (!product) {
+                        return false;
+                    }
+
+                    await ProductSubscriber.create({
+                        ...args,
+                        product: product._id,
+                    });
+
+                    return true;
+                } catch {
+                    return false;
                 }
             },
         },

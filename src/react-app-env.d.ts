@@ -118,6 +118,7 @@ interface Customer {
         {
             _id: string;
             uuid: string;
+            orderId: string;
             items: [
                 {
                     prodUuid: string;

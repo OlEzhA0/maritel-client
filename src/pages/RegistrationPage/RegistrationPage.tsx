@@ -106,7 +106,7 @@ export const RegistrationPage = () => {
         if (!loading && data?.customer) {
             const { customer } = data;
             const defaultFormValues: { [x: string]: any } = {};
-            console.log("customer", customer);
+
             Object.keys(customer).forEach((key) => {
                 if (
                     customer[key as keyof FormType] !== "" &&
@@ -147,10 +147,6 @@ export const RegistrationPage = () => {
         return <Redirect to={redirect} />;
     }
 
-    // if (data.customer.status === "registered") {
-    //     return <Redirect to="/account" />;
-    // }
-
     watch("shippingMethod");
     watch("shippingMethod.name");
     watch("shippingMethod.value");
@@ -159,7 +155,6 @@ export const RegistrationPage = () => {
 
     const { shippingMethod, city } = getValues();
 
-    console.log(getValues());
 
     const onSubmit = (fieldData: FormType) => {
         if (fieldData) {

@@ -11,7 +11,7 @@ const menuItems = [
     { value: "account", name: "Аккаунт" },
     { value: "wishlist", name: "список желаний" },
     { value: "orders", name: "мои заказы" },
-    { value: "bonuses", name: "мой бонусный счет" },
+    // { value: "bonuses", name: "мой бонусный счет" },
 ];
 
 export const AccountMenu = (props: Props) => {

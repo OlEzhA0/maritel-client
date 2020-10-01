@@ -4,13 +4,13 @@ export const orderSchema = Joi.object().keys({
     payer: Joi.object()
         .keys({
             lastName: Joi.string().min(3).required(),
-            firstName: Joi.string().min(3).required(),
+            firstName: Joi.string().min(2).required(),
             phone: Joi.string().min(10).max(13).required(),
         })
         .required(),
     customRecepient: Joi.object().keys({
         lastName: Joi.string().min(3).required(),
-        firstName: Joi.string().min(3).required(),
+        firstName: Joi.string().min(2).required(),
         phone: Joi.string().min(10).max(13).required(),
     }),
     recepient: Joi.string().valid("payer", "custom").required(),

@@ -1,35 +1,94 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductPageAddCart.scss";
 import cn from "classnames";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../../store/actionCreators";
-
+import { addToCart, SetPopupCartStatus } from "../../../store/actionCreators";
+import Modal from "react-modal";
+import { ProductPageMissingProduct } from "../ProductPageMissingProduct/ProductPageMissingProduct";
 interface Props {
-  choosenSize: string;
-  quantity: string;
-  prodUuid: string;
+    choosenSize: string;
+    quantity: string;
+    prodUuid: string;
+    stock: string;
 }
 
-export const ProductPageAddCart: React.FC<Props> = ({
-  choosenSize,
-  quantity,
-  prodUuid,
-}) => {
-  const disptach = useDispatch();
+Modal.setAppElement("#root");
 
-  return (
-    <button
-      type="button"
-      className={cn({
-        ProductPageAddCart__Button: true,
-        "ProductPageAddCart__Button--dis": !choosenSize,
-      })}
-      disabled={!choosenSize}
-      onClick={() => {
-        disptach(addToCart(prodUuid, quantity, choosenSize));
-      }}
-    >
-      добавить в корзину
-    </button>
-  );
+export const ProductPageAddCart: React.FC<Props> = ({
+    choosenSize,
+    quantity,
+    prodUuid,
+    stock,
+}) => {
+    const dispatch = useDispatch();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    let timeout: undefined | ReturnType<typeof setTimeout> = undefined;
+
+    const showCart = () => {
+        dispatch(SetPopupCartStatus(true));
+
+        timeout = setTimeout(() => {
+            dispatch(SetPopupCartStatus(false));
+        }, 3000);
+    };
+
+    useEffect(() => {
+        return () => {
+            if (timeout) {
+                clearTimeout(timeout);
+            }
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    if (parseInt(stock) < 1) {
+        return (
+            <>
+                <button
+                    type="button"
+                    className={cn({
+                        ProductPageAddCart__Button: true,
+                        "ProductPageAddCart__Button--dis": !choosenSize,
+                    })}
+                    disabled={!choosenSize}
+                    onClick={() => {
+                        setIsModalOpen(true);
+                    }}
+                >
+                    Сообщить о поступлении
+                </button>
+                <Modal
+                    className="Maritel__Modal"
+                    overlayClassName="Maritel__ModalOverlay"
+                    isOpen={isModalOpen}
+                    onRequestClose={() => setIsModalOpen(false)}
+                >
+                    <ProductPageMissingProduct
+                        size={choosenSize}
+                        product={prodUuid}
+                        closeModal={() => setIsModalOpen(false)}
+                    />
+                </Modal>
+            </>
+        );
+    }
+
+    return (
+        <button
+            type="button"
+            className={cn({
+                ProductPageAddCart__Button: true,
+                "ProductPageAddCart__Button--dis": !choosenSize,
+            })}
+            disabled={!choosenSize}
+            onClick={() => {
+                showCart();
+                dispatch(addToCart(prodUuid, quantity, choosenSize));
+            }}
+        >
+            добавить в корзину
+        </button>
+    );
 };

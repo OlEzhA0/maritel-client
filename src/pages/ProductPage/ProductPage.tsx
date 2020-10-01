@@ -29,7 +29,7 @@ export const ProductPage = () => {
     const [generalPhotoLoad, setGeneralPhotoLoad] = useState(false);
     const [colors, setColors] = useState<ColorTypes[]>([]);
     const [relatedProds, setRelatedProds] = useState<Products[]>([]);
-    const [choosenSize, setChoosenSize] = useState("");
+    const [choosenSize, setChoosenSize] = useState<Sizes>({} as Sizes);
     const [quantity, setQuantity] = useState("1");
     const [currentPath, setCurrentPath] = useState(0);
     const getColors = useQuery(getColorsQuery);
@@ -85,7 +85,7 @@ export const ProductPage = () => {
     }, [getColors]);
 
     useEffect(() => {
-        setChoosenSize("");
+        setChoosenSize({} as Sizes);
     }, [location]);
 
     const handleCreateMobileInfo = useMemo(() => {
@@ -121,7 +121,7 @@ export const ProductPage = () => {
 
     useEffect(() => {
         setQuantity("1");
-        setChoosenSize("");
+        setChoosenSize({} as Sizes);
     }, [cart]);
 
     return product && colors.length ? (
@@ -174,19 +174,20 @@ export const ProductPage = () => {
                                 )?.category!
                             }
                             product={product}
-                            choosenSize={choosenSize}
+                            choosenSize={choosenSize.size}
                             setChoosenSize={setChoosenSize}
                         />
                         <Prod.ProductPageQuantity
                             quantity={quantity}
                             setQuantity={setQuantity}
-                            choosenSize={choosenSize}
+                            choosenSize={choosenSize.size}
                             product={product}
                         />
                         <Prod.ProductPageAddCart
-                            choosenSize={choosenSize}
+                            choosenSize={choosenSize.size}
                             quantity={quantity}
                             prodUuid={product.uuid}
+                            stock={choosenSize.stock}
                         />
                     </div>
                     <div className="ProductPage__Descr">

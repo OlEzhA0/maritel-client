@@ -4,7 +4,7 @@ export const FOOTER_INFO: FooterInfo[] = [
         fields: [
             {
                 name: "Размерная сетка",
-                link: "/size-chart",
+                link: "/sizeChart",
             },
             {
                 name: "Список желаний",

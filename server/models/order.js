@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const uuid = require("uuid");
+const autoIncrement = require("mongoose-auto-increment");
 
 const ordersSchema = new Schema({
+    orderId: Number,
     uuid: { type: String, unique: true, default: uuid.v4 },
     items: [
         {
@@ -47,6 +49,14 @@ const ordersSchema = new Schema({
     paymentStatus: String,
     customer: { type: Schema.Types.ObjectId, ref: "customers" },
     deliveryStatus: String,
+});
+
+autoIncrement.initialize(mongoose.connection);
+
+ordersSchema.plugin(autoIncrement.plugin, {
+    model: "orders",
+    field: "orderId",
+    startAt: 1000024,
 });
 
 module.exports = mongoose.model("orders", ordersSchema, "orders");

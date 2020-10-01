@@ -112,6 +112,7 @@ export const getCustomer = gql`
             }
             orders {
                 _id
+                orderId
                 items {
                     prodUuid
                     name

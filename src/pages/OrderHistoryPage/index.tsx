@@ -34,7 +34,7 @@ export const OrderHistoryPage = () => {
                     {data?.customer.orders.map((order) => (
                         <OrderItem
                             key={order._id}
-                            _id={order._id}
+                            _id={order.orderId ? order.orderId : order._id}
                             date={order.date}
                             items={order.items}
                             amount={order.amount}

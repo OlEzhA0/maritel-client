@@ -174,13 +174,14 @@
     }
 
     &__CartWrap {
+        width: 36px;
         height: 100%;
         display: flex;
         align-items: center;
-        cursor: pointer;
         justify-content: center;
-        width: 36px;
+        cursor: pointer;
         transform: translateX(10px);
+        text-decoration: none;
         & > span {
             margin-left: 10px;
             color: #101010;

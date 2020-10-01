@@ -117,14 +117,22 @@ export const CartPage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [getValues()]);
 
+    if (!cart.length) {
+        return (
+            <div className="CartPage Page__Wrap">
+                <div className="CartPage__EmptyCart">
+                    Добавьте товары в корзину
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="CartPage Page__Wrap">
             <ReactTooltip />
 
             <div className="CartPage__RegisterOrder">
-                <p className="CartPage__Hint">
-                    БЕСПЛАТНАЯ ДОСТАВКА ПРИ ЗАКАЗЕ НА СУММУ ОТ 1500 ГРН.
-                </p>
+                <p className="CartPage__Hint"></p>
                 <div className="CartPage__InfoTitle">
                     <h1 className="CartPage__TitlePage">корзина</h1>
                     <p className="CartPage__CountProds">

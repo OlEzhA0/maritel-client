@@ -1,40 +1,40 @@
 @import "../../../styles/vars.scss";
 
 .ProductPageAddCart {
-  &__Button {
-    height: 35px;
-    width: 100%;
-    border: 1px solid #58ba87;
-    box-sizing: border-box;
-    font-weight: 800;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 0.08em;
-    color: #fff;
-    text-transform: uppercase;
-    background-color: #58ba87;
-    cursor: pointer;
-    transition: all 0.3s;
-    outline: none;
+    &__Button {
+        height: 35px;
+        width: 100%;
+        border: 1px solid #58ba87;
+        box-sizing: border-box;
+        font-weight: 800;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 0.08em;
+        color: #fff;
+        text-transform: uppercase;
+        background-color: #58ba87;
+        cursor: pointer;
+        transition: all 0.3s;
+        outline: none;
 
-    &:hover {
-      background-color: #fff;
+        &:hover {
+            background-color: #fff;
 
-      color: #58ba87;
+            color: #58ba87;
+        }
+
+        &:disabled {
+            cursor: no-drop;
+            color: #58ba87;
+            background-color: #fff;
+        }
+
+        &:disabled:hover {
+            background-color: #fff;
+            color: #58ba87;
+        }
     }
-
-    &:disabled {
-      cursor: no-drop;
-      color: #58ba87;
-      background-color: #fff;
-    }
-
-    &:disabled:hover {
-      background-color: #fff;
-      color: #58ba87;
-    }
-
-  }
 }
+

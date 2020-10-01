@@ -1,42 +1,42 @@
 @import "../../../styles/vars.scss";
 
 .ProductPageProdInfo {
-  &__ShopTitle {
-    font-weight: 800;
-    font-size: 1rem;
-    letter-spacing: 0.08em;
-    color: $main-color;
-    margin-bottom: 6px;
-  }
+    &__ShopTitle {
+        font-weight: 800;
+        font-size: 1rem;
+        letter-spacing: 0.08em;
+        color: $main-color;
+        margin-bottom: 6px;
+    }
 
-  &__ProdTitle {
-    font-weight: 800;
-    font-size: 22px;
-    letter-spacing: 0.08em;
-    color: #bb2a36;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-  }
+    &__ProdTitle {
+        font-weight: 800;
+        font-size: 22px;
+        letter-spacing: 0.08em;
+        color: #101010;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+    }
 
-  &__OnePrice,
-  &__LastPrice,
-  &__NewPrice {
-    font-weight: 800;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    color: $main-color;
-    margin-right: 7px;
-  }
+    &__OnePrice,
+    &__LastPrice,
+    &__NewPrice {
+        font-weight: 800;
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        color: $main-color;
+        margin-right: 7px;
+    }
 
-  &__LastPrice {
-    text-decoration-line: line-through;
-  }
+    &__LastPrice {
+        text-decoration-line: line-through;
+    }
 
-  &__NewPrice {
-    color: #bb2a36;
-  }
+    &__NewPrice {
+        color: #bb2a36;
+    }
 
-  &__Price {
-    margin-bottom: 21px;
-  }
+    &__Price {
+        margin-bottom: 21px;
+    }
 }

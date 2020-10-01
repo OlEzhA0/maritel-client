@@ -36,6 +36,8 @@ export const FilterBy: React.FC<Props> = ({ name, options }) => {
   useEffect(() => {
     if (params) {
       setCheckedParams(params.split(";"));
+    } else {
+      setCheckedParams([])
     }
   }, [params]);
 

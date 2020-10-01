@@ -9,8 +9,6 @@
         color: #bb2a36;
     }
 
-
-
     &__PaymentHint {
         position: absolute;
         top: 100%;
@@ -98,6 +96,14 @@
 
     &__CityName {
         color: #bb2a36;
+    }
+    &__EmptyCart {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
     }
 
     &__RadioContainer {

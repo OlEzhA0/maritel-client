@@ -55,3 +55,23 @@ export const editCustomer = gql`
         }
     }
 `;
+
+export const AddProductSubscriber = gql`
+    mutation productSubscriber(
+        $name: String
+        $email: String
+        $phone: String
+        $product: String
+        $size: String
+        $subscribe: Boolean
+    ) {
+        AddProductSubscriber(
+            name: $name
+            email: $email
+            phone: $phone
+            product: $product
+            size: $size
+            subscribe: $subscribe
+        )
+    }
+`;
