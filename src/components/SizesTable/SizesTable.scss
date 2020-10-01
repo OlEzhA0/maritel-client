@@ -42,3 +42,11 @@
         padding: 10px 20px;
     }
 }
+
+@media only screen and (max-device-width: 480px) {
+    .SizesTable {
+        &__ModalOverlay.Maritel__ModalOverlay {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    }
+}

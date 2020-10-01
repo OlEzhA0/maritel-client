@@ -29,7 +29,7 @@ export const SizesTable: React.FC = ({ children }) => {
             <span onClick={() => setIsModalOpen(true)}>{children}</span>
             <ReactModal
                 className="Maritel__Modal SizesTable__Modal"
-                overlayClassName="Maritel__ModalOverlay"
+                overlayClassName="Maritel__ModalOverlay SizesTable__ModalOverlay"
                 isOpen={isModalOpen}
                 onRequestClose={() => setIsModalOpen(false)}
             >
