@@ -48,7 +48,8 @@
         color: $main-color;
         cursor: pointer;
 
-        &--choosen {
+        &--choosen,
+        &:hover {
             background: #bb2a36;
             color: #fff;
             border: 1px solid #bb2a36;
