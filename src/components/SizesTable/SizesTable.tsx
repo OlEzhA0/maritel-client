@@ -52,11 +52,11 @@ export const SizesTable: React.FC = ({ children }) => {
                             <th>ОБХВАТ ТАЛИИ</th>
                             <th>ОБХВАТ БЕДЕР</th>
                         </tr>
-                        {sizes.map((size) => {
+                        {sizes.map((size, i) => {
                             return (
-                                <tr>
-                                    {size.map((item) => (
-                                        <td>{item}</td>
+                                <tr key={i}>
+                                    {size.map((item, j) => (
+                                        <td key={j}>{item}</td>
                                     ))}
                                 </tr>
                             );
