@@ -153,8 +153,8 @@ export const ProductsList = ({ isWishlist }: Props) => {
     );
 
     const handleGetColors = useMemo(
-        () => prodsSettings.gColors(lastCurrentProds, colors),
-        [lastCurrentProds, colors]
+        () => prodsSettings.gColors(filterByPrice, colors),
+        [filterByPrice, colors]
     );
 
     const filterByColor = useMemo(
@@ -163,8 +163,8 @@ export const ProductsList = ({ isWishlist }: Props) => {
     );
 
     const handleGetSizes = useMemo(
-        () => prodsSettings.gSizes(lastCurrentProds, products),
-        [lastCurrentProds, products]
+        () => prodsSettings.gSizes(filterByColor, products),
+        [filterByColor, products]
     );
 
     const filterBySize = useMemo(
