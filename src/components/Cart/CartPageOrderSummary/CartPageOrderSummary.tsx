@@ -14,8 +14,14 @@ import {
 import { orderSchema } from "../../../helpers/validationSchemas";
 import { fetchOrderInfo } from "./api";
 import { clearCart, setOrderStatus } from "../../../store/actionCreators";
+import { DeepMap, FieldError, UseFormMethods } from "react-hook-form";
+import { CartFormType } from "../../../pages/CartPage/CartPage";
 
-export const CartPageOrderSummary = () => {
+type Props = {
+    formMethods: UseFormMethods<CartFormType>;
+};
+
+export const CartPageOrderSummary = ({ formMethods }: Props) => {
     const dispatch = useDispatch();
 
     const cartItemsTotal = useSelector(getCartItemsTotal);
@@ -141,6 +147,24 @@ export const CartPageOrderSummary = () => {
                                 }, 0);
                             }
                         );
+                    } else {
+                        formMethods.trigger().then(() => {
+                            if (formMethods.errors) {
+                                console.log(formMethods.errors);
+
+                                const errorRef = getErrorRef<CartFormType>(
+                                    formMethods.errors
+                                );
+
+                                if (errorRef) {
+                                    errorRef.focus();
+                                }
+
+                                // for(const prop in formMethods.errors) {
+
+                                // }
+                            }
+                        });
                     }
                 }}
             >
@@ -159,4 +183,24 @@ export const CartPageOrderSummary = () => {
             </div>
         </div>
     );
+};
+
+const getErrorRef = <T extends unknown>(errors: DeepMap<T, FieldError>) => {
+    const getFirstProp = (error: { [x: string]: any }) => {
+        for (const prop in error) {
+            return error[prop];
+        }
+    };
+
+    let error = getFirstProp(errors);
+
+    while (!error.hasOwnProperty("ref")) {
+        try {
+            error = getFirstProp(error);
+        } catch {
+            return null;
+        }
+    }
+
+    return error.ref as HTMLInputElement;
 };

@@ -19,7 +19,7 @@ import { RadioInput } from "../../components/RadioInput/RadioInput";
 import { getCustomer } from "../../helpers/gqlQuery";
 import { useQuery } from "react-apollo";
 
-type FormType = {
+export type CartFormType = {
     payer: {
         firstName: string;
         lastName: string;
@@ -56,7 +56,7 @@ export const CartPage = () => {
         skip: !isLogged,
     });
 
-    const formMethods = useForm<FormType>({
+    const formMethods = useForm<CartFormType>({
         mode: "onBlur",
         reValidateMode: "onChange",
     });
@@ -75,7 +75,7 @@ export const CartPage = () => {
                 shippingAddress,
                 shippingMethod,
             } = data.customer;
-            const customerInfo: FormType = {} as FormType;
+            const customerInfo: CartFormType = {} as CartFormType;
             customerInfo.payer = {
                 firstName,
                 lastName,
@@ -150,7 +150,7 @@ export const CartPage = () => {
             </div>
             {!loading && (
                 <>
-                    <CartPageOrderSummary />
+                    <CartPageOrderSummary formMethods={formMethods} />
 
                     <div className="CartPage__StepTitle">
                         1. ВАШИ КОНТАКТНЫЕ ДАННЫЕ
@@ -219,7 +219,7 @@ export const CartPage = () => {
                         <div className="CartPage__ShippingMethodItem">
                             <RadioInput
                                 label="В отделение Новой Почты"
-                                register={register}
+                                register={register({ required: true })}
                                 value="postOffice"
                                 name="shippingMethod"
                                 disabled={!formValues.city?.name}
@@ -310,7 +310,7 @@ export const CartPage = () => {
                                     type="radio"
                                     value="cash"
                                     name="paymentMethod"
-                                    ref={register}
+                                    ref={register({ required: true })}
                                 />
                                 <span className="checkmark"></span>
                             </label>
@@ -320,7 +320,7 @@ export const CartPage = () => {
                                 label="Картой онлайн"
                                 name="paymentMethod"
                                 value="card"
-                                register={register}
+                                register={register({ required: true })}
                             />
                         </div>
                         {formValues.paymentMethod === "card" && (
@@ -330,7 +330,7 @@ export const CartPage = () => {
                                         label="LiqPay"
                                         name="paymentService"
                                         value="liqpay"
-                                        register={register}
+                                        register={register({ required: true })}
                                     />
                                 </div>
                                 <div className="CartPage__PaymentServiceContainer">
@@ -338,7 +338,7 @@ export const CartPage = () => {
                                         label="WayForPay"
                                         name="paymentService"
                                         value="wayforpay"
-                                        register={register}
+                                        register={register({ required: true })}
                                     />
                                 </div>
                             </>
