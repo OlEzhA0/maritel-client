@@ -137,6 +137,11 @@
     }
 }
 
+.Maritel__InputContainer__Street {
+    flex-basis: 50%;
+    margin-left: 6%;
+}
+
 .checkmark {
     width: 20px;
     height: 20px;
@@ -182,7 +187,12 @@
             margin: 0 16px;
         }
 
-        &__InputContainer {
+        &__CourierDelivery {
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+        .Maritel__InputContainer {
             flex-basis: 100%;
             margin: 1% 0 !important;
         }
@@ -190,7 +200,7 @@
         &__StepTitle {
             margin: 16px 0;
         }
-        &__ShippingMethodItem &__InputContainer {
+        &__ShippingMethodItem .Maritel__InputContainer {
             padding: 10px 4%;
         }
         &__PaymentServiceContainer {
@@ -199,5 +209,10 @@
         &__RadioWithHint {
             margin-bottom: 11%;
         }
+    }
+
+    .Maritel__InputContainer__Street {
+        flex-basis: 100%;
+        margin-left: 0;
     }
 }

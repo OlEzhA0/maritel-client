@@ -19,6 +19,7 @@ type Props = {
     control: any;
     error?: FieldError;
     errorMessage?: string;
+    className?: string;
 };
 
 const AsyncSelect = (props: Props) => {
@@ -33,6 +34,7 @@ const AsyncSelect = (props: Props) => {
         control,
         error,
         errorMessage,
+        className,
     } = props;
 
     const [open, setOpen] = useState(false);
@@ -96,7 +98,7 @@ const AsyncSelect = (props: Props) => {
                         loading={loading}
                         loadingText={"Загружается..."}
                         noOptionsText={"Ничего не найдено."}
-                        className="Maritel__InputContainer"
+                        className={`Maritel__InputContainer ${className}`}
                         disabled={disabled}
                         data-tip={disabled ? disabledMessage : ""}
                         renderInput={(params) => (

@@ -110,8 +110,6 @@ export const CartPage = () => {
     watch("paymentService");
     watch("deliveryAddress");
 
-    console.log("values", getValues());
-
     useEffect(() => {
         dispatch(setOrderInfo({ ...getValues(), customRecepient: undefined }));
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -258,10 +256,7 @@ export const CartPage = () => {
                                     <AsyncSelect
                                         name="deliveryAddress.street"
                                         control={control}
-                                        style={{
-                                            marginLeft: "6%",
-                                            flexBasis: "50%",
-                                        }}
+                                        className="Maritel__InputContainer__Street"
                                         label="Улица"
                                         getOptions={(searchQuery: string) =>
                                             getDeliveryAddress(

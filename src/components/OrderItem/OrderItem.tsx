@@ -44,8 +44,6 @@ export const OrderItem = (props: Props) => {
         );
     }, [items]);
 
-    console.log(items);
-
     return (
         <div className="OrderItem">
             <div className="OrderItem__Date">{`№${_id} от ${timestampToString(

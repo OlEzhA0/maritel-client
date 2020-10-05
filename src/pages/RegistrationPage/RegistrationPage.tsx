@@ -124,7 +124,6 @@ export const RegistrationPage = () => {
                 }
             });
             setValue("shippingMethod", defaultFormValues.shippingMethod);
-            console.log(defaultFormValues);
             reset(defaultFormValues);
             trigger();
         }
@@ -154,7 +153,6 @@ export const RegistrationPage = () => {
     watch("birthday");
 
     const { shippingMethod, city } = getValues();
-
 
     const onSubmit = (fieldData: FormType) => {
         if (fieldData) {

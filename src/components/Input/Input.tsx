@@ -29,6 +29,16 @@ export const Input = (props: Props) => {
         placeholder,
         autoComplete,
     } = props;
+
+    if (error) {
+        console.log("error", error);
+        const ref = error.ref;
+        if (ref) {
+            console.log("ref", ref);
+            (ref as HTMLInputElement).focus();
+        }
+    }
+
     return (
         <div className={"Maritel__InputContainer " + className}>
             <label>
