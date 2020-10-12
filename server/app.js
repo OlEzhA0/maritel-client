@@ -11,6 +11,18 @@ const orderRouter = require("./routes/order");
 const authRouter = require("./routes/auth");
 const isAuth = require("./helpers/isAuth");
 
+app.use(express.static("build"));
+
+app.use((req, res, next) => {
+    if (process.env.NODE_ENV === "production") {
+        if (req.protocol === "http") {
+            res.redirect("https://" + req.get("host") + req.originalUrl);
+            return;
+        }
+    }
+    return next();
+});
+
 app.use(cors({ credentials: true, origin: process.env.REACT_APP }));
 
 app.use(isAuth);
@@ -27,7 +39,6 @@ mongoose.connect(
     { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 );
 
-app.use(express.static("build"));
 app.use(
     "/graphql",
     graphqlHTTP({
