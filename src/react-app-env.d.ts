@@ -61,6 +61,7 @@ interface Products {
 }
 
 interface LocalProduct {
+    id: string;
     uuid: string;
     title: string;
     descr: string;
@@ -114,49 +115,7 @@ interface Customer {
         day: string;
         month: string;
     };
-    orders: [
-        {
-            _id: string;
-            uuid: string;
-            orderId: string;
-            items: [
-                {
-                    prodUuid: string;
-                    name: string;
-                    size: string;
-                    quantity: string;
-                    price: string;
-                }
-            ];
-            date: string;
-            receiver?: {
-                firstName: string;
-                lastName: string;
-                patronymic: string;
-                phone: string;
-            };
-            payer: {
-                firstName: string;
-                lastName: string;
-                phone: string;
-            };
-            city: OptionType;
-            customReceiver: Boolean;
-            paymentMethod: string;
-            paymentService: string;
-            shippingAddress: {
-                street?: OptionType;
-                appartment?: string;
-                houseNumber?: string;
-                value?: string;
-                name?: string;
-            };
-            shippingMethod: string;
-            amount: string;
-            paymentStatus: string;
-            deliveryStatus: string;
-        }
-    ];
+    orders: Order[];
     gender: { value: "male" | "female"; name: string };
     status: "registering" | "registered";
 }
@@ -165,3 +124,67 @@ interface OptionType {
     value: string;
     name: string;
 }
+
+interface Order {
+    _id: string;
+    uuid: string;
+    orderId: string;
+    items: [
+        {
+            prodUuid: string;
+            name: string;
+            size: string;
+            quantity: string;
+            price: string;
+        }
+    ];
+    date: string;
+    receiver?: {
+        firstName: string;
+        lastName: string;
+        patronymic: string;
+        phone: string;
+    };
+    payer: {
+        firstName: string;
+        lastName: string;
+        phone: string;
+    };
+    city: OptionType;
+    customReceiver: Boolean;
+    paymentMethod: string;
+    paymentService: string;
+    shippingAddress: {
+        street?: OptionType;
+        appartment?: string;
+        houseNumber?: string;
+        value?: string;
+        name?: string;
+    };
+    shippingMethod: string;
+    amount: string;
+    paymentStatus: string;
+    deliveryStatus: string;
+}
+
+interface MainSettings {
+    main?: string;
+    phone?: string;
+    instagram?: string;
+    facebook?: string;
+    telegram?: string;
+}
+
+interface SocialLink {
+    name: "facebook" | "instagram" | "telegram";
+    link: string;
+}
+
+type Promo = {
+    promoName: string;
+    promoDisc: "grn" | "percent";
+    promoValue: number;
+};
+
+
+type InfoPageNames = "brand" | "bloggers" | "vacancies" | "delivery-policies" | "return-policies" | "rules"

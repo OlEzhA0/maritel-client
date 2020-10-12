@@ -1,0 +1,66 @@
+.AboutUsPage {
+    display: flex;
+    padding-top: 15px;
+    &__Container {
+        width: 75%;
+        margin-bottom: 100px;
+        padding: 0 30px;
+    }
+
+    &__Title {
+        max-width: 50%;
+        margin-bottom: 40px;
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: 0.08rem;
+    }
+
+    &__SubTitle {
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: 0.08rem;
+        text-transform: uppercase;
+        line-height: 27px;
+    }
+
+    &__Vacancy {
+        margin-bottom: 20px;
+    }
+
+    &__Text {
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.08rem;
+        line-height: 23px;
+    }
+
+    &__Paragraph {
+        margin-bottom: 25px;
+    }
+
+    &__ContactUs {
+        margin-top: 50px;
+    }
+
+    &__Email {
+        color: #bb2a36;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    .AboutUsPage {
+        padding-top: 30px;
+
+        &__Container {
+            width: 100%;
+            margin-bottom: 25px;
+            padding: 0 16px;
+        }
+
+        &__Title {
+            max-width: 85%;
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+    }
+}

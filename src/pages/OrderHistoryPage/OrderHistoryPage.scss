@@ -1,0 +1,17 @@
+.OrderHistoryPage {
+    &__SortContainer {
+        display: flex;
+        align-items: center;
+        user-select: none;
+        cursor: pointer;
+        & > span {
+            margin-right: 5px;
+        }
+    }
+
+    &__Pagination {
+        & .MuiPagination-ul {
+            justify-content: center;
+        }
+    }
+}

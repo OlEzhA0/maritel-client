@@ -1,0 +1,37 @@
+.InfoPagesMenu {
+    width: 25%;
+    margin-top: 30px;
+    &__Category {
+        margin-bottom: 60px;
+        padding: 0 0 0 35%;
+    }
+
+    &__Title,
+    &__Link {
+        margin: 20px 0;
+    }
+
+    &__Title {
+        font-size: 15px;
+        font-weight: 800;
+        color: #bb2a36;
+    }
+
+    &__Link {
+        font-size: 13px;
+        font-weight: 500;
+        & a {
+            transition: 0.3s;
+
+            text-decoration: none;
+            color: #101010;
+            &:hover {
+                color: #bb2a36;
+            }
+        }
+
+        &--active a {
+            color: #bb2a36;
+        }
+    }
+}

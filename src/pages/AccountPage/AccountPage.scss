@@ -42,6 +42,7 @@
 .Account__PageTitle {
     position: relative;
     display: flex;
+    justify-content: space-between;
 }
 
 @media only screen and (max-device-width: 480px) {

@@ -7,6 +7,7 @@ const {
     GraphQLNonNull,
     GraphQLString,
     GraphQLID,
+    GraphQLInt,
 } = graphql;
 
 const Product = require("../models/product");
@@ -17,6 +18,9 @@ const Subscr = require("../models/subscrByMail");
 const Colors = require("../models/colors");
 const Customer = require("../models/customer");
 const ProductSubscriber = require("../models/productSubscriber");
+const Order = require("../models/order");
+const MainSettings = require("../models/mainSettings");
+const Promo = require("../models/promo");
 
 const ProductType = new GraphQLObjectType({
     name: "Product",
@@ -166,6 +170,26 @@ const SubscribeType = new GraphQLObjectType({
         id: { type: GraphQLID },
         email: { type: GraphQLString },
     }),
+});
+
+const MainSettingsType = new GraphQLObjectType({
+    name: "MainSettings",
+    fields: () => ({
+        email: { type: GraphQLString },
+        phone: { type: GraphQLString },
+        instagram: { type: GraphQLString },
+        facebook: { type: GraphQLString },
+        telegram: { type: GraphQLString },
+    }),
+});
+
+const PromoType = new GraphQLObjectType({
+    name: "Promo",
+    fields: {
+        promoName: { type: GraphQLString },
+        promoDisc: { type: GraphQLString },
+        promoValue: { type: GraphQLInt },
+    },
 });
 
 const Mutation = new GraphQLObjectType({
@@ -325,6 +349,12 @@ const Mutation = new GraphQLObjectType({
 const Query = new GraphQLObjectType({
     name: "Query",
     fields: {
+        mainSettings: {
+            type: MainSettingsType,
+            async resolve() {
+                return MainSettings.findOne({});
+            },
+        },
         categories: {
             type: new GraphQLList(CategoriesType),
             resolve() {
@@ -350,6 +380,19 @@ const Query = new GraphQLObjectType({
                 return Product.find({});
             },
         },
+        queryProducts: {
+            type: new GraphQLList(ProductType),
+            args: {
+                query: { type: GraphQLString },
+            },
+            async resolve(_p, args) {
+                const products = await Product.find({
+                    title: new RegExp(args.query, "i"),
+                });
+
+                return products;
+            },
+        },
         colors: {
             type: new GraphQLList(ColorsType),
             resolve() {
@@ -366,6 +409,53 @@ const Query = new GraphQLObjectType({
                 return Customer.findOne({
                     _id: context.customer.customerId,
                 }).populate("orders");
+            },
+        },
+        orders: {
+            type: new GraphQLObjectType({
+                name: "OrdersReturn",
+                fields: {
+                    orders: { type: new GraphQLList(OrderType) },
+                    orderCount: { type: GraphQLString },
+                },
+            }),
+            args: {
+                limit: { type: GraphQLString },
+                offset: { type: GraphQLString },
+                sort: { type: GraphQLString },
+            },
+            async resolve(_parent, args, context) {
+                if (!context.customer) {
+                    return;
+                }
+
+                const orders = await Order.find({
+                    customer: context.customer.customerId,
+                })
+                    .sort(args.sort || "-date")
+                    .skip(parseInt(args.offset) || 0)
+                    .limit(parseInt(args.limit) || 5);
+
+                const orderCount = Order.countDocuments({
+                    customer: context.customer.customerId,
+                });
+
+                return { orders, orderCount };
+            },
+        },
+        promo: {
+            type: PromoType,
+            args: {
+                promoName: { type: GraphQLString },
+            },
+            resolve(_parent, args) {
+                return Promo.findOne({ promoName: args.promoName });
+            },
+        },
+        promos: {
+            type: new GraphQLList(PromoType),
+            resolve() {
+                return Promo.find({});
             },
         },
     },

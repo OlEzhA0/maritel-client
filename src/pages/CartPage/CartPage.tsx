@@ -150,8 +150,8 @@ export const CartPage = () => {
             </div>
             {!loading && (
                 <>
+                    {/* <Promo /> */}
                     <CartPageOrderSummary formMethods={formMethods} />
-
                     <div className="CartPage__StepTitle">
                         1. ВАШИ КОНТАКТНЫЕ ДАННЫЕ
                     </div>

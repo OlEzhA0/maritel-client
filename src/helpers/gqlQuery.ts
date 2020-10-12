@@ -127,3 +127,69 @@ export const getCustomer = gql`
         }
     }
 `;
+
+export const getOrders = gql`
+    query getOrders($limit: String, $offset: String, $sort: String) {
+        orders(limit: $limit, offset: $offset, sort: $sort) {
+            orders {
+                _id
+                orderId
+                items {
+                    prodUuid
+                    name
+                    size
+                    quantity
+                    price
+                }
+                date
+                amount
+            }
+            orderCount
+        }
+    }
+`;
+
+export const getMainSettings = gql`
+    {
+        mainSettings {
+            email
+            phone
+            instagram
+            facebook
+            telegram
+        }
+    }
+`;
+
+export const getPromo = gql`
+    query getPromo($promoName: String) {
+        promo(promoName: $promoName) {
+            promoName
+            promoDisc
+            promoValue
+        }
+    }
+`;
+
+export const findProducts = gql`
+    query findProducts($query: String) {
+        queryProducts(query: $query) {
+            id
+            uuid
+            title
+            descr
+            color
+            price
+            gender
+            modelParam
+            composition
+            sizes
+            lastPrice
+            type
+            care
+            photos
+            previewPhoto
+            timestamp
+        }
+    }
+`;

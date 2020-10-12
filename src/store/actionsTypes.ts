@@ -9,7 +9,7 @@ export const getQickViewStatus = (state: RootState) => state.qucikView.status;
 export const getQickViewUuid = (state: RootState) => state.qucikView.uuid;
 export const getBackgroundSearchCover = (state: RootState) =>
     state.searchBackground;
-export const getWishList = (state: RootState) => state.wishList;
+export const getWishList = (state: RootState) => state.wishList.items;
 export const getCart = (state: RootState) => state.cart;
 export const getCartItemsTotal = (state: RootState) => {
     const products = getProducts(state);
@@ -41,6 +41,17 @@ export const getOrderTotal = (state: RootState) => {
     const orderCommision = getOrderCommision(state);
     orderTotal += orderCommision;
 
+    const promoDiscount = getPromo(state);
+    if (promoDiscount.promoValue) {
+        if (promoDiscount.promoDisc === "grn") {
+            orderTotal += -promoDiscount.promoValue;
+        } else {
+            orderTotal += -Math.floor(
+                (orderTotal * promoDiscount.promoValue) / 100
+            );
+        }
+    }
+
     return orderTotal;
 };
 export const getShippingCost = (state: RootState) => {
@@ -55,3 +66,5 @@ export const getCustomerInfo = (state: RootState) => state.customer;
 export const getAccessToken = (state: RootState) => state.customer.accessToken;
 export const getIsLogged = (state: RootState) =>
     state.customer.accessToken ? true : false;
+export const getPromo = (state: RootState) => state.promo;
+export const getSearchQuery = (state: RootState) => state.searchQuery;

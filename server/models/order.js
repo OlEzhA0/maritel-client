@@ -46,9 +46,15 @@ const ordersSchema = new Schema({
     },
     shippingMethod: String,
     amount: Number,
+    discount: Number,
     paymentStatus: String,
     customer: { type: Schema.Types.ObjectId, ref: "customers" },
     deliveryStatus: String,
+    promo: {
+        promoName: String,
+        promoDisc: String,
+        promoValue: Number,
+    },
 });
 
 autoIncrement.initialize(mongoose.connection);

@@ -6,71 +6,81 @@ import { setWishList } from "../../../store/actionCreators";
 import { getWishList, getQickViewUuid } from "../../../store/actionsTypes";
 import cn from "classnames";
 
-export const ProductShareProd = () => {
-  const location = useLocation();
-  const dispatch = useDispatch();
-  const wishList = useSelector(getWishList);
-  const [uuid, setUuid] = useState(
-    location.pathname.split("/")[location.pathname.split("/").length - 1]
-  );
+import { FacebookShareButton, PinterestShareButton } from "react-share";
 
-  const isPopup = useSelector(getQickViewUuid);
+type Props = {
+    name: string;
+    img: string;
+};
 
-  useEffect(() => {
-    if (isPopup) {
-      setUuid(isPopup);
-    } else {
-      setUuid(
+export const ProductShareProd: React.FC<Props> = ({ name, img }) => {
+    const location = useLocation();
+    const dispatch = useDispatch();
+    const wishList = useSelector(getWishList);
+    const [uuid, setUuid] = useState(
         location.pathname.split("/")[location.pathname.split("/").length - 1]
-      );
-    }
-  }, [isPopup, location.pathname]);
+    );
 
-  return (
-    <div className="ProductShareProd">
-      <p className="ProductShareProd__Text">поделитесь товаром</p>
-      <div className="ProductShareProd__Share">
-        <a href="/#" className="ProductShareProd__Item">
-          <img
-            src="images/productPage/shareFB.svg"
-            alt="facebook share"
-            className="ProductShareProd__Img"
-          />
-        </a>
-        <a href="/#" className="ProductShareProd__Item">
-          <img
-            src="images/productPage/shareInst.svg"
-            alt="facebook share"
-            className="ProductShareProd__Img"
-          />
-        </a>
-        <a href="/#" className="ProductShareProd__Item">
-          <img
-            src="images/productPage/shareP.svg"
-            alt="facebook share"
-            className="ProductShareProd__Img"
-          />
-        </a>
-        <button
-          className={cn({
-            ProductShareProd__AddWish: true,
-          })}
-          onClick={() => dispatch(setWishList(uuid))}
-        >
-          <img
-            src={
-              wishList.some((wish) => wish === uuid)
-                ? "images/productPage/wishAdded.svg"
-                : "images/productPage/wish.svg"
-            }
-            alt="wish"
-            className={cn({
-              ProductShareProd__WishImg: true,
-            })}
-          />{" "}
-          Список желаний
-        </button>
-      </div>
-    </div>
-  );
+    const isPopup = useSelector(getQickViewUuid);
+
+    useEffect(() => {
+        if (isPopup) {
+            setUuid(isPopup);
+        } else {
+            setUuid(
+                location.pathname.split("/")[
+                    location.pathname.split("/").length - 1
+                ]
+            );
+        }
+    }, [isPopup, location.pathname]);
+
+    return (
+        <div className="ProductShareProd">
+            <p className="ProductShareProd__Text">поделитесь товаром</p>
+            <div className="ProductShareProd__Share">
+                <FacebookShareButton
+                    url={window.location.href}
+                    title={name}
+                    className="ProductShareProd__Item"
+                >
+                    <img
+                        src="images/productPage/shareFB.svg"
+                        alt="facebook share"
+                        className="ProductShareProd__Img"
+                    />
+                </FacebookShareButton>
+                <PinterestShareButton
+                    url={window.location.href}
+                    media={img}
+                    className="ProductShareProd__Item"
+                >
+                    <img
+                        src="images/productPage/shareP.svg"
+                        alt="pinterest share"
+                        className="ProductShareProd__Img"
+                    />
+                </PinterestShareButton>
+                <button
+                    className={cn({
+                        ProductShareProd__AddWish: true,
+                    })}
+                    onClick={() => dispatch(setWishList(uuid))}
+                >
+                    <img
+                        src={
+                            wishList.some((item) => item.prodId === uuid)
+                                ? "images/productPage/wishAdded.svg"
+                                : "images/productPage/wish.svg"
+                        }
+                        alt="wish"
+                        className={cn({
+                            ProductShareProd__WishImg: true,
+                        })}
+                    />{" "}
+                    Список желаний
+                </button>
+            </div>
+        </div>
+    );
 };

@@ -8,6 +8,7 @@ import {
     SET_CURRENT_UUID_QUICK_VIEW,
     SET_BACKGROUND_COVER,
     SET_TO_WISH_LIST,
+    SORT_WISH_LIST,
     ADD_TO_CART,
     DELETE_FROM_CART,
     UPDATE_PRODUCT_IN_CART,
@@ -17,6 +18,8 @@ import {
     CLEAR_CART,
     SET_CUSTOMER_INFO,
     CLEAR_CUSTOMER_INFO,
+    SET_PROMO,
+    SET_SEARCH_QUERY,
 } from "./actions";
 import { Customer } from "./customer";
 
@@ -121,4 +124,18 @@ export const setCustomerInfo = (
 
 export const clearCustomerInfo = (): { type: typeof CLEAR_CUSTOMER_INFO } => ({
     type: CLEAR_CUSTOMER_INFO,
+});
+
+export const sortWishlist = () => ({
+    type: SORT_WISH_LIST,
+});
+
+export const setPromo = (payload: Promo) => ({
+    type: SET_PROMO,
+    payload,
+});
+
+export const setSearchQuery = (payload: string) => ({
+    type: SET_SEARCH_QUERY,
+    payload,
 });

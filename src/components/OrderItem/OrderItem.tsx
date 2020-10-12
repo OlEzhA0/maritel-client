@@ -32,8 +32,9 @@ export const OrderItem = (props: Props) => {
     const orderProductList = useMemo(() => {
         return (
             <div className="OrderProductList">
-                {items.map((item) => (
+                {items.map((item, i) => (
                     <OrderProduct
+                        key={i}
                         productUuid={item.prodUuid}
                         price={item.price}
                         quantity={item.quantity}

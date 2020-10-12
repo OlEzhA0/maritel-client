@@ -1,0 +1,23 @@
+.Maritel__Breadcrumbs {
+    position: absolute;
+    left: 0;
+    top: 15px;
+    display: flex;
+    list-style: none;
+    font-weight: 500;
+    z-index: 1;
+    & a {
+        text-decoration: none;
+        color: rgba(16, 16, 16, 1);
+        transition: 0.3s;
+
+        &:hover {
+            color: #bb2a36;
+        }
+    }
+    &__Active {
+        color: rgba(150, 150, 150, 1);
+    }
+}
+
+

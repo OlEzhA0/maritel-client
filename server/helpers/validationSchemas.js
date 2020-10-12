@@ -52,6 +52,7 @@ module.exports.orderSchema = Joi.object().keys({
             })
         )
         .required(),
+    promoName: Joi.string(),
 });
 
 module.exports.registerSchema = Joi.object().keys({

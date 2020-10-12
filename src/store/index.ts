@@ -11,29 +11,34 @@ import SearchBackgroundReducer from "./backgroundCover";
 import WishListReducer from "./wishList";
 import CartReducer from "./cart";
 import CartPopupReducer from "./cartPopup";
-import OrderStateReducer from  './order'
-import OrderStatusReducer from  './orderStatus'
-import CustomerReducer  from './customer'
+import OrderStateReducer from "./order";
+import OrderStatusReducer from "./orderStatus";
+import CustomerReducer from "./customer";
+import PromoReducer from "./promo";
+import SearchQueryReducer from "./searchQuery";
 
 const rootReducer = combineReducers({
-  categories: CategoriesReducer,
-  specCategories: SpecCategoriesReducer,
-  background: BackgroundCoverReducer,
-  products: ProductsReducer,
-  isTablet: IsTabletReducer,
-  qucikView: QuickViewReducer,
-  searchBackground: SearchBackgroundReducer,
-  wishList: WishListReducer,
-  cart: CartReducer,
-  cartPopupStatus: CartPopupReducer,
-  order: OrderStateReducer,
-  orderStatus: OrderStatusReducer,
-  customer: CustomerReducer
+    categories: CategoriesReducer,
+    specCategories: SpecCategoriesReducer,
+    background: BackgroundCoverReducer,
+    products: ProductsReducer,
+    isTablet: IsTabletReducer,
+    qucikView: QuickViewReducer,
+    searchBackground: SearchBackgroundReducer,
+    cart: CartReducer,
+    cartPopupStatus: CartPopupReducer,
+    order: OrderStateReducer,
+    orderStatus: OrderStatusReducer,
+    customer: CustomerReducer,
+    wishList: WishListReducer,
+    promo: PromoReducer,
+    searchQuery: SearchQueryReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-export const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
+export const store1 = (parameters?: RootState) => createStore(
+    rootReducer,
+    parameters,
+    composeWithDevTools(applyMiddleware(thunk))
 );

@@ -152,7 +152,10 @@ export const ProductPageQuickView = () => {
                         title="Состав"
                         text={product.composition}
                     />
-                    <Prod.ProductShareProd />
+                    <Prod.ProductShareProd
+                        name={product.title}
+                        img={product.previewPhoto}
+                    />
                 </div>
             </div>
         </div>

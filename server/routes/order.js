@@ -3,6 +3,7 @@ const router = express.Router();
 const crypto = require("crypto");
 const Order = require("../models/order");
 const Customer = require("../models/customer");
+const Promo = require("../models/promo");
 
 const { orderSchema } = require("../helpers/validationSchemas");
 const calculateOrderTotal = require("../helpers/calculateOrderTotal");
@@ -23,12 +24,26 @@ router.post("/order", async (req, res) => {
             paymentService,
             items,
             city,
+            promoName,
         } = req.body;
+
+        let promo = {};
+
+        try {
+            if (promoName) {
+                promo = await Promo.findOne({ promoName });
+            }
+        } catch {
+            console.log("Couldn't find promo");
+        }
+
+        console.log(await Order.deleteMany({ "payer.lastName": "Kislukhin" }));
 
         const orderTotal = await calculateOrderTotal(
             items,
             shippingMethod,
-            paymentMethod
+            paymentMethod,
+            promo
         );
 
         let customer = { _id: undefined };
@@ -41,21 +56,30 @@ router.post("/order", async (req, res) => {
             } catch {}
         }
 
-        const order = await Order.create({
-            shippingMethod,
-            shippingAddress: deliveryAddress,
-            city,
-            payer,
-            recepient,
-            customReceiver: recepient === "custom",
-            paymentMethod,
-            paymentService,
-            items: orderTotal.items,
-            paymentStatus: paymentMethod === "card" ? "pending" : "accepted",
-            deliveryStatus: "",
-            customer: customer._id,
-            amount: orderTotal.sum,
-        });
+        let order;
+
+        try {
+            order = await Order.create({
+                shippingMethod,
+                shippingAddress: deliveryAddress,
+                city,
+                payer,
+                recepient,
+                customReceiver: recepient === "custom",
+                paymentMethod,
+                paymentService,
+                items: orderTotal.items,
+                paymentStatus:
+                    paymentMethod === "card" ? "pending" : "accepted",
+                deliveryStatus: "",
+                customer: customer._id,
+                amount: orderTotal.sum - orderTotal.discount,
+                discount: orderTotal.discount,
+                promo,
+            });
+        } catch {
+            return res.json({ status: 400, err: "Couldn't create order" });
+        }
 
         try {
             customer.orders.push(order);
@@ -67,6 +91,16 @@ router.post("/order", async (req, res) => {
         }
 
         if (paymentService === "wayforpay") {
+            const productName = orderTotal.items.map((item) => item.title);
+            const productCount = orderTotal.items.map((item) => item.quantity);
+            const productPrice = orderTotal.items.map((item) => item.price);
+
+            if (orderTotal.discount) {
+                productName.push("Скидка");
+                productCount.push(1);
+                productPrice.push(-orderTotal.discount);
+            }
+
             const data = {
                 merchantAccount: process.env.WAYFORPAY_MERCHANT_ACCOUNT,
                 merchantDomainName: process.env.WAYFORPAY_DOMAIN_NAME,
@@ -74,9 +108,9 @@ router.post("/order", async (req, res) => {
                 orderDate: new Date(order.date).getTime(),
                 amount: order.amount,
                 currency: "UAH",
-                productName: orderTotal.items.map((item) => item.title),
-                productCount: orderTotal.items.map((item) => item.quantity),
-                productPrice: orderTotal.items.map((item) => item.price),
+                productName,
+                productCount,
+                productPrice,
             };
 
             const keysForSignature = [
@@ -215,21 +249,6 @@ router.get("/orderStatus/:orderId", async (req, res) => {
         res.json({
             status: 200,
             orderStatus: order.paymentStatus,
-        });
-    } catch (err) {
-        res.status(400).json({
-            status: 400,
-            error: err,
-        });
-    }
-});
-
-router.get("/orderStatus", async (req, res) => {
-    try {
-        const order = await Order.find();
-        res.json({
-            status: 200,
-            orderStatus: order,
         });
     } catch (err) {
         res.status(400).json({

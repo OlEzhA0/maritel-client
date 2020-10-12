@@ -22,8 +22,8 @@ export const AccountMenu = (props: Props) => {
             <div className="hide-desktop AccountMenu__Title">
                 Личный кабинет
             </div>
-            {menuItems.map((item) => (
-                <div>
+            {menuItems.map((item, i) => (
+                <div key={i}>
                     {disabled ? (
                         <span
                             className={

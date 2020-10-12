@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./AsyncSelect.scss";
 import "../Input/Input.scss";
 
@@ -37,6 +37,8 @@ const AsyncSelect = (props: Props) => {
         className,
     } = props;
 
+    const isCurrent = useRef(true);
+
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState([] as OptionType[]);
     const [loading, setLoading] = useState(false);
@@ -45,13 +47,18 @@ const AsyncSelect = (props: Props) => {
         setLoading(true);
         setOptions([]);
         props.getOptions(searchQuery).then((options) => {
-            setOptions(options);
-            setLoading(false);
+            if (isCurrent.current) {
+                setOptions(options);
+                setLoading(false);
+            }
         });
     };
 
     useEffect(() => {
         getOptions("");
+        return () => {
+            isCurrent.current = false;
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

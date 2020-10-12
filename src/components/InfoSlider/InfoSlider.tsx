@@ -1,5 +1,5 @@
 import cn from "classnames";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { INFO_SLIDER } from "../../helpers";
 import "./InfoSlider.scss";
 import { useDispatch, useSelector } from "react-redux";

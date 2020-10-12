@@ -48,5 +48,9 @@
         &__ModalOverlay.Maritel__ModalOverlay {
             background-color: rgba(0, 0, 0, 0.5);
         }
+        & td,
+        & th {
+            padding: 10px 10px;
+        }
     }
 }

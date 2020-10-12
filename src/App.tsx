@@ -27,6 +27,8 @@ import { AccountPage } from "./pages/AccountPage/AccountPage";
 import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage";
 import { WishlistPage } from "./pages/WishlistPage";
 import { OrderHistoryPage } from "./pages/OrderHistoryPage";
+import { SearchPage } from "./pages/SearchPage";
+import { AboutUsPage } from "./staticPages/AboutUsPage/AboutUsPage";
 
 function App() {
     const location = useLocation();
@@ -42,6 +44,15 @@ function App() {
     const searchBackground = useSelector(getBackgroundSearchCover);
     const wishList = useSelector(getWishList);
     const cart = useSelector(getCart);
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const query = searchParams.get("query");
+        if (query) {
+            aCreator.setSearchQuery(query);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleScroll = useCallback(() => {
         const scrollInfo = document.documentElement.getBoundingClientRect();
@@ -143,6 +154,7 @@ function App() {
     return (
         <>
             <Header visible={headerVisible} />
+
             <Switch>
                 <Route
                     path="/:category/:sub/:name/:id"
@@ -159,6 +171,7 @@ function App() {
                     exact
                     component={ProductsList}
                 />
+                <Route path="/about/:path" exact component={AboutUsPage} />
                 <Route path="/:category/:sub" exact component={ProductsList} />
                 <Route path="/wish-list" exact component={ProductsList} />
                 <Route path="/cart" exact component={CartPage} />
@@ -168,6 +181,7 @@ function App() {
                 <Route path="/wishlist" exact component={WishlistPage} />
                 <Route path="/login" exact component={LoginPage} />
                 <Route path="/register" exact component={RegistrationPage} />
+                <Route path="/search" exact component={SearchPage} />
                 <Route path="/:category" exact component={CategoryPage} />
                 <Route path="/" exact component={HomePage} />
             </Switch>

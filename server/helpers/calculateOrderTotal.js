@@ -3,7 +3,8 @@ const Product = require("../models/product");
 const calculateOrderTotal = async (
     items = [],
     shippingMethod = "postOffice",
-    paymentMethod = "cash"
+    paymentMethod = "cash",
+    promo = {}
 ) => {
     const products = await Product.find({
         uuid: items.map((el) => el.prodUuid),
@@ -29,13 +30,18 @@ const calculateOrderTotal = async (
     if (paymentMethod === "card") {
         sum += Math.ceil(itemsTotal * 0.025);
     }
-    // if (shippingMethod === "courier") {
-    //     sum += 80;
-    // } else {
-    //     sum += 50;
-    // }
 
-    return { items, sum };
+    let discount = 0;
+
+    if (promo.promoValue) {
+        if (promo.promoDisc === "grn") {
+            discount = promo.promoValue;
+        } else {
+            discount = Math.floor((sum * promo.promoValue) / 100);
+        }
+    }
+
+    return { items, sum, discount };
 };
 
 module.exports = calculateOrderTotal;

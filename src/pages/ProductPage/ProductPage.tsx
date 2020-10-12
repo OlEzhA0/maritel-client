@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import "./ProductPage.scss";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useParams } from "react-router-dom";
 import { useQuery } from "react-apollo";
 import { productQuery, getColorsQuery, splitValue } from "../../helpers";
 import { SpinnerLoader } from "../../components/SpinnerLoader";
@@ -15,14 +15,28 @@ import * as Prod from "../../components/ProductPage";
 import { handleDecode, handleTranslit } from "../../helpers/links";
 import { ProductAlsoBuy } from "../../components/ProductPage";
 import ReactBreakLines from "../../helpers/ReactBreakLines";
+import { Breadcrumbs } from "../../components/Breadcrumbs";
+
+type UrlParams = {
+    category: string;
+    sub: string;
+    name: string;
+    id: string;
+};
 
 export const ProductPage = () => {
+    const { category, sub, name } = useParams<UrlParams>();
     const location = useLocation();
     const prodUuid = location.pathname.split("/").filter((p) => p)[3];
     const getProduct = useQuery(productQuery, {
         variables: { uuid: prodUuid },
     });
     const generalPathName = location.pathname.slice(1, -7);
+
+    const urlParams = [];
+    urlParams.push({ url: category, name: handleDecode(category) });
+    urlParams.push({ url: sub, name: handleDecode(sub) });
+    urlParams.push({ url: name, name: handleDecode(name) });
 
     const [product, setProduct] = useState<Products>();
     const [generalPhoto, setGeneralPhoto] = useState("");
@@ -127,6 +141,8 @@ export const ProductPage = () => {
     return product && colors.length ? (
         <>
             <div className="ProductPage Page__Wrap">
+                <Breadcrumbs path={urlParams} />
+
                 <Link
                     className="ProductPage__MobileInfo"
                     to={`/${location.pathname
@@ -207,7 +223,10 @@ export const ProductPage = () => {
                         title="Состав"
                         text={product.composition}
                     />
-                    <Prod.ProductShareProd />
+                    <Prod.ProductShareProd
+                        name={product.title}
+                        img={product.previewPhoto}
+                    />
                 </div>
             </div>
             <ProductAlsoBuy />

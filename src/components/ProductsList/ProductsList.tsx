@@ -2,9 +2,9 @@ import cn from "classnames";
 import React, { useEffect, useMemo, useState } from "react";
 import { useQuery } from "react-apollo";
 import { useSelector } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { getColorsQuery, sortBy } from "../../helpers";
-import { handleTranslit } from "../../helpers/links";
+import { handleDecode, handleTranslit } from "../../helpers/links";
 import { prodListGoods } from "../../helpers/prodsListGoods";
 import * as prodsSettings from "../../helpers/prodSort";
 import * as types from "../../store/actionsTypes";
@@ -14,15 +14,28 @@ import { SelectDropDown } from "../SelectDropDown";
 import "./ProductsList.scss";
 import { Pagination } from "../Pagination";
 import { SpinnerLoader } from "../SpinnerLoader";
+import { Breadcrumbs } from "../Breadcrumbs";
 
 type Props = {
     isWishlist?: boolean;
+    isSearch?: boolean;
+    searchProducts?: Products[];
 };
 
-export const ProductsList = ({ isWishlist }: Props) => {
+type UrlParams = {
+    category?: string;
+    sub?: string;
+};
+
+export const ProductsList = ({
+    isWishlist,
+    isSearch,
+    searchProducts,
+}: Props) => {
     const location = useLocation();
     const history = useHistory();
     const searchParams = new URLSearchParams(location.search);
+    const { category: urlCategory, sub } = useParams<UrlParams>();
 
     const [products, setProducts] = useState<Products[]>([]);
     const [category, setCategory] = useState<CategoriesTypes>();
@@ -72,12 +85,21 @@ export const ProductsList = ({ isWishlist }: Props) => {
         if (isWishlist && goods.length && wishList.length) {
             setProducts(
                 wishList
-                    .map((id) => goods.find((prod) => prod.uuid === id)!)
+                    .map(
+                        (item) =>
+                            goods.find((prod) => prod.uuid === item.prodId)!
+                    )
                     .filter((g) => g)
             );
 
             return;
         }
+
+        if (isSearch && searchProducts) {
+            setProducts(searchProducts);
+            return;
+        }
+
         const category = location.pathname.split("/").filter((c) => c)[0];
         const currentCategory = categories.find(
             (categ) => handleTranslit(categ.category) === category
@@ -101,6 +123,8 @@ export const ProductsList = ({ isWishlist }: Props) => {
         specCategs,
         wishList,
         isWishlist,
+        isSearch,
+        searchProducts,
     ]);
 
     useEffect(() => {
@@ -137,10 +161,9 @@ export const ProductsList = ({ isWishlist }: Props) => {
         };
     }, [isOpen]);
 
-    const handleGetPrices = useMemo(
-        () => prodsSettings.gPrices(lastCurrentProds),
-        [lastCurrentProds]
-    );
+    const handleGetPrices = useMemo(() => prodsSettings.gPrices(products), [
+        products,
+    ]);
 
     const sortedProducts = useMemo(
         () => prodsSettings.sortByDropDown(sortedValue || "", products),
@@ -246,9 +269,145 @@ export const ProductsList = ({ isWishlist }: Props) => {
         );
     }
 
+    if (isSearch) {
+        return (
+            <div className="ProductsList Page__Wrap">
+                <div className="ProductsList__Wrap">
+                    <h1 className="ProductsList__Title">Поиск</h1>
+                    <div className="ProductsList__Info">
+                        <div
+                            className="ProductsList__FilterName ProductsList__FilterName--tablet"
+                            onClick={openFilters}
+                        >
+                            ФИЛЬТР
+                        </div>
+                        <p className="ProductsList__InfoCount">{`${makeTitle()} из ${
+                            filterColor || filterPrice || filterSizes
+                                ? filterBySize.length
+                                : products.length
+                        }`}</p>
+                        <div className="ProductsList__SelectWrap">
+                            <SelectDropDown
+                                values={[
+                                    "Новизне",
+                                    "От дешевых к дорогим",
+                                    "От дорогих к дешевым",
+                                ]}
+                            />
+                        </div>
+                    </div>
+                    <div className="ProductsList__ProductsWrap">
+                        <div
+                            className={cn({
+                                ProductsList__Filters: true,
+                                "ProductsList__Filters--open": isOpen,
+                            })}
+                        >
+                            <div className="ProductsList__TabletFilter">
+                                <p className="ProductsList__TabletText">
+                                    ФИЛЬТР
+                                </p>
+                                <div
+                                    className="ProductsList__TabletX"
+                                    onClick={openFilters}
+                                />
+                            </div>
+                            <div className="ProductsList__FilterName">
+                                ФИЛЬТР
+                            </div>
+                            <div className="ProductsList__FilterTabletWrap">
+                                <FilterBy
+                                    name="Цена"
+                                    options={handleGetPrices}
+                                />
+                                <FilterBy
+                                    name="Цвет"
+                                    options={handleGetColors}
+                                />
+                                <FilterBy
+                                    name="Размер"
+                                    options={handleGetSizes}
+                                />
+                            </div>
+                            <p
+                                onClick={clearAll}
+                                className="ProductsList__ClearFilters"
+                            >
+                                Очистить все
+                            </p>
+                            <div className="ProductsList__ClearTabl">
+                                <p
+                                    onClick={() => setIsOpen(!isOpen)}
+                                    className="ProductsList__ClearTabl--clear ProductsList__ClearTabl--accept"
+                                >
+                                    Применить
+                                </p>
+                                <p
+                                    onClick={clearAll}
+                                    className="ProductsList__ClearTabl--clear"
+                                >
+                                    Очистить все
+                                </p>
+                            </div>
+                        </div>
+                        <div className="ProductsList__ProdsWrap">
+                            {pagProducts.length === 0 && (
+                                <div
+                                    style={{
+                                        fontWeight: 800,
+                                        fontSize: "14px",
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    Ничего не найдено
+                                </div>
+                            )}
+
+                            <ul
+                                className="ProductsList__Prods"
+                                style={{
+                                    gridTemplateRows: `repeat(${Math.ceil(
+                                        isTablet && !isOpen
+                                            ? pagProducts.length / 2
+                                            : isOpen
+                                            ? 2
+                                            : pagProducts.length / 3
+                                    )}, minmax(${
+                                        isTablet ? 210 : 337
+                                    }px, 1fr))`,
+                                }}
+                            >
+                                {pagProducts.map((prod) => (
+                                    <ProductCard
+                                        prod={prod}
+                                        key={prod.id}
+                                        products={pagProducts}
+                                    />
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <Pagination
+                    pagesCount={
+                        filterColor || filterSizes || filterPrice
+                            ? Math.ceil(filterBySize.length / perPage)
+                            : Math.ceil(products.length / perPage)
+                    }
+                    start={!!products.length}
+                />
+            </div>
+        );
+    }
+
+    const urlParams = [];
+    urlParams.push({ url: urlCategory!, name: handleDecode(urlCategory!) });
+    urlParams.push({ url: sub!, name: handleDecode(sub!) });
+
     return products.length > 0 ? (
         <div className="ProductsList Page__Wrap">
             <div className="ProductsList__Wrap">
+                <Breadcrumbs path={urlParams} />
                 <h1 className="ProductsList__Title">
                     {handleCreateTitle() || "список желаний"}
                 </h1>
@@ -347,10 +506,6 @@ export const ProductsList = ({ isWishlist }: Props) => {
                 }
                 start={!!products.length}
             />
-        </div>
-    ) : isWishlist ? (
-        <div className="ProductsList  Page__Wrap">
-            <p className="ProductsList__NoProd">Нет товаров :(</p>
         </div>
     ) : (
         <div className="Page__Wrap">
