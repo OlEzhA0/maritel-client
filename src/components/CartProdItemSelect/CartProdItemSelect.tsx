@@ -56,6 +56,14 @@ export const CartProdItemSelect: React.FC<Props> = ({
         );
     }
 
+    if (parseInt(quantity) > 5) {
+        quantityArr.push(
+            <MenuItem key={quantity} value={quantity}>
+                {quantity}
+            </MenuItem>
+        );
+    }
+
     return (
         <div className="CartProdItemSelect">
             <img
