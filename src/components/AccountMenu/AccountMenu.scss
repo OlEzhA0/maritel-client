@@ -17,9 +17,6 @@
         cursor: not-allowed;
     }
 
-    .hide-desktop {
-        display: none;
-    }
 }
 
 @media only screen and (max-device-width: 480px) {
@@ -31,9 +28,5 @@
             font-size: 20px;
             font-weight: 800;
         }
-    }
-
-    .hide-desktop {
-        display: block !important;
     }
 }
