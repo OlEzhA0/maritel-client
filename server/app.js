@@ -16,7 +16,7 @@ app.use(express.static("build"));
 app.use((req, res, next) => {
     if (process.env.NODE_ENV === "production") {
         if (req.protocol === "http") {
-            console.log("hello");
+            console.log("protocol: ", req.protocol);
             res.redirect("https://" + req.get("host") + req.originalUrl);
             return;
         }
