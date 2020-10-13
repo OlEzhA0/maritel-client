@@ -14,6 +14,8 @@ const isAuth = require("./helpers/isAuth");
 app.use(express.static("build"));
 
 app.use((req, res, next) => {
+    console.log("protocol", req.protocol);
+    console.log(process.env.NODE_ENV);
     if (process.env.NODE_ENV === "production") {
         if (req.protocol === "http") {
             res.redirect("https://" + req.get("host") + req.originalUrl);
