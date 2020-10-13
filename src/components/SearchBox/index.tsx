@@ -23,12 +23,12 @@ export const SearchBox = () => {
             clearTimeout(timeoutRef.current);
         }
 
-        if (!isSearchPage) {
+        if (!isSearchPage && query) {
             timeoutRef.current = setTimeout(() => {
                 redirectRef.current = true;
                 setSearchPlaceholder("");
             }, 800);
-        } else {
+        } else if (query) {
             timeoutRef.current = setTimeout(() => {
                 dispatch(setSearchQuery(query));
             }, 800);
