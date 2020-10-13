@@ -6,14 +6,14 @@ import { getCustomer } from "../../helpers/gqlQuery";
 import { useForm } from "react-hook-form";
 import { getIsLogged } from "../../store/actionsTypes";
 import { Redirect } from "react-router-dom";
-import { Input } from "../../components/Input/Input";
-import AsyncSelect from "../../components/AsyncSelect/AsyncSelect";
+import { Input } from "../../components/common/Input/Input";
+import AsyncSelect from "../../components/common/AsyncSelect/AsyncSelect";
 import {
     getCityWarehouses,
     getDeliveryAddress,
     getNVSettlements,
 } from "./../../helpers/novaposhtaAPI";
-import { Select } from "../../components/Select/Select";
+import { Select } from "../../components/common/Select/Select";
 import { editCustomer } from "../../helpers";
 import { SpinnerLoader } from "../../components/SpinnerLoader";
 

@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from "react";
 import "./Footer.scss";
-import { FOOTER_INFO, getMainSettings } from "../../helpers";
+import { FOOTER_INFO, getMainSettings } from "../../../helpers";
 import { Link } from "react-router-dom";
 import cn from "classnames";
-import { SubscribeByMail } from "../SubscribeByMail";
-import { SizesTable } from "../SizesTable/SizesTable";
+import { SubscribeByMail } from "../../SubscribeByMail";
+import { SizesTable } from "../../SizesTable/SizesTable";
 import { useQuery } from "react-apollo";
 
 export const Footer = () => {

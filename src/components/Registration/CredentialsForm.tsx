@@ -3,10 +3,10 @@ import "./CredentialsForm.scss";
 
 import { useForm } from "react-hook-form";
 
-import { Input } from "../Input/Input";
+import { Input } from "../common/Input/Input";
 
 import { useDispatch } from "react-redux";
-import { Checkbox } from "../Checkbox";
+import { Checkbox } from "../common/Checkbox";
 import { registerCustomer } from "./api";
 import { setCustomerInfo } from "../../store/actionCreators";
 

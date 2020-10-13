@@ -10,12 +10,12 @@ import {
     getDeliveryAddress,
     getNVSettlements,
 } from "./../../helpers/novaposhtaAPI";
-import AsyncSelect from "../../components/AsyncSelect/AsyncSelect";
+import AsyncSelect from "../../components/common/AsyncSelect/AsyncSelect";
 import { setOrderInfo } from "../../store/actionCreators";
 import { CartPageOrderSummary } from "../../components/Cart/CartPageOrderSummary";
-import { Input } from "../../components/Input/Input";
+import { Input } from "../../components/common/Input/Input";
 
-import { RadioInput } from "../../components/RadioInput/RadioInput";
+import { RadioInput } from "../../components/common/RadioInput/RadioInput";
 import { getCustomer } from "../../helpers/gqlQuery";
 import { useQuery } from "react-apollo";
 

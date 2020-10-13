@@ -6,7 +6,7 @@ import { getCategories, getProducts } from "../../store/actionsTypes";
 import translit from "cyrillic-to-translit-js";
 import { splitValue } from "../../helpers";
 import { handleTranslit } from "../../helpers/links";
-import { Banner } from "../../components/Banner";
+import { Banner } from "../../components/common/Banner";
 
 export const CategoryPage = () => {
     const location = useLocation();

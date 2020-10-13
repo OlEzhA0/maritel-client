@@ -3,10 +3,10 @@ import "./LoginForm.scss";
 
 import { useForm } from "react-hook-form";
 
-import { Input } from "../Input/Input";
+import { Input } from "../common/Input/Input";
 
 import { login } from "./api";
-import { Checkbox } from "../Checkbox";
+import { Checkbox } from "../common/Checkbox";
 import { useDispatch } from "react-redux";
 import { setCustomerInfo } from "../../store/actionCreators";
 

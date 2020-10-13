@@ -2,8 +2,8 @@ import React from "react";
 import { useMutation } from "react-apollo";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { AddProductSubscriber } from "../../../helpers";
-import { Checkbox } from "../../Checkbox";
-import { Input } from "../../Input/Input";
+import { Checkbox } from "../../common/Checkbox";
+import { Input } from "../../common/Input/Input";
 
 import CheckmarkIcon from "../../../images/checkmark.svg";
 

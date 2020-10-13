@@ -11,7 +11,7 @@ import {
 import { SetPopupCartStatus } from "../../../store/actionCreators";
 import { CartPopupItem } from "../CartPopupItem";
 import { Link } from "react-router-dom";
-import { CheckmarkIcon } from "../../CheckmarkIcon";
+import { CheckmarkIcon } from "../../common/CheckmarkIcon";
 
 export const CartPopup = () => {
     const cartPopupStatus = useSelector(getCartPopupStatus);

@@ -15,7 +15,7 @@ import * as Prod from "../../components/ProductPage";
 import { handleDecode } from "../../helpers/links";
 import { ProductAlsoBuy } from "../../components/ProductPage";
 import ReactBreakLines from "../../helpers/ReactBreakLines";
-import { Breadcrumbs } from "../../components/Breadcrumbs";
+import { Breadcrumbs } from "../../components/common/Breadcrumbs";
 
 type UrlParams = {
     category: string;

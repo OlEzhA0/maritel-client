@@ -2,14 +2,14 @@ import React, { useState, useEffect, useMemo } from "react";
 import "./Header.scss";
 import { Link } from "react-router-dom";
 import cn from "classnames";
-import { HambMenu } from "../HambMenu";
+import { HambMenu } from "../../HambMenu";
 import { DesktopMenu } from "../DesktopMenu";
 import { useDispatch, useSelector } from "react-redux";
 import {
     setMenuStatus,
     setBackgroundStatus,
     SetPopupCartStatus,
-} from "../../store/actionCreators";
+} from "../../../store/actionCreators";
 import {
     getMenuStatus,
     getBackgroundSearchCover,
@@ -17,11 +17,11 @@ import {
     getCartPopupStatus,
     getAccessToken,
     getCart,
-} from "../../store/actionsTypes";
-import { InfoSlider } from "../InfoSlider";
-import { CartPopup } from "../Cart/CartPopup";
-import { SearchBox } from "../SearchBox";
-import { SearchBoxMobile } from "../SearchBox/mobile";
+} from "../../../store/actionsTypes";
+import { InfoSlider } from "../../InfoSlider";
+import { CartPopup } from "../../Cart/CartPopup";
+import { SearchBox } from "../../SearchBox";
+import { SearchBoxMobile } from "../../SearchBox/mobile";
 
 interface Props {
     visible: boolean;

@@ -14,7 +14,7 @@ import { SelectDropDown } from "../SelectDropDown";
 import "./ProductsList.scss";
 import { Pagination } from "../Pagination";
 import { SpinnerLoader } from "../SpinnerLoader";
-import { Breadcrumbs } from "../Breadcrumbs";
+import { Breadcrumbs } from "../common/Breadcrumbs";
 
 type Props = {
     isWishlist?: boolean;

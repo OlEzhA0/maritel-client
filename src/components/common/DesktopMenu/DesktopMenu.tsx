@@ -3,8 +3,8 @@ import "./DesktopMenu.scss";
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getCategories, getSpecCateg } from "../../store/actionsTypes";
-import { handleTranslit } from "../../helpers/links";
+import { getCategories, getSpecCateg } from "../../../store/actionsTypes";
+import { handleTranslit } from "../../../helpers/links";
 
 interface Props {
   hoveredItem: string;
