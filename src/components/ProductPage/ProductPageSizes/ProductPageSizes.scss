@@ -17,6 +17,11 @@
 
     &__Sheets {
         color: $main-color;
+        transition: 0.3s;
+        cursor: pointer;
+        &:hover {
+            color: #bb2a36;
+        }
     }
 
     &__List {

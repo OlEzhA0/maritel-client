@@ -2,7 +2,7 @@ import { RootState } from "../../../store";
 
 export const fetchOrderInfo = (
     order: RootState["order"],
-    cart: RootState["cart"],
+    cart: CartProd[],
     accessToken?: string,
     promoName?: string
 ) => {

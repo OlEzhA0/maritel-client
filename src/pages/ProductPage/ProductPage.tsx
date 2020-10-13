@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import "./ProductPage.scss";
 import { useLocation, Link, useParams } from "react-router-dom";
 import { useQuery } from "react-apollo";
@@ -12,7 +12,7 @@ import {
     getCart,
 } from "../../store/actionsTypes";
 import * as Prod from "../../components/ProductPage";
-import { handleDecode, handleTranslit } from "../../helpers/links";
+import { handleDecode } from "../../helpers/links";
 import { ProductAlsoBuy } from "../../components/ProductPage";
 import ReactBreakLines from "../../helpers/ReactBreakLines";
 import { Breadcrumbs } from "../../components/Breadcrumbs";
@@ -102,25 +102,25 @@ export const ProductPage = () => {
         setChoosenSize({} as Sizes);
     }, [location]);
 
-    const handleCreateMobileInfo = useMemo(() => {
-        if (isTablet) {
-            const category = handleDecode(
-                location.pathname.split("/")[2].split(/\+|-/g).join(" ")
-            );
+    // const handleCreateMobileInfo = useMemo(() => {
+    //     if (isTablet) {
+    //         const category = handleDecode(
+    //             location.pathname.split("/")[2].split(/\+|-/g).join(" ")
+    //         );
 
-            if (category === "ВСЕ ТОВАРИ") {
-                return "ВСЕ ТОВАРЫ";
-            } else if (category === "СПЕCИАЛНОЕ") {
-                return "СПЕЦИАЛЬНОЕ";
-            } else {
-                return categories.find(
-                    (cat) =>
-                        handleTranslit(cat.category) ===
-                        location.pathname.split("/")[2]
-                )?.category;
-            }
-        }
-    }, [categories, location.pathname, isTablet]);
+    //         if (category === "ВСЕ ТОВАРИ") {
+    //             return "ВСЕ ТОВАРЫ";
+    //         } else if (category === "СПЕCИАЛНОЕ") {
+    //             return "СПЕЦИАЛЬНОЕ";
+    //         } else {
+    //             return categories.find(
+    //                 (cat) =>
+    //                     handleTranslit(cat.category) ===
+    //                     location.pathname.split("/")[2]
+    //             )?.category;
+    //         }
+    //     }
+    // }, [categories, location.pathname, isTablet]);
 
     const handleSlider = (path: number) => {
         const photos = product?.photos;
@@ -156,7 +156,7 @@ export const ProductPage = () => {
                         className="ProductPage__MobileInfoBack"
                     />
                     <p className="ProductPage__MobileInfoCateg">
-                        {handleCreateMobileInfo?.toLocaleUpperCase()}
+                        {urlParams[1].name}
                     </p>
                 </Link>
                 <Prod.ProductPagePhotos

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ProductPageAddCart.scss";
 import cn from "classnames";
 import { useDispatch } from "react-redux";
-import { addToCart, SetPopupCartStatus } from "../../../store/actionCreators";
+import { addToCart } from "../../../store/actionCreators";
 import Modal from "react-modal";
 import { ProductPageMissingProduct } from "../ProductPageMissingProduct/ProductPageMissingProduct";
 interface Props {
@@ -25,14 +25,6 @@ export const ProductPageAddCart: React.FC<Props> = ({
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     let timeout: undefined | ReturnType<typeof setTimeout> = undefined;
-
-    const showCart = () => {
-        dispatch(SetPopupCartStatus(true));
-
-        timeout = setTimeout(() => {
-            dispatch(SetPopupCartStatus(false));
-        }, 3000);
-    };
 
     useEffect(() => {
         return () => {
@@ -84,7 +76,6 @@ export const ProductPageAddCart: React.FC<Props> = ({
             })}
             disabled={!choosenSize}
             onClick={() => {
-                showCart();
                 dispatch(addToCart(prodUuid, quantity, choosenSize));
             }}
         >

@@ -10,10 +10,11 @@ export const getQickViewUuid = (state: RootState) => state.qucikView.uuid;
 export const getBackgroundSearchCover = (state: RootState) =>
     state.searchBackground;
 export const getWishList = (state: RootState) => state.wishList.items;
-export const getCart = (state: RootState) => state.cart;
+export const getCart = (state: RootState) => state.cart.items;
+export const getNewCartItem = (state: RootState) => state.cart.newItem;
 export const getCartItemsTotal = (state: RootState) => {
     const products = getProducts(state);
-    return state.cart.reduce((accum, value) => {
+    return getCart(state).reduce((accum, value) => {
         const prod = products.find((g) => g.uuid === value.prodUuid)!;
         if (prod) {
             const addPrice = +prod.price * +value.quantity;

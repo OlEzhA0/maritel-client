@@ -32,69 +32,74 @@ if (JSON.parse(localStorage.getItem("cart")!)) {
     defaultState = JSON.parse(localStorage.getItem("cart")!);
 }
 
-const reducer = (state = defaultState, actions: GeneralType) => {
+const reducer = (
+    state = { items: defaultState },
+    actions: GeneralType
+): { items: CartProd[]; newItem?: CartProd } => {
     switch (actions.type) {
         case ADD_TO_CART: {
-            if (
-                state.some(
-                    (prod) =>
-                        prod.prodUuid === actions.prodUuid &&
-                        prod.size === actions.size
-                )
-            ) {
-                return state.map((prod) => {
+            const inCart = state.items.findIndex(
+                (prod) =>
+                    prod.prodUuid === actions.prodUuid &&
+                    prod.size === actions.size
+            );
+
+            if (inCart !== -1) {
+                state.items[inCart].quantity = (
+                    +state.items[inCart].quantity + +actions.quantity
+                ).toString();
+
+                return {
+                    items: [...state.items],
+                    newItem: state.items[inCart],
+                };
+            } else {
+                return {
+                    items: [
+                        ...state.items,
+
+                        {
+                            prodUuid: actions.prodUuid,
+                            quantity: actions.quantity,
+                            size: actions.size,
+                        },
+                    ],
+                    newItem: {
+                        prodUuid: actions.prodUuid,
+                        size: actions.size,
+                        quantity: actions.quantity,
+                    },
+                };
+            }
+        }
+        case DELETE_FROM_CART: {
+            return {
+                items: state.items.filter(
+                    (prod) => prod.prodUuid + prod.size !== actions.prod
+                ),
+            };
+        }
+
+        case UPDATE_PRODUCT_IN_CART:
+            return {
+                items: state.items.map((prod) => {
                     if (
-                        prod.prodUuid === actions.prodUuid &&
-                        prod.size === actions.size
+                        prod.prodUuid + prod.size ===
+                        actions.prodUuid + actions.size
                     ) {
                         return {
-                            prodUuid: actions.prodUuid,
-                            quantity: `${
-                                +prod.quantity + +actions.quantity > 4
-                                    ? 4
-                                    : +prod.quantity + +actions.quantity
-                            }`,
+                            ...prod,
+                            quantity: actions.quantity,
                             size: actions.size,
                         };
                     }
 
                     return prod;
-                });
-            } else {
-                return [
-                    ...state,
-                    {
-                        prodUuid: actions.prodUuid,
-                        quantity: actions.quantity,
-                        size: actions.size,
-                    },
-                ];
-            }
-        }
-        case DELETE_FROM_CART: {
-            return state.filter(
-                (prod) => prod.prodUuid + prod.size !== actions.prod
-            );
-        }
-
-        case UPDATE_PRODUCT_IN_CART:
-            return state.map((prod) => {
-                if (
-                    prod.prodUuid + prod.size ===
-                    actions.prodUuid + actions.size
-                ) {
-                    return {
-                        ...prod,
-                        quantity: actions.quantity,
-                        size: actions.size,
-                    };
-                }
-
-                return prod;
-            });
+                }),
+            };
 
         case CLEAR_CART:
-            return [];
+            return { items: [] };
 
         default:
             return state;

@@ -137,5 +137,32 @@
         &__Buttons {
             background: #fff;
         }
+
+        &__AddedToCart {
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            position: fixed;
+            left: 0;
+            top: 45px;
+            z-index: 2;
+            background-color: #f8f6f5;
+            &__Title {
+                padding: 12px 16px;
+                font-size: 20px;
+                font-weight: 800;
+            }
+        }
+        &__SuccessText {
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            background: green;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.08rem;
+            text-transform: uppercase;
+        }
     }
 }
