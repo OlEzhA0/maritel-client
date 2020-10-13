@@ -4,6 +4,7 @@ const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const redirectToHTTPS = require("express-http-to-https").redirectToHTTPS;
 const schema = require("./schema/schema");
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -11,16 +12,7 @@ const orderRouter = require("./routes/order");
 const authRouter = require("./routes/auth");
 const isAuth = require("./helpers/isAuth");
 
-app.use((req, res, next) => {
-    if (process.env.NODE_ENV === "production") {
-        if (req.protocol === "http") {
-            console.log("protocol: ", req.protocol);
-            res.redirect("https://" + req.get("host") + req.originalUrl);
-            return;
-        }
-    }
-    return next();
-});
+app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
 
 app.use(express.static("build"));
 
