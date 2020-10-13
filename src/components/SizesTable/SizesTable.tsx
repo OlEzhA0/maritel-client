@@ -34,10 +34,17 @@ export const SizesTable: React.FC = ({ children }) => {
                 onRequestClose={() => setIsModalOpen(false)}
             >
                 <div
-                    className="SizesTable__Close"
+                    className="SizesTable__Close hide-mobile"
                     onClick={() => setIsModalOpen(false)}
                 >
                     &times;
+                </div>
+                <div
+                    className="SizesTable__Title hide-desktop"
+                    onClick={() => setIsModalOpen(false)}
+                >
+                    <div>РАЗМЕРНАЯ СЕТКА</div>
+                    <span className="SizesTable__CloseIcon">&times;</span>
                 </div>
                 <table
                     cellPadding="0"

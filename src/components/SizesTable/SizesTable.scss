@@ -45,12 +45,37 @@
 
 @media only screen and (max-device-width: 480px) {
     .SizesTable {
+        max-height: 100vh;
+        overflow-y: scroll;
+        font-size: 3.2vw;
+
         &__ModalOverlay.Maritel__ModalOverlay {
             background-color: rgba(0, 0, 0, 0.5);
         }
+
+        &__Title {
+            display: flex;
+            justify-content: space-between;
+            padding: 13px 16px;
+            font-size: 5.3vw;
+            font-weight: 800;
+            line-height: 24px;
+            background: rgba(16, 16, 16, 0.1);
+        }
+
+        &__CloseIcon {
+            font-weight: 400;
+            font-size: 45px;
+        }
+
         & td,
         & th {
-            padding: 10px 10px;
+            width: 25%;
+            padding: 8px 16px;
+        }
+
+        & th {
+            font-size: 3.2vw;
         }
     }
 }
