@@ -1,283 +1,283 @@
 @import "../../styles/vars.scss";
 
 .ProductsList {
-  position: relative;
-  overflow: hidden;
-  max-width: 1600px;
-  margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    max-width: 1600px;
+    margin: 0 auto;
 
-  &__NoProd {
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 22px;
-    color: #101010;
-    font-weight: 800;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  &__Title {
-    font-weight: 800;
-    font-size: 26px;
-    align-items: center;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-align: center;
-    color: $main-color;
-    margin-bottom: 31px;
-  }
-
-  &__Wrap {
-    padding-top: 33px;
-  }
-
-  &__ProductsWrap {
-    padding: 0 30px;
-    display: flex;
-    @media screen and (max-width: 1024px) {
-      flex-direction: column;
-    }
-
-    @media screen and (max-width: 414px) {
-      padding: 0 16px;
-    }
-  }
-
-  &__Filters {
-    min-width: 290px;
-
-    @media screen and (max-width: 1024px) {
-      transition: all 0.4s;
-      position: absolute;
-      top: 300%;
-      z-index: 3;
-      background-color: #fff;
-      width: 100%;
-      height: 0;
-      display: flex;
-      flex-direction: column;
-      &--open {
-        transition: all 0.4s;
-        background-color: #f8f6f5;
-        top: 5px;
-        height: calc(100vh - 74px);
-        overflow: hidden;
-        overflow-y: scroll;
-        margin-left: -30px;
-        padding-left: 16px;
-      }
-    }
-
-    @media screen and (max-width: 540px) {
-    }
-  }
-
-  &__Prods {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(150px, 1fr));
-    grid-column-gap: 26px;
-    grid-row-gap: 89px;
-    margin-bottom: 79px;
-
-    @media screen and (max-width: 1024px) {
-      grid-template-columns: repeat(2, minmax(130px, 1fr));
-      grid-row-gap: 130px;
-    }
-  }
-
-  &__Info {
-    padding: 0 30px;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 16px;
-
-    @media screen and (max-width: 1024px) {
-      justify-content: space-between;
-    }
-
-    @media screen and (max-width: 415px) {
-      padding: 0 16px;
-    }
-  }
-
-  &__ProdsWrap {
-    flex-grow: 1;
-  }
-
-  &__InfoCount {
-    margin-right: 56px;
-    font-weight: 800;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    color: #969696;
-
-    @media screen and (max-width: 1024px) {
-      margin-right: 0;
-    }
-  }
-
-  &__ClearFilters {
-    font-size: 13px;
-    color: $main-color;
-    text-transform: uppercase;
-    margin-top: 2rem;
-    cursor: pointer;
-
-    @media screen and (max-width: 1024px) {
-      display: none;
-    }
-  }
-
-  &__FilterName {
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    color: #969696;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    cursor: pointer;
-
-    @media screen and (max-width: 1024px) {
-      display: none;
-      margin-bottom: 0;
-    }
-
-    &--tablet {
-      display: none;
-      @media screen and (max-width: 1024px) {
-        display: block;
-      }
-    }
-
-    @media screen and (max-width: 1024px) {
-      font-weight: 800;
-      font-size: 1rem;
-      line-height: 15px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: $main-color;
-    }
-  }
-
-  &__SelectWrap {
-    @media screen and (max-width: 1024px) {
-      display: none;
-    }
-  }
-
-  &__TabletFilter {
-    display: none;
-    @media screen and (max-width: 1024px) {
-      display: block;
-      margin-bottom: 25px;
-      position: relative;
-      height: 50px;
-      line-height: 50px;
-      font-weight: 800;
-      font-size: 20px;
-      letter-spacing: 0.08em;
-      color: $main-color;
-      box-sizing: border-box;
-    }
-    @media screen and (max-width: 415px) {
-      padding-left: 16px;
-    }
-  }
-
-  &__TabletX {
-    @media screen and (max-width: 1024px) {
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      background-color: $main-color;
-      top: 0;
-      right: -1rem;
-      transform: translateX(-50%);
-      cursor: pointer;
-
-      &::after,
-      &::before {
-        content: "";
+    &__NoProd {
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 22px;
+        color: #101010;
+        font-weight: 800;
         position: absolute;
-        width: 14px;
-        height: 2px;
         top: 50%;
         left: 50%;
-        background-color: #fff;
         transform: translate(-50%, -50%);
-        transform-origin: center;
-        border-radius: 2px;
-      }
-
-      &::after {
-        transform: translate(-50%, -50%) rotate(45deg);
-      }
-      &::before {
-        transform: translate(-50%, -50%) rotate(-45deg);
-      }
-    }
-    @media screen and (max-width: 415px) {
-      right: -2rem;
-    }
-  }
-
-  &__ClearTabl {
-    @media screen and (min-width: 1025px) {
-      display: none;
     }
 
-    bottom: 0;
-    height: 145px;
-    margin-left: -16px;
-    width: 100%;
-    background-color: #fff;
-    padding: 20px 16px;
-    box-sizing: border-box;
-
-    @media screen and (max-width: 415px) {
-      margin-left: 0;
+    &__Title {
+        font-weight: 800;
+        font-size: 26px;
+        align-items: center;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-align: center;
+        color: $main-color;
+        margin-bottom: 31px;
     }
 
-    &--clear {
-      height: 45px;
-      border: 1px solid #58ba87;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: all 0.3s;
-      margin-bottom: 15px;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-      &:hover {
-        background-color: #58ba87;
-        color: #fff;
-      }
+    &__Wrap {
+        padding-top: 33px;
     }
 
-    &--clear {
-      font-weight: 800;
-      font-size: 13px;
-      color: #58ba87;
+    &__ProductsWrap {
+        padding: 0 30px;
+        display: flex;
+        @media screen and (max-width: 1024px) {
+            flex-direction: column;
+        }
+
+        @media screen and (max-width: 414px) {
+            padding: 0 16px;
+        }
     }
 
-    &--accept {
-      background-color: #58ba87;
-      color: #fff;
-      transition: all 0.3s;
-      &:hover {
+    &__Filters {
+        min-width: 290px;
+
+        @media screen and (max-width: 1024px) {
+            transition: all 0.4s;
+            position: absolute;
+            top: 300%;
+            z-index: 3;
+            background-color: #fff;
+            width: 100%;
+            height: 0;
+            display: flex;
+            flex-direction: column;
+            &--open {
+                transition: all 0.4s;
+                background-color: #f8f6f5;
+                top: 5px;
+                height: calc(100vh - 74px);
+                overflow: hidden;
+                overflow-y: scroll;
+                margin-left: -30px;
+                padding-left: 16px;
+            }
+        }
+
+        @media screen and (max-width: 540px) {
+        }
+    }
+
+    &__Prods {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(150px, 1fr));
+        grid-column-gap: 26px;
+        grid-row-gap: 89px;
+        margin-bottom: 79px;
+
+        @media screen and (max-width: 1024px) {
+            grid-template-columns: repeat(2, minmax(130px, 1fr));
+            grid-row-gap: 130px;
+        }
+    }
+
+    &__Info {
+        padding: 0 30px;
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 16px;
+
+        @media screen and (max-width: 1024px) {
+            justify-content: space-between;
+        }
+
+        @media screen and (max-width: 415px) {
+            padding: 0 16px;
+        }
+    }
+
+    &__ProdsWrap {
+        flex-grow: 1;
+    }
+
+    &__InfoCount {
+        margin-right: 56px;
+        font-weight: 800;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        color: #969696;
+
+        @media screen and (max-width: 1024px) {
+            margin-right: 0;
+        }
+    }
+
+    &__ClearFilters {
+        font-size: 13px;
+        color: $main-color;
+        text-transform: uppercase;
+        margin-top: 2rem;
+        cursor: pointer;
+
+        @media screen and (max-width: 1024px) {
+            display: none;
+        }
+    }
+
+    &__FilterName {
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        color: #969696;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        cursor: pointer;
+
+        @media screen and (max-width: 1024px) {
+            display: none;
+            margin-bottom: 0;
+        }
+
+        &--tablet {
+            display: none;
+            @media screen and (max-width: 1024px) {
+                display: block;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            font-weight: 800;
+            font-size: 1rem;
+            line-height: 15px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: $main-color;
+        }
+    }
+
+    &__SelectWrap {
+        @media screen and (max-width: 1024px) {
+            display: none;
+        }
+    }
+
+    &__TabletFilter {
+        display: none;
+        @media screen and (max-width: 1024px) {
+            display: block;
+            margin-bottom: 25px;
+            position: relative;
+            height: 50px;
+            line-height: 50px;
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: 0.08em;
+            color: $main-color;
+            box-sizing: border-box;
+        }
+        @media screen and (max-width: 415px) {
+            padding-left: 16px;
+        }
+    }
+
+    &__TabletX {
+        @media screen and (max-width: 1024px) {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: $main-color;
+            top: 0;
+            right: -1rem;
+            transform: translateX(-50%);
+            cursor: pointer;
+
+            &::after,
+            &::before {
+                content: "";
+                position: absolute;
+                width: 14px;
+                height: 2px;
+                top: 50%;
+                left: 50%;
+                background-color: #fff;
+                transform: translate(-50%, -50%);
+                transform-origin: center;
+                border-radius: 2px;
+            }
+
+            &::after {
+                transform: translate(-50%, -50%) rotate(45deg);
+            }
+            &::before {
+                transform: translate(-50%, -50%) rotate(-45deg);
+            }
+        }
+        @media screen and (max-width: 415px) {
+            right: -2rem;
+        }
+    }
+
+    &__ClearTabl {
+        @media screen and (min-width: 1025px) {
+            display: none;
+        }
+        position: relative;
+        bottom: 0;
+        // height: 145px;
+        margin-left: -16px;
+        width: 100%;
         background-color: #fff;
-        color: #58ba87;
-      }
-    }
-  }
+        padding: 20px 16px;
+        box-sizing: border-box;
 
-  &__FilterTabletWrap {
-    flex-grow: 1;
-  }
+        @media screen and (max-width: 415px) {
+            margin-left: 0;
+        }
+
+        &--clear {
+            height: 45px;
+            border: 1px solid #58ba87;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+            &:hover {
+                background-color: #58ba87;
+                color: #fff;
+            }
+        }
+
+        &--clear {
+            font-weight: 800;
+            font-size: 13px;
+            color: #58ba87;
+        }
+
+        &--accept {
+            background-color: #58ba87;
+            color: #fff;
+            transition: all 0.3s;
+            &:hover {
+                background-color: #fff;
+                color: #58ba87;
+            }
+        }
+    }
+
+    &__FilterTabletWrap {
+        flex-grow: 1;
+    }
 }
