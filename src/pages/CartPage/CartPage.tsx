@@ -25,13 +25,13 @@ export type CartFormType = {
         lastName: string;
         phone: string;
     };
-    customRecepient?: {
+    customReceiver?: {
         firstName: string;
         lastName: string;
         patronymic: string;
         phone: string;
     };
-    recepient: "payer" | "custom";
+    receiver: "payer" | "custom";
     shippingMethod?: "postOffice" | "courier";
     deliveryAddress: {
         street?: OptionType;
@@ -105,13 +105,13 @@ export const CartPage = () => {
     }, [loading]);
 
     watch("shippingMethod");
-    watch("recepient");
+    watch("receiver");
     watch("paymentMethod");
     watch("paymentService");
     watch("deliveryAddress");
 
     useEffect(() => {
-        dispatch(setOrderInfo({ ...getValues(), customRecepient: undefined }));
+        dispatch(setOrderInfo({ ...getValues() }));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [getValues()]);
 
@@ -161,7 +161,7 @@ export const CartPage = () => {
                             name="payer.lastName"
                             register={register({
                                 required: true,
-                                minLength: 4,
+                                minLength: 3,
                             })}
                             error={errors.payer?.lastName}
                             errorMessage="Введите свою фамилию"
@@ -352,7 +352,7 @@ export const CartPage = () => {
                             <RadioInput
                                 label="Я"
                                 register={register}
-                                name="recepient"
+                                name="receiver"
                                 value="payer"
                                 passThrough={{ defaultChecked: true }}
                             />
@@ -361,105 +361,62 @@ export const CartPage = () => {
                             <RadioInput
                                 label="Другой человек"
                                 register={register}
-                                name="recepient"
+                                name="receiver"
                                 value="custom"
                             />
                         </div>
                     </div>
                     <div className="CartPage__FormContainer">
-                        {formValues.recepient === "custom" && (
+                        {formValues.receiver === "custom" && (
                             <>
-                                <div className="Maritel__InputContainer">
-                                    <label>
-                                        Фамилия{" "}
-                                        <span className="CartPage__Required">
-                                            *
-                                        </span>
-                                    </label>
+                                <Input
+                                    label="Фамилия"
+                                    name="customReceiver.lastName"
+                                    register={register({
+                                        required: true,
+                                        minLength: 3,
+                                    })}
+                                    error={errors.customReceiver?.lastName}
+                                    errorMessage="Укажите фамилию получателя"
+                                    required={true}
+                                />
 
-                                    <input
-                                        className={
-                                            errors.customRecepient?.lastName
-                                                ? "Maritel__InputError"
-                                                : ""
-                                        }
-                                        name="customRecepient.lastName"
-                                        ref={register({
-                                            required: true,
-                                            minLength: 4,
-                                        })}
-                                    />
-                                </div>
+                                <Input
+                                    label="Имя"
+                                    name="customReceiver.firstName"
+                                    register={register({
+                                        required: true,
+                                        minLength: 2,
+                                    })}
+                                    error={errors.customReceiver?.firstName}
+                                    errorMessage="Укажите имя получателя"
+                                    required={true}
+                                />
 
-                                <div className="Maritel__InputContainer">
-                                    <label>
-                                        Имя{" "}
-                                        <span className="CartPage__Required">
-                                            *
-                                        </span>
-                                    </label>
-                                    <input
-                                        className={
-                                            errors.customRecepient?.firstName
-                                                ? "Maritel__InputError"
-                                                : ""
-                                        }
-                                        name="customRecepient.firstName"
-                                        ref={register({
-                                            minLength: 2,
-                                            required: true,
-                                        })}
-                                    />
-                                </div>
-                                <div className="Maritel__InputContainer">
-                                    <label>
-                                        Отчество{" "}
-                                        <span className="CartPage__Required">
-                                            *
-                                        </span>
-                                    </label>
+                                <Input
+                                    label="Отчество"
+                                    name="customReceiver.patronymic"
+                                    register={register({
+                                        required: true,
+                                        minLength: 4,
+                                    })}
+                                    error={errors.customReceiver?.patronymic}
+                                    errorMessage="Укажите отчество получателя"
+                                    required={true}
+                                />
 
-                                    <input
-                                        className={
-                                            errors.customRecepient?.patronymic
-                                                ? "Maritel__InputError"
-                                                : ""
-                                        }
-                                        data-tip={
-                                            errors.customRecepient?.patronymic
-                                                ? "Пожалуйста, введите отчество"
-                                                : ""
-                                        }
-                                        name="customRecepient.patronymic"
-                                        ref={register({
-                                            required: true,
-                                            minLength: 3,
-                                        })}
-                                    />
-                                </div>
-
-                                <div className="Maritel__InputContainer">
-                                    <label>
-                                        Телефон{" "}
-                                        <span className="CartPage__Required">
-                                            *
-                                        </span>
-                                    </label>
-
-                                    <input
-                                        className={
-                                            errors.customRecepient?.phone &&
-                                            "Maritel__InputError"
-                                        }
-                                        name="customRecepient.phone"
-                                        ref={register({
-                                            required: true,
-                                            minLength: 10,
-                                            maxLength: 13,
-                                        })}
-                                    />
-                                </div>
-                                <ReactTooltip />
+                                <Input
+                                    label="Телефон"
+                                    name="customReceiver.phone"
+                                    register={register({
+                                        minLength: 10,
+                                        maxLength: 13,
+                                        required: true,
+                                    })}
+                                    error={errors.customReceiver?.phone}
+                                    errorMessage="Укажите мобильный номер"
+                                    required={true}
+                                />
                             </>
                         )}
                     </div>

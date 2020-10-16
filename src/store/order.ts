@@ -11,21 +11,19 @@ export type SetOrder = Action<typeof SET_ORDER_INFO> & {
             value?: string;
             name?: string;
         };
-        recepient: "payer" | "custom";
+        receiver: "payer" | "custom";
         city: OptionType;
         payer: {
             firstName: string;
             lastName: string;
             phone: string;
         };
-        customRecepient:
-            | {
-                  firstName: string;
-                  lastName: string;
-                  patronymic: string;
-                  phone: string;
-              }
-            | undefined;
+        customReceiver?: {
+            firstName: string;
+            lastName: string;
+            patronymic: string;
+            phone: string;
+        };
         paymentMethod: "card" | "cash" | "";
         paymentService: "wayforpay" | "liqpay" | "";
     };

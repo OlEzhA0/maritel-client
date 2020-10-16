@@ -13,11 +13,12 @@ router.post("/order", async (req, res) => {
     const errors = orderSchema.validate(req.body).error;
 
     if (errors) {
-        res.status(400).json(errors);
+        res.json({ status: 400, errors });
     } else {
         const {
             payer,
-            recepient,
+            receiver,
+            customReceiver,
             shippingMethod,
             deliveryAddress,
             paymentMethod,
@@ -37,7 +38,7 @@ router.post("/order", async (req, res) => {
             console.log("Couldn't find promo");
         }
 
-        console.log(await Order.deleteMany({ "payer.lastName": "Kislukhin" }));
+        // console.log(await Order.deleteMany({ "payer.lastName": "Kislukhin" }));
 
         const orderTotal = await calculateOrderTotal(
             items,
@@ -64,8 +65,8 @@ router.post("/order", async (req, res) => {
                 shippingAddress: deliveryAddress,
                 city,
                 payer,
-                recepient,
-                customReceiver: recepient === "custom",
+                receiver: receiver === "custom" ? customReceiver : payer,
+                customReceiver: receiver === "custom",
                 paymentMethod,
                 paymentService,
                 items: orderTotal.items,

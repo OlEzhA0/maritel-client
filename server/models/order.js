@@ -55,6 +55,7 @@ const ordersSchema = new Schema({
         promoDisc: String,
         promoValue: Number,
     },
+    visited: { type: Boolean, default: false },
 });
 
 autoIncrement.initialize(mongoose.connection);

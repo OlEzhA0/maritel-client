@@ -426,7 +426,7 @@ const Query = new GraphQLObjectType({
             },
             async resolve(_parent, args, context) {
                 if (!context.customer) {
-                    return;
+                    return {};
                 }
 
                 const orders = await Order.find({

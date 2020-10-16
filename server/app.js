@@ -12,7 +12,7 @@ const orderRouter = require("./routes/order");
 const authRouter = require("./routes/auth");
 const isAuth = require("./helpers/isAuth");
 
-app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
+app.use(redirectToHTTPS([/localhost:(\d{4})/], [], 301));
 
 app.use(express.static("build"));
 
