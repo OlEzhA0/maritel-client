@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./ProductPage.scss";
 import { useLocation, Link, useParams } from "react-router-dom";
 import { useQuery } from "react-apollo";
@@ -12,7 +12,7 @@ import {
     getCart,
 } from "../../store/actionsTypes";
 import * as Prod from "../../components/ProductPage";
-import { handleDecode } from "../../helpers/links";
+import { handleDecode, handleTranslit } from "../../helpers/links";
 import { ProductAlsoBuy } from "../../components/ProductPage";
 import ReactBreakLines from "../../helpers/ReactBreakLines";
 import { Breadcrumbs } from "../../components/common/Breadcrumbs";
@@ -25,18 +25,13 @@ type UrlParams = {
 };
 
 export const ProductPage = () => {
-    const { category, sub, name } = useParams<UrlParams>();
+    const { category: categoryUrl, sub: subUrl, name } = useParams<UrlParams>();
     const location = useLocation();
     const prodUuid = location.pathname.split("/").filter((p) => p)[3];
     const getProduct = useQuery(productQuery, {
         variables: { uuid: prodUuid },
     });
     const generalPathName = location.pathname.slice(1, -7);
-
-    const urlParams = [];
-    urlParams.push({ url: category, name: handleDecode(category) });
-    urlParams.push({ url: sub, name: handleDecode(sub) });
-    urlParams.push({ url: name, name: handleDecode(name) });
 
     const [product, setProduct] = useState<Products>();
     const [generalPhoto, setGeneralPhoto] = useState("");
@@ -46,11 +41,28 @@ export const ProductPage = () => {
     const [choosenSize, setChoosenSize] = useState<Sizes>({} as Sizes);
     const [quantity, setQuantity] = useState("1");
     const [currentPath, setCurrentPath] = useState(0);
+
     const getColors = useQuery(getColorsQuery);
     const products = useSelector(getProducts);
     const categories = useSelector(getCategories);
     const isTablet = useSelector(getIsTablet);
     const cart = useSelector(getCart);
+
+    const category = useMemo(() => {
+        return categories.find(
+            (cat) => handleTranslit(cat.category) === categoryUrl
+        );
+    }, [categories, categoryUrl]);
+
+    const sub = useMemo(() => {
+        if (category && subUrl) {
+            return category.subCategories.find(
+                (subCategory) => handleTranslit(subCategory.subs) === subUrl
+            );
+        }
+    }, [category, subUrl]);
+
+    console.log("category", category);
 
     useEffect(() => {
         if (product && products.length) {
@@ -65,6 +77,8 @@ export const ProductPage = () => {
             ]);
         }
     }, [products, product]);
+
+    console.log(getProduct.data);
 
     useEffect(() => {
         if (getProduct && getProduct.data) {
@@ -121,6 +135,11 @@ export const ProductPage = () => {
     //         }
     //     }
     // }, [categories, location.pathname, isTablet]);
+
+    const urlParams: { url: string; name?: string }[] = [];
+    urlParams.push({ url: categoryUrl, name: category?.category });
+    urlParams.push({ url: subUrl, name: sub?.subs });
+    urlParams.push({ url: name, name: product?.title });
 
     const handleSlider = (path: number) => {
         const photos = product?.photos;

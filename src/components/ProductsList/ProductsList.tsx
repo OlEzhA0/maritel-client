@@ -401,8 +401,8 @@ export const ProductsList = ({
     }
 
     const urlParams = [];
-    urlParams.push({ url: urlCategory!, name: handleDecode(urlCategory!) });
-    urlParams.push({ url: sub!, name: handleDecode(sub!) });
+    urlParams.push({ url: urlCategory!, name: category?.category });
+    urlParams.push({ url: sub!, name: subsName });
 
     return products.length > 0 ? (
         <div className="ProductsList Page__Wrap">

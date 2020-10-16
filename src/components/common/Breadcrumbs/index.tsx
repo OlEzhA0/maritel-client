@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import "./Breadcrumbs.scss";
 
 type Props = {
-    path: { url: string; name: string }[];
+    path: { url: string; name?: string }[];
 };
 
 export const Breadcrumbs: React.FC<Props> = ({ path }) => {
-    const links = [{ url: "/", name: "HOME" }];
+    const links: Props["path"] = [{ url: "/", name: "HOME" }];
 
     let url = "";
 
