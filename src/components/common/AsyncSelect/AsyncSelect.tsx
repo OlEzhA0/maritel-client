@@ -43,7 +43,7 @@ const AsyncSelect = (props: Props) => {
     const [options, setOptions] = useState([] as OptionType[]);
     const [loading, setLoading] = useState(false);
 
-    const getOptions = (searchQuery: string) => {
+    const handleGetOptions = (searchQuery: string) => {
         setLoading(true);
         setOptions([]);
         props.getOptions(searchQuery).then((options) => {
@@ -55,7 +55,7 @@ const AsyncSelect = (props: Props) => {
     };
 
     useEffect(() => {
-        getOptions("");
+        handleGetOptions("");
         return () => {
             isCurrent.current = false;
         };
@@ -93,7 +93,7 @@ const AsyncSelect = (props: Props) => {
                             option?.name ? option?.name : ""
                         }
                         onInput={({ target }) => {
-                            getOptions((target as HTMLInputElement).value);
+                            handleGetOptions((target as HTMLInputElement).value);
                         }}
                         options={
                             options.some((el) => el.value === value?.value)

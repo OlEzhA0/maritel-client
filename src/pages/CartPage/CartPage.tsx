@@ -109,6 +109,7 @@ export const CartPage = () => {
     watch("paymentMethod");
     watch("paymentService");
     watch("deliveryAddress");
+    watch("city");
 
     useEffect(() => {
         dispatch(setOrderInfo({ ...getValues() }));
