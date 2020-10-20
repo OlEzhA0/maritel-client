@@ -16,6 +16,7 @@ import OrderStatusReducer from "./orderStatus";
 import CustomerReducer from "./customer";
 import PromoReducer from "./promo";
 import SearchQueryReducer from "./searchQuery";
+import MainSettingsReducer from "./mainSettings";
 
 const rootReducer = combineReducers({
     categories: CategoriesReducer,
@@ -33,12 +34,14 @@ const rootReducer = combineReducers({
     wishList: WishListReducer,
     promo: PromoReducer,
     searchQuery: SearchQueryReducer,
+    mainSettings: MainSettingsReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-export const store1 = (parameters?: RootState) => createStore(
-    rootReducer,
-    parameters,
-    composeWithDevTools(applyMiddleware(thunk))
-);
+export const initializeStore = (parameters?: RootState) =>
+    createStore(
+        rootReducer,
+        parameters,
+        composeWithDevTools(applyMiddleware(thunk))
+    );

@@ -32,9 +32,6 @@ import { AboutUsPage } from "./staticPages/AboutUsPage/AboutUsPage";
 
 function App() {
     const location = useLocation();
-    const products = useQuery(helpers.productsQuery);
-    const { data } = useQuery(helpers.getCategoriesQuery);
-    const specCategs = useQuery(helpers.getSpecCategQuery);
     const dispatch = useDispatch();
     const backgroundStatus = useSelector(getMenuStatus);
     const [scrollPos, setScrollPos] = useState(0);
@@ -44,6 +41,13 @@ function App() {
     const searchBackground = useSelector(getBackgroundSearchCover);
     const wishList = useSelector(getWishList);
     const cart = useSelector(getCart);
+
+    const { data, loading } = useQuery<{
+        products: LocalProduct[];
+        categories: CategoriesFromDB[];
+        getSpecCateg: SpecProdsCategory[];
+        mainSettings: MainSettings;
+    }>(helpers.initialQuery);
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
@@ -76,21 +80,31 @@ function App() {
     }, [wishList]);
 
     useEffect(() => {
-        document.addEventListener("scroll", handleScroll);
-    }, [scrollPos, handleScroll]);
+        if(!loading) {
+            document.getElementById("full-page-loader")!.style.display = "none";
+        }
+    }, [loading])
 
     useEffect(() => {
-        if (data && data.categories && products && products.data) {
-            const goods: Products[] = products.data.products
-                .filter((prod: Products) => !prod.title.includes("копия"))
-                .filter((prod: Products) => prod.photos.length !== 0)
+        if (!loading) {
+            document.addEventListener("scroll", handleScroll);
+        }
+    }, [scrollPos, handleScroll, loading]);
+
+    useEffect(() => {
+        if (data && data.categories && data.products) {
+            const { products } = data;
+
+            const goods: Products[] = products
+                .filter((prod) => !prod.title.includes("копия"))
+                .filter((prod) => prod.photos.length !== 0)
                 .map((prod: LocalProduct) => ({
                     ...prod,
                     sizes: JSON.parse(prod.sizes),
                 }));
 
             const categories: CategoriesTypes[] = data.categories.map(
-                (category: CategoriesFromDB) => ({
+                (category) => ({
                     ...category,
                     subCategories: JSON.parse(category.subCategories),
                 })
@@ -99,7 +113,7 @@ function App() {
             const preparedCategs = categories.filter((categ) =>
                 goods.some(
                     (good) =>
-                        good.type.split(helpers.splitValue)[0] === categ.id
+                        good.type.split(helpers.splitValue)[0] === categ._id
                 )
             );
 
@@ -124,19 +138,24 @@ function App() {
                 )
             );
         }
-    }, [data, dispatch, products]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data, dispatch, data?.products]);
 
     useEffect(() => {
-        if (specCategs.data && specCategs.data.getSpecCateg) {
+        if (data?.getSpecCateg) {
             dispatch(
                 aCreator.setSpecCategories(
-                    specCategs.data.getSpecCateg.filter(
-                        (categ: SpecProdsCategory) => !!categ.products.length
-                    )
+                    data.getSpecCateg.filter((categ) => !!categ.products.length)
                 )
             );
         }
-    }, [specCategs, dispatch]);
+    }, [data, dispatch]);
+
+    useEffect(() => {
+        if (data?.mainSettings) {
+            dispatch(aCreator.setMainSettings(data.mainSettings));
+        }
+    }, [data, dispatch]);
 
     useEffect(() => {
         window.scrollTo(0, 0);

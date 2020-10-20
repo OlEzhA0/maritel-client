@@ -57,7 +57,7 @@ export const CartPopupItem: React.FC<Props> = ({
                     <p className="CartPopup__ProdTitle">{title}</p>
                     <p className="CartPopup__Info">
                         {categories.find(
-                            (categ) => categ.id === type.split(splitValue)[0]
+                            (categ) => categ._id === type.split(splitValue)[0]
                         )?.category || ""}
                         <span className="CartPopup__Span">|</span>
                         {size}

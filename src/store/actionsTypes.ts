@@ -69,3 +69,4 @@ export const getIsLogged = (state: RootState) =>
     state.customer.accessToken ? true : false;
 export const getPromo = (state: RootState) => state.promo;
 export const getSearchQuery = (state: RootState) => state.searchQuery;
+export const getMainSettings = (state: RootState) => state.mainSettings;

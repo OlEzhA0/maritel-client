@@ -17,15 +17,19 @@
             }
 
             .full-page-loader {
+                width: 100%;
+                height: 100vh;
                 display: flex;
                 align-items: center;
                 flex-direction: column;
                 justify-content: center;
-                position: absolute;
+                position: fixed;
                 top: 0;
                 right: 0;
                 left: 0;
                 bottom: 0;
+                background: #fff;
+                z-index: 100;
             }
 
             .full-page-loader > img {
@@ -53,9 +57,10 @@
     </head>
     <body>
         <div id="root">
-            <div class="full-page-loader">
+            <div id="full-page-loader" class="full-page-loader">
                 <img width="200" src="images/logo.svg" alt="logo" />
             </div>
+            <div id="react-content"></div>
         </div>
     </body>
 </html>

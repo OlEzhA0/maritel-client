@@ -16,7 +16,7 @@ export const prodListGoods = (
     setCategory(currentCategory);
 
     const filteredGoods = goods.filter(
-      (good) => good.type.split(splitValue)[0] === currentCategory?.id
+      (good) => good.type.split(splitValue)[0] === currentCategory?._id
     );
     if (pathname.includes("/Vse-tovari")) {
       setProducts(filteredGoods);

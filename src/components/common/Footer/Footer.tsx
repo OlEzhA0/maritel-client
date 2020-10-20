@@ -1,16 +1,17 @@
 import React, { useMemo, useState } from "react";
 import "./Footer.scss";
-import { FOOTER_INFO, getMainSettings } from "../../../helpers";
+import { FOOTER_INFO } from "../../../helpers";
 import { Link } from "react-router-dom";
 import cn from "classnames";
 import { SubscribeByMail } from "../../SubscribeByMail";
 import { SizesTable } from "../../SizesTable/SizesTable";
-import { useQuery } from "react-apollo";
+import { useSelector } from "react-redux";
+import { getMainSettings } from "../../../store/actionsTypes";
 
 export const Footer = () => {
     const [isOpenInfo, setIsOpenInfo] = useState<string[]>([]);
 
-    const { data } = useQuery<{ mainSettings: MainSettings }>(getMainSettings);
+    const mainSettings = useSelector(getMainSettings)
 
     const setOpenStatus = (name: string) => {
         if (isOpenInfo.some((info) => info === name)) {
@@ -23,8 +24,8 @@ export const Footer = () => {
     const socialLinks = useMemo(() => {
         const linkList: SocialLink[] = [];
 
-        if (data?.mainSettings) {
-            const { facebook, instagram, telegram } = data.mainSettings;
+        if (mainSettings) {
+            const { facebook, instagram, telegram } = mainSettings;
 
             linkList.push({
                 name: "facebook",
@@ -59,7 +60,7 @@ export const Footer = () => {
         }
 
         return linkList;
-    }, [data]);
+    }, [mainSettings]);
 
     const social = "social";
 

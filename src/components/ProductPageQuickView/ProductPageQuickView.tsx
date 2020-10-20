@@ -114,7 +114,7 @@ export const ProductPageQuickView = () => {
                             prodType={
                                 categories.find(
                                     (categ) =>
-                                        categ.id ===
+                                        categ._id ===
                                         product.type.split(splitValue)[0]
                                 )?.category!
                             }

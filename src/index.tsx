@@ -10,14 +10,14 @@ import { HttpLink } from "apollo-link-http";
 import { ApolloLink, Observable } from "apollo-link";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import { Provider } from "react-redux";
-import { store1 } from "./store/index";
+import { initializeStore } from "./store/index";
 import { getAccessToken } from "./store/actionsTypes";
 import jwtDecode from "jwt-decode";
 import { clearCustomerInfo, setCustomerInfo } from "./store/actionCreators";
 
 const cache = new InMemoryCache({});
 
-const store = store1();
+const store = initializeStore();
 
 const requestLink = new ApolloLink(
     (operation, forward) =>
@@ -106,5 +106,5 @@ ReactDOM.render(
             </React.StrictMode>
         </ApolloProvider>
     </HashRouter>,
-    document.getElementById("root")
+    document.getElementById("react-content")
 );

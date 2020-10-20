@@ -52,7 +52,7 @@ export const HambMenu = () => {
                     })}
                 >
                     {categories.map((category) => (
-                        <li key={category.id} className="HambMenu__Item">
+                        <li key={category._id} className="HambMenu__Item">
                             {category.subCategories.length === 0 && (
                                 <Link
                                     to={`/${handleTranslit(
@@ -73,7 +73,7 @@ export const HambMenu = () => {
                             {category.subCategories.length > 0 && (
                                 <p
                                     className="HambMenu__Categ"
-                                    onClick={() => setOpenSubMenu(category.id)}
+                                    onClick={() => setOpenSubMenu(category._id)}
                                 >
                                     {category.category}{" "}
                                     <img
@@ -121,7 +121,7 @@ export const HambMenu = () => {
                         <Link
                             to={`/${handleTranslit(
                                 categories.find(
-                                    (categ) => categ.id === openSubMenu
+                                    (categ) => categ._id === openSubMenu
                                 )?.category || ""
                             )}`}
                             className="HambMenu__SubLink HambMenu__SubLinkMain"
@@ -129,7 +129,7 @@ export const HambMenu = () => {
                         >
                             {
                                 categories.find(
-                                    (categ) => categ.id === openSubMenu
+                                    (categ) => categ._id === openSubMenu
                                 )?.category
                             }{" "}
                             <img
@@ -140,7 +140,7 @@ export const HambMenu = () => {
                     </li>
                     {categories.map(
                         (categ) =>
-                            categ.id === openSubMenu &&
+                            categ._id === openSubMenu &&
                             categ.subCategories.map((subCateg) => (
                                 <li
                                     key={subCateg.id}
@@ -151,7 +151,7 @@ export const HambMenu = () => {
                                         to={`/${handleTranslit(
                                             categories.find(
                                                 (categ) =>
-                                                    categ.id === openSubMenu
+                                                    categ._id === openSubMenu
                                             )?.category || ""
                                         )}/${handleTranslit(subCateg.subs)}`}
                                         onClick={closeMenu}

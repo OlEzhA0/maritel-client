@@ -4,7 +4,7 @@ import { useQuery } from "react-apollo";
 import { useSelector } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import { getColorsQuery, sortBy } from "../../helpers";
-import { handleDecode, handleTranslit } from "../../helpers/links";
+import { handleTranslit } from "../../helpers/links";
 import { prodListGoods } from "../../helpers/prodsListGoods";
 import * as prodsSettings from "../../helpers/prodSort";
 import * as types from "../../store/actionsTypes";

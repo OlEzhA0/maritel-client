@@ -8,15 +8,17 @@ interface SubCateg {
 type SortBy = "Новизне" | "От дешевых к дорогим" | "От дорогих к дешевым";
 
 interface CategoriesTypes {
-    id: string;
+    _id: string;
     category: string;
     subCategories: SubCateg[];
+    banners: BannerCategory[] | BannerSpecial[];
 }
 
 interface CategoriesFromDB {
-    id: string;
+    _id: string;
     category: string;
     subCategories: string;
+    banners: BannerCategory[] | BannerSpecial[];
 }
 
 interface SpecProdsCategory {
@@ -186,5 +188,29 @@ type Promo = {
     promoValue: number;
 };
 
+type InfoPageNames =
+    | "brand"
+    | "bloggers"
+    | "vacancies"
+    | "delivery-policies"
+    | "return-policies"
+    | "rules";
 
-type InfoPageNames = "brand" | "bloggers" | "vacancies" | "delivery-policies" | "return-policies" | "rules"
+type BannerCategory = {
+    position: "top" | "bottom";
+    title: string;
+    buttonText: string;
+    link: string;
+    image: string;
+};
+
+type BannerSpecial = {
+    accentedText: string;
+    text: string;
+    buttonText: string;
+    link: string;
+};
+
+type BannerCarousel = {
+    title: string;
+};

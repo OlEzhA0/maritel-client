@@ -16,7 +16,7 @@ export const HomePage = () => {
         <BackgroundMainImg />
         <ul className="HomePage__List">
           {categories.map((categ) => (
-            <li key={categ.id} className="HomePage__Item">
+            <li key={categ._id} className="HomePage__Item">
               <Link
                 to={
                   categ.subCategories.length > 0

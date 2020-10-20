@@ -20,6 +20,7 @@ import {
     CLEAR_CUSTOMER_INFO,
     SET_PROMO,
     SET_SEARCH_QUERY,
+    SET_MAIN_SETTINGS,
 } from "./actions";
 import { Customer } from "./customer";
 
@@ -137,5 +138,10 @@ export const setPromo = (payload: Promo) => ({
 
 export const setSearchQuery = (payload: string) => ({
     type: SET_SEARCH_QUERY,
+    payload,
+});
+
+export const setMainSettings = (payload: MainSettings) => ({
+    type: SET_MAIN_SETTINGS,
     payload,
 });

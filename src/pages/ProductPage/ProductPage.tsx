@@ -12,7 +12,7 @@ import {
     getCart,
 } from "../../store/actionsTypes";
 import * as Prod from "../../components/ProductPage";
-import { handleDecode, handleTranslit } from "../../helpers/links";
+import { handleTranslit } from "../../helpers/links";
 import { ProductAlsoBuy } from "../../components/ProductPage";
 import ReactBreakLines from "../../helpers/ReactBreakLines";
 import { Breadcrumbs } from "../../components/common/Breadcrumbs";
@@ -204,7 +204,7 @@ export const ProductPage = () => {
                             prodType={
                                 categories.find(
                                     (categ) =>
-                                        categ.id ===
+                                        categ._id ===
                                         product.type.split(splitValue)[0]
                                 )?.category!
                             }

@@ -22,6 +22,8 @@ const Order = require("../models/order");
 const MainSettings = require("../models/mainSettings");
 const Promo = require("../models/promo");
 
+const Banner = require("../models/banners");
+
 const ProductType = new GraphQLObjectType({
     name: "Product",
     fields: () => ({
@@ -86,9 +88,10 @@ const ShippingAddressType = new GraphQLObjectType({
 const CategoriesType = new GraphQLObjectType({
     name: "Categories",
     fields: () => ({
-        id: { type: GraphQLID },
+        _id: { type: GraphQLID },
         category: { type: GraphQLString },
         subCategories: { type: GraphQLString },
+        banners: { type: new GraphQLList(BannerType) },
     }),
 });
 
@@ -189,6 +192,22 @@ const PromoType = new GraphQLObjectType({
         promoName: { type: GraphQLString },
         promoDisc: { type: GraphQLString },
         promoValue: { type: GraphQLInt },
+    },
+});
+
+const BannerType = new GraphQLObjectType({
+    name: "Banner",
+    fields: {
+        _id: { type: GraphQLID },
+        category: { type: GraphQLID },
+        position: { type: GraphQLString },
+        accentedText: { type: GraphQLString },
+        text: { type: GraphQLString },
+        title: { type: GraphQLString },
+        buttonText: { type: GraphQLString },
+        link: { type: GraphQLString },
+        image: { type: GraphQLString },
+        for: { type: GraphQLString },
     },
 });
 
@@ -357,8 +376,18 @@ const Query = new GraphQLObjectType({
         },
         categories: {
             type: new GraphQLList(CategoriesType),
-            resolve() {
-                return Category.find({});
+            async resolve() {
+                return Category.aggregate([
+                    { $match: {} },
+                    {
+                        $lookup: {
+                            from: "banners",
+                            localField: "_id",
+                            foreignField: "category",
+                            as: "banners",
+                        },
+                    },
+                ]);
             },
         },
         getSpecCateg: {

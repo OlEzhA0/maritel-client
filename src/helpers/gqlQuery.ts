@@ -3,9 +3,18 @@ import { gql } from "apollo-boost";
 export const getCategoriesQuery = gql`
     query getCategoriesQuery {
         categories {
-            id
+            _id
             category
             subCategories
+            banners {
+                position
+                text
+                title
+                buttonText
+                link
+                image
+                for
+            }
         }
     }
 `;
@@ -149,18 +158,6 @@ export const getOrders = gql`
     }
 `;
 
-export const getMainSettings = gql`
-    {
-        mainSettings {
-            email
-            phone
-            instagram
-            facebook
-            telegram
-        }
-    }
-`;
-
 export const getPromo = gql`
     query getPromo($promoName: String) {
         promo(promoName: $promoName) {
@@ -190,6 +187,55 @@ export const findProducts = gql`
             photos
             previewPhoto
             timestamp
+        }
+    }
+`;
+
+export const initialQuery = gql`
+    {
+        products {
+            id
+            uuid
+            title
+            descr
+            color
+            price
+            gender
+            modelParam
+            composition
+            sizes
+            lastPrice
+            type
+            care
+            photos
+            previewPhoto
+            timestamp
+        }
+        categories {
+            _id
+            category
+            subCategories
+            banners {
+                position
+                text
+                title
+                buttonText
+                link
+                image
+                for
+            }
+        }
+        getSpecCateg {
+            id
+            name
+            products
+        }
+        mainSettings {
+            email
+            phone
+            instagram
+            facebook
+            telegram
         }
     }
 `;

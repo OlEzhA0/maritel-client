@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./CategoryPage.scss";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -14,6 +14,47 @@ export const CategoryPage = () => {
     const goods = useSelector(getProducts);
     const [products, setProducts] = useState<Products[]>([]);
     const [category, setCategory] = useState<CategoriesTypes>();
+
+    const [bannerTop, bannerBottom] = useMemo(() => {
+        if (
+            category &&
+            category.banners.length &&
+            category.banners[0] &&
+            (category.banners[0] as BannerCategory).position
+        ) {
+            const result: JSX.Element[] = [];
+            const topBanner =
+                (category.banners as BannerCategory[]).find(
+                    ({ position }) => position === "top"
+                ) || {} as BannerCategory;
+            result.push(
+                <Banner
+                    text={topBanner.title}
+                    buttonText={topBanner.buttonText}
+                    imgLink={topBanner.image}
+                    link={topBanner.link}
+                />
+            );
+
+            const bottomBanner =
+                (category.banners as BannerCategory[]).find(
+                    ({ position }) => position === "bottom"
+                ) || {} as BannerCategory;
+
+            result.push(
+                <Banner
+                    text={bottomBanner.title}
+                    buttonText={bottomBanner.buttonText}
+                    imgLink={bottomBanner.image}
+                    link={bottomBanner.link}
+                />
+            );
+
+            return result;
+        }
+
+        return [<Banner />, <Banner />];
+    }, [category]);
 
     useEffect(() => {
         const uuids = new Set();
@@ -33,7 +74,7 @@ export const CategoryPage = () => {
         setCategory(currentCategory);
         const visGoods: Products[] = goods.filter(
             (prod) =>
-                prod.type.split(splitValue)[0] === currentCategory?.id ||
+                prod.type.split(splitValue)[0] === currentCategory?._id ||
                 currentCategory?.subCategories.some(
                     (subCateg) => subCateg.id === prod.type.split(splitValue)[1]
                 )
@@ -55,12 +96,7 @@ export const CategoryPage = () => {
 
     return (
         <div className="CategoryPage Page__Wrap">
-            <Banner
-                imgLink="images/homepage/main.jpg"
-                text="Влюбитесь с первого взгляда"
-                link=""
-                buttonText="Перейти к летним новинкам"
-            />
+            {bannerTop}
             <div className="CategoryPage__Wrap">
                 <h2 className="CategoryPage__Title">категории</h2>
                 <ul className="CategoryPage__List">
@@ -96,12 +132,7 @@ export const CategoryPage = () => {
                     ))}
                 </ul>
             </div>
-            <Banner
-                imgLink="images/homepage/main.jpg"
-                text="Влюбитесь с первого взгляда"
-                link=""
-                buttonText="Узнать больше"
-            />
+            {bannerBottom}
         </div>
     );
 };
