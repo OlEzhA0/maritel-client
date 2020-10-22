@@ -122,8 +122,6 @@ export const CartPageOrderSummary = ({ formMethods }: Props) => {
         } else {
             formMethods.trigger().then(() => {
                 if (formMethods.errors) {
-                    console.log(formMethods.errors);
-
                     const errorRef = getErrorRef<CartFormType>(
                         formMethods.errors
                     );

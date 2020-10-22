@@ -155,7 +155,6 @@ function App() {
         }
 
         if (data?.carousel) {
-            console.log(data.carousel.map((item) => item.title));
             dispatch(
                 aCreator.setCarousel(data.carousel.map((item) => item.title))
             );

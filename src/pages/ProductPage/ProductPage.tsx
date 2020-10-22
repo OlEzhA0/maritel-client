@@ -62,8 +62,6 @@ export const ProductPage = () => {
         }
     }, [category, subUrl]);
 
-    console.log("category", category);
-
     useEffect(() => {
         if (product && products.length) {
             setRelatedProds([
@@ -77,8 +75,6 @@ export const ProductPage = () => {
             ]);
         }
     }, [products, product]);
-
-    console.log(getProduct.data);
 
     useEffect(() => {
         if (getProduct && getProduct.data) {

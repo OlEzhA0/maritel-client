@@ -1,226 +1,228 @@
 @import "../../styles/vars.scss";
 
 .HambMenu {
-  &__Stick {
-    width: 16px;
-    height: 3px;
-    background-color: $main-color;
-    position: relative;
+    &__Stick {
+        width: 16px;
+        height: 3px;
+        background-color: $main-color;
+        position: relative;
 
-    &::after,
-    &::before {
-      width: 16px;
-      height: 3px;
-      content: "";
-      position: absolute;
-      background-color: $main-color;
-      left: 0;
-      box-sizing: border-box;
-      transition: all 0.3s;
+        &::after,
+        &::before {
+            width: 16px;
+            height: 3px;
+            content: "";
+            position: absolute;
+            background-color: $main-color;
+            left: 0;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+
+        &::after {
+            top: -180%;
+        }
+
+        &::before {
+            top: 180%;
+        }
+
+        &--open {
+            transform: rotate(45deg);
+
+            &::after {
+                transform: rotate(90deg);
+                top: 0;
+            }
+
+            &::before {
+                transform: rotate(0);
+                top: 0;
+            }
+        }
     }
 
-    &::after {
-      top: -180%;
+    &__Wrapper {
+        width: 1.5rem;
+        height: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
     }
 
-    &::before {
-      top: 180%;
+    &__Menu {
+        overflow: hidden;
+        overflow-y: scroll;
+        position: absolute;
+        top: 3.5rem;
+        left: 0;
+        width: 27.5rem;
+        transform: translateX(-30rem);
+        transition: all 0.3s;
+        height: calc(100% - 3.5rem);
+        background-color: #fff;
+        z-index: 4;
+        &--open {
+            transform: translateX(0);
+        }
+        @media only screen and (max-device-width: 480px) {
+            position: fixed;
+        }
     }
 
-    &--open {
-      transform: rotate(45deg);
+    &__List {
+        list-style-type: none;
+        box-sizing: border-box;
+        padding-top: 28px;
+        transition: all 0.3s;
+        text-transform: uppercase;
 
-      &::after {
-        transform: rotate(90deg);
+        &--close {
+            position: absolute;
+            transform: translateX(-30rem);
+        }
+    }
+
+    &__Item {
+        box-sizing: border-box;
+        transition: all 0.3s;
+        &:hover {
+            background: rgba($color: #101010, $alpha: 0.05);
+        }
+    }
+
+    &__Categ {
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: 0.08em;
+        color: $main-color;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-decoration: none;
+        cursor: pointer;
+        padding: 11px 16px;
+    }
+
+    &__ChoosedCateg {
+        transform: translateX(30rem);
+        transition: all 0.3s;
+        box-sizing: border-box;
+        padding-top: 23px;
+        position: absolute;
         top: 0;
-      }
 
-      &::before {
-        transform: rotate(0);
-        top: 0;
-      }
-    }
-  }
-
-  &__Wrapper {
-    width: 1.5rem;
-    height: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  &__Menu {
-    overflow: hidden;
-    overflow-y: scroll;
-    position: absolute;
-    top: 3.5rem;
-    left: 0;
-    width: 27.5rem;
-    transform: translateX(-30rem);
-    transition: all 0.3s;
-    height: calc(100%- 3.5rem);
-    background-color: #fff;
-    z-index: 4;
-    &--open {
-      transform: translateX(0);
-    }
-  }
-
-  &__List {
-    list-style-type: none;
-    box-sizing: border-box;
-    padding-top: 28px;
-    transition: all 0.3s;
-    text-transform: uppercase;
-    
-    &--close {
-      position: absolute;
-      transform: translateX(-30rem);
-    }
-  }
-
-  &__Item {
-    box-sizing: border-box;
-    transition: all 0.3s;
-    &:hover {
-      background: rgba($color: #101010, $alpha: 0.05);
-    }
-  }
-
-  &__Categ {
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: 0.08em;
-    color: $main-color;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-decoration: none;
-    cursor: pointer;
-    padding: 11px 16px;
-
-  }
-
-  &__ChoosedCateg {
-    transform: translateX(30rem);
-    transition: all 0.3s;
-    box-sizing: border-box;
-    padding-top: 23px;
-    position: absolute;
-    top: 0;
-
-    &--open {
-      position: relative;
-      transform: translateX(0);
-    }
-  }
-
-  &__Back {
-    display: flex;
-    height: 3rem;
-    width: 100%;
-    align-items: center;
-    font-size: 1rem;
-
-    &:hover {
-      background-color: rgba($color: #010101, $alpha: 0.05);
-      cursor: pointer;
-    }
-  }
-
-  &__BackArrow {
-    margin-right: 10px;
-    transform: rotate(180deg);
-  }
-
-  &__SubGeneral {
-    color: $main-color;
-    box-sizing: border-box;
-    padding: 0 16px;
-    letter-spacing: 0.08em;
-    font-weight: 800;
-  }
-
-  &__Main {
-    font-size: 1.5rem;
-    letter-spacing: 0.08em;
-    color: $main-color;
-    font-weight: 800;
-    cursor: pointer;
-  }
-
-  &__SubLink {
-    color: $main-color;
-    text-decoration: none;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    padding: 17px 0;
-    text-transform: uppercase;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &__SubLinkMain {
-    padding: 15px 16px 18px;
-    transition: all 0.3s;
-    position: relative;
-    &:hover {
-      background-color: rgba($color: #010101, $alpha: 0.05);
-      cursor: pointer;
+        &--open {
+            position: relative;
+            transform: translateX(0);
+        }
     }
 
-    &::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background-color: #ccc;
-      bottom: 0;
-      left: 0;
-    }
-  }
+    &__Back {
+        display: flex;
+        height: 3rem;
+        width: 100%;
+        align-items: center;
+        font-size: 1rem;
 
-  &__SubItem {
-    text-transform: uppercase;
-    font-size: 14px;
-    position: relative;
-
-    &::after {
-      position: absolute;
-      content: "";
-      height: 1px;
-      width: 100%;
-      background-color: #ccc;
-      bottom: 0;
-      left: 0;
+        &:hover {
+            background-color: rgba($color: #010101, $alpha: 0.05);
+            cursor: pointer;
+        }
     }
 
-    &:hover {
-      background-color: rgba($color: #010101, $alpha: 0.05);
+    &__BackArrow {
+        margin-right: 10px;
+        transform: rotate(180deg);
     }
-  }
-  &__Settings {
-    margin-top: 45px;
-  }
 
-  &__SettingsLink {
-    display: flex;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    color: $main-color;
-    text-transform: uppercase;
-    text-decoration: none;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 0 16px;
-  }
+    &__SubGeneral {
+        color: $main-color;
+        box-sizing: border-box;
+        padding: 0 16px;
+        letter-spacing: 0.08em;
+        font-weight: 800;
+    }
 
-  &__SettingsItem {
-    margin-bottom: 2rem;
-  }
+    &__Main {
+        font-size: 1.5rem;
+        letter-spacing: 0.08em;
+        color: $main-color;
+        font-weight: 800;
+        cursor: pointer;
+    }
+
+    &__SubLink {
+        color: $main-color;
+        text-decoration: none;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        padding: 17px 0;
+        text-transform: uppercase;
+        box-sizing: border-box;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__SubLinkMain {
+        padding: 15px 16px 18px;
+        transition: all 0.3s;
+        position: relative;
+        &:hover {
+            background-color: rgba($color: #010101, $alpha: 0.05);
+            cursor: pointer;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #ccc;
+            bottom: 0;
+            left: 0;
+        }
+    }
+
+    &__SubItem {
+        text-transform: uppercase;
+        font-size: 14px;
+        position: relative;
+
+        &::after {
+            position: absolute;
+            content: "";
+            height: 1px;
+            width: 100%;
+            background-color: #ccc;
+            bottom: 0;
+            left: 0;
+        }
+
+        &:hover {
+            background-color: rgba($color: #010101, $alpha: 0.05);
+        }
+    }
+    &__Settings {
+        margin-top: 45px;
+    }
+
+    &__SettingsLink {
+        display: flex;
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        color: $main-color;
+        text-transform: uppercase;
+        text-decoration: none;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 0 16px;
+    }
+
+    &__SettingsItem {
+        margin-bottom: 2rem;
+    }
 }

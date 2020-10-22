@@ -6,7 +6,6 @@ type CartPopup = Action<typeof SET_CART_POPUP_STATUS> & {
 };
 
 const reducer = (status = false, actions: CartPopup) => {
-    console.log(actions.status);
     switch (actions.type) {
         case SET_CART_POPUP_STATUS:
             return actions.status;

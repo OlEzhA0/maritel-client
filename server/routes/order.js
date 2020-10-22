@@ -38,8 +38,6 @@ router.post("/order", async (req, res) => {
             console.log("Couldn't find promo");
         }
 
-        // console.log(await Order.deleteMany({ "payer.lastName": "Kislukhin" }));
-
         const orderTotal = await calculateOrderTotal(
             items,
             shippingMethod,

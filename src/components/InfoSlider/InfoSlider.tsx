@@ -22,8 +22,6 @@ export const InfoSlider: React.FC<Props> = ({ visible }) => {
 
     const carouselItems = useSelector(getCarousel);
 
-    carouselItems.map(console.log);
-
     useEffect(() => {
         setInfo(carouselItems);
     }, [carouselItems]);
