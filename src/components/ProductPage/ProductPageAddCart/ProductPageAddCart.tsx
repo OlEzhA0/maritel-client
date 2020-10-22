@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ProductPageAddCart.scss";
 import cn from "classnames";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../../store/actionCreators";
+import { addToCart, setShowAddedToCart } from "../../../store/actionCreators";
 import Modal from "react-modal";
 import { ProductPageMissingProduct } from "../ProductPageMissingProduct/ProductPageMissingProduct";
 interface Props {
@@ -76,6 +76,7 @@ export const ProductPageAddCart: React.FC<Props> = ({
             })}
             disabled={!choosenSize}
             onClick={() => {
+                dispatch(setShowAddedToCart(true));
                 dispatch(addToCart(prodUuid, quantity, choosenSize));
             }}
         >

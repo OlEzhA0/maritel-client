@@ -31,9 +31,20 @@ export const Banner: React.FC<Props> = ({
             />
             <div className="Banner__Settings">
                 <p className="Banner__Text">{text}</p>
-                <Link to={link} className="Banner__Link">
-                    {buttonText}
-                </Link>
+                {!link ? (
+                    <Link to={link} className="Banner__Link">
+                        {buttonText}
+                    </Link>
+                ) : (
+                    <a
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="Banner__Link"
+                    >
+                        {buttonText}
+                    </a>
+                )}
             </div>
             {!showImg && <div className="Banner__Preload" />}
         </div>

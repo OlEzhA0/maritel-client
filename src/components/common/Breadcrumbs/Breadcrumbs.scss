@@ -1,8 +1,9 @@
 .Maritel__Breadcrumbs {
+    display: flex;
     position: absolute;
     left: 0;
     top: 15px;
-    display: flex;
+    padding: 0 30px;
     list-style: none;
     font-weight: 500;
     z-index: 1;
@@ -19,5 +20,3 @@
         color: rgba(150, 150, 150, 1);
     }
 }
-
-

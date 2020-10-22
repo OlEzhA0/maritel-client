@@ -47,6 +47,7 @@ function App() {
         categories: CategoriesFromDB[];
         getSpecCateg: SpecProdsCategory[];
         mainSettings: MainSettings;
+        carousel: BannerCarousel[];
     }>(helpers.initialQuery);
 
     useEffect(() => {
@@ -80,10 +81,10 @@ function App() {
     }, [wishList]);
 
     useEffect(() => {
-        if(!loading) {
+        if (!loading) {
             document.getElementById("full-page-loader")!.style.display = "none";
         }
-    }, [loading])
+    }, [loading]);
 
     useEffect(() => {
         if (!loading) {
@@ -149,11 +150,15 @@ function App() {
                 )
             );
         }
-    }, [data, dispatch]);
-
-    useEffect(() => {
         if (data?.mainSettings) {
             dispatch(aCreator.setMainSettings(data.mainSettings));
+        }
+
+        if (data?.carousel) {
+            console.log(data.carousel.map((item) => item.title));
+            dispatch(
+                aCreator.setCarousel(data.carousel.map((item) => item.title))
+            );
         }
     }, [data, dispatch]);
 

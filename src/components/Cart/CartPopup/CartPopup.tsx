@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import "./CartPopup.scss";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -7,22 +7,27 @@ import {
     getProducts,
     getIsTablet,
     getNewCartItem,
+    getShowAddedToCart,
 } from "../../../store/actionsTypes";
-import { SetPopupCartStatus } from "../../../store/actionCreators";
+import {
+    SetPopupCartStatus,
+    setShowAddedToCart,
+} from "../../../store/actionCreators";
 import { CartPopupItem } from "../CartPopupItem";
 import { Link } from "react-router-dom";
 import { CheckmarkIcon } from "../../common/CheckmarkIcon";
 
 export const CartPopup = () => {
+    const dispatch = useDispatch();
+
     const cartPopupStatus = useSelector(getCartPopupStatus);
-    const disptach = useDispatch();
     const cart = useSelector(getCart);
     const newCartItem = useSelector(getNewCartItem);
     const goods = useSelector(getProducts);
 
     const isTablet = useSelector(getIsTablet);
 
-    const [showAddedToCart, setShowAddedToCart] = useState(false);
+    const showAddedToCart = useSelector(getShowAddedToCart);
 
     const totalPrice = useMemo(() => {
         if (goods.length) {
@@ -47,22 +52,31 @@ export const CartPopup = () => {
     }, []);
 
     useEffect(() => {
-        if (cart.length) {
-            setShowAddedToCart(true);
+        if (showAddedToCart) {
             timeoutRef.current = setTimeout(
-                () => setShowAddedToCart(false),
+                () => dispatch(setShowAddedToCart(false)),
                 2500
             );
         }
-    }, [cart]);
+    }, [showAddedToCart, dispatch]);
 
     useEffect(() => {
         const { current } = timeoutRef;
         if (current) {
             clearTimeout(current);
         }
-        setShowAddedToCart(cartPopupStatus);
-    }, [cartPopupStatus]);
+        dispatch(setShowAddedToCart(cartPopupStatus));
+    }, [cartPopupStatus, dispatch]);
+
+    useEffect(() => {
+        if (isTablet && cartPopupStatus) {
+            const html = document.querySelector("html")!;
+            html.style.overflow = "hidden";
+        } else {
+            const html = document.querySelector("html")!;
+            html.style.overflow = "scroll";
+        }
+    }, [isTablet, cartPopupStatus]);
 
     const newCartItemProd = useMemo(() => {
         if (newCartItem) {
@@ -111,8 +125,8 @@ export const CartPopup = () => {
         cart.length > 0 ? (
             <div
                 className="CartPopup"
-                onMouseEnter={() => disptach(SetPopupCartStatus(true))}
-                onMouseLeave={() => disptach(SetPopupCartStatus(false))}
+                onMouseEnter={() => dispatch(SetPopupCartStatus(true))}
+                onMouseLeave={() => dispatch(SetPopupCartStatus(false))}
             >
                 <div className="CartPopup__Prods">
                     <ul className="CartPopup__List">
@@ -148,7 +162,7 @@ export const CartPopup = () => {
                     </p>
                     <Link to="/cart" className="CartPopup__LinkToOrder">
                         <span
-                            onClick={() => disptach(SetPopupCartStatus(false))}
+                            onClick={() => dispatch(SetPopupCartStatus(false))}
                         >
                             оформить заказ
                         </span>
@@ -158,8 +172,8 @@ export const CartPopup = () => {
         ) : (
             <div
                 className="CartPopup CartPopup__Empty"
-                onMouseEnter={() => disptach(SetPopupCartStatus(true))}
-                onMouseLeave={() => disptach(SetPopupCartStatus(false))}
+                onMouseEnter={() => dispatch(SetPopupCartStatus(true))}
+                onMouseLeave={() => dispatch(SetPopupCartStatus(false))}
             >
                 корзина пустая.
             </div>

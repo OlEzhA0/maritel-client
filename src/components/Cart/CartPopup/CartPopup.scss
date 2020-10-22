@@ -126,15 +126,20 @@
 @media only screen and (max-device-width: 480px) {
     .CartPopup {
         width: 100%;
+        height: calc(100% - 42px);
+        max-height: calc(100% - 42px);
         top: 42px;
 
         &__Prods {
-            height: calc(100vh - 162px);
+            height: calc(100% - 120px);
             max-height: unset;
             padding: 40px 4% 0;
         }
 
         &__Buttons {
+            width: 100%;
+            position: fixed;
+            bottom: 0;
             background: #fff;
         }
 

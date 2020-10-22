@@ -211,6 +211,13 @@ const BannerType = new GraphQLObjectType({
     },
 });
 
+const BannerCarouselType = new GraphQLObjectType({
+    name: "BannerCarousel",
+    fields: {
+        title: { type: GraphQLString },
+    },
+});
+
 const Mutation = new GraphQLObjectType({
     name: "Mutation",
     fields: {
@@ -485,6 +492,12 @@ const Query = new GraphQLObjectType({
             type: new GraphQLList(PromoType),
             resolve() {
                 return Promo.find({});
+            },
+        },
+        carousel: {
+            type: new GraphQLList(BannerCarouselType),
+            resolve() {
+                return Banner.find({ for: "carousel" });
             },
         },
     },

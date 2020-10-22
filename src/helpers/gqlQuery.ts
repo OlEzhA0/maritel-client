@@ -237,5 +237,8 @@ export const initialQuery = gql`
             facebook
             telegram
         }
+        carousel {
+            title
+        }
     }
 `;

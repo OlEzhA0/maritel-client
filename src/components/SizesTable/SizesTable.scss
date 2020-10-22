@@ -45,13 +45,9 @@
 
 @media only screen and (max-device-width: 480px) {
     .SizesTable {
-        max-height: 100vh;
+        max-height: 100%;
         overflow-y: scroll;
         font-size: 3.2vw;
-
-        &__ModalOverlay.Maritel__ModalOverlay {
-            background-color: rgba(0, 0, 0, 0.5);
-        }
 
         &__Title {
             display: flex;

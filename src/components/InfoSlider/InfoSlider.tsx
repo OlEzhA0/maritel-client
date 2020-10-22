@@ -1,9 +1,8 @@
 import cn from "classnames";
 import React, { useEffect, useState } from "react";
-import { INFO_SLIDER } from "../../helpers";
 import "./InfoSlider.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { getMenuStatus } from "../../store/actionsTypes";
+import { getCarousel, getMenuStatus } from "../../store/actionsTypes";
 import { setMenuStatus, setDeviceStatus } from "../../store/actionCreators";
 
 type TransitionMS = 4 | 0;
@@ -16,10 +15,18 @@ export const InfoSlider: React.FC<Props> = ({ visible }) => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [itemWidth, setItemWidth] = useState(600);
     const [left, setLeft] = useState(0);
-    const [info, setInfo] = useState(INFO_SLIDER);
+    const [info, setInfo] = useState<string[]>([]);
     const [transitionMS, setTransitionMs] = useState<TransitionMS>(4);
     const dispatch = useDispatch();
     const menuStatus = useSelector(getMenuStatus);
+
+    const carouselItems = useSelector(getCarousel);
+
+    carouselItems.map(console.log);
+
+    useEffect(() => {
+        setInfo(carouselItems);
+    }, [carouselItems]);
 
     const handleCarousel = (path: number) => {
         if (menuStatus) {
@@ -30,13 +37,13 @@ export const InfoSlider: React.FC<Props> = ({ visible }) => {
         const pos = nextWidth / itemWidth;
 
         if (pos === info.length) {
-            setInfo([...info, ...INFO_SLIDER]);
+            setInfo([...info, ...carouselItems]);
         }
 
         if (pos === -1) {
             const newLeft = itemWidth * info.length;
             setLeft(newLeft);
-            setInfo([...INFO_SLIDER, ...info]);
+            setInfo([...carouselItems, ...info]);
             setTransitionMs(0);
 
             setTimeout(() => {

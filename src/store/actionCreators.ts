@@ -21,6 +21,8 @@ import {
     SET_PROMO,
     SET_SEARCH_QUERY,
     SET_MAIN_SETTINGS,
+    SET_CAROUSEL,
+    SET_SHOW_ADDED_TO_CART,
 } from "./actions";
 import { Customer } from "./customer";
 
@@ -143,5 +145,15 @@ export const setSearchQuery = (payload: string) => ({
 
 export const setMainSettings = (payload: MainSettings) => ({
     type: SET_MAIN_SETTINGS,
+    payload,
+});
+
+export const setCarousel = (payload: string[]) => ({
+    type: SET_CAROUSEL,
+    payload,
+});
+
+export const setShowAddedToCart = (payload: boolean) => ({
+    type: SET_SHOW_ADDED_TO_CART,
     payload,
 });

@@ -70,3 +70,5 @@ export const getIsLogged = (state: RootState) =>
 export const getPromo = (state: RootState) => state.promo;
 export const getSearchQuery = (state: RootState) => state.searchQuery;
 export const getMainSettings = (state: RootState) => state.mainSettings;
+export const getCarousel = (state: RootState) => state.carousel;
+export const getShowAddedToCart = (state: RootState) => state.showAddedToCart

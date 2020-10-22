@@ -17,6 +17,8 @@ import CustomerReducer from "./customer";
 import PromoReducer from "./promo";
 import SearchQueryReducer from "./searchQuery";
 import MainSettingsReducer from "./mainSettings";
+import CarouselReducer from "./carousel";
+import ShowAddedToCartReducer from "./showAddedToCart";
 
 const rootReducer = combineReducers({
     categories: CategoriesReducer,
@@ -35,6 +37,8 @@ const rootReducer = combineReducers({
     promo: PromoReducer,
     searchQuery: SearchQueryReducer,
     mainSettings: MainSettingsReducer,
+    carousel: CarouselReducer,
+    showAddedToCart: ShowAddedToCartReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

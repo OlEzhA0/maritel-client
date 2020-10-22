@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const Breadcrumbs: React.FC<Props> = ({ path }) => {
-    const links: Props["path"] = [{ url: "/", name: "HOME" }];
+    const links: Props["path"] = [{ url: "/", name: "Главная" }];
 
     let url = "";
 
