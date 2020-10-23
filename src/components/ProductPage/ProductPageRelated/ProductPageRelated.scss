@@ -13,13 +13,16 @@
     }
 
     &__RelatedItem {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: relative;
         margin-right: 16px;
+        margin-top: 5px;
         cursor: pointer;
         border-radius: 50%;
-        border: 0.5px solid #ccc;
         &::after {
             transition: all 0.3s;
             content: "";
@@ -29,23 +32,17 @@
             border: 2px solid #fff;
             box-sizing: border-box;
             border-radius: 50%;
-            left: -5px;
-            top: -5px;
         }
 
         &:hover::after {
             border: 2px solid #969696;
         }
 
+
         &--choosen {
-            width: 40px;
-            height: 40px;
-            transform: translate(-1px, -5px);
             box-sizing: border-box;
             position: relative;
-            margin-right: 11px;
-
-            &::after {
+            &:after {
                 display: none;
             }
         }
@@ -53,9 +50,11 @@
 
     &__RelLink {
         position: absolute;
-        width: 100%;
-        height: 100%;
+        width: 30px;
+        height: 30px;
         z-index: 2;
+        border: 0.5px solid #ccc;
+        border-radius: 50%;
     }
 
     &__Gasket {

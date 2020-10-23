@@ -169,7 +169,22 @@
 @media only screen and (max-device-width: 480px) {
     .CartPage {
         width: 100%;
+        margin: 75px 0 0 0;
         padding: 0;
+
+        &__TitlePage {
+            font-size: 20px;
+        }
+
+        &__CountProds {
+            padding-bottom: 3px;
+            font-size: 13px;
+            line-height: 16px;
+        }
+
+        &__InfoTitle {
+            margin-bottom: 15px;
+        }
 
         &__RegisterOrder,
         &__FormContainer,

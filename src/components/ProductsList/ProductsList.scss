@@ -236,6 +236,7 @@
         background-color: #fff;
         box-sizing: border-box;
         transition: all 0.8s;
+        z-index: 1;
         @media screen and (max-width: 415px) {
             position: fixed;
             margin-left: 0;

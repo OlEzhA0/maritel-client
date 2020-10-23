@@ -23,37 +23,40 @@ export const CategoryPage = () => {
             (category.banners[0] as BannerCategory).position
         ) {
             const result: JSX.Element[] = [];
-            const topBanner =
-                (category.banners as BannerCategory[]).find(
-                    ({ position }) => position === "top"
-                ) || {} as BannerCategory;
-            result.push(
-                <Banner
-                    text={topBanner.title}
-                    buttonText={topBanner.buttonText}
-                    imgLink={topBanner.image}
-                    link={topBanner.link}
-                />
+            const topBanner = (category.banners as BannerCategory[]).find(
+                ({ position }) => position === "top"
             );
 
-            const bottomBanner =
-                (category.banners as BannerCategory[]).find(
-                    ({ position }) => position === "bottom"
-                ) || {} as BannerCategory;
+            if (topBanner) {
+                result.push(
+                    <Banner
+                        text={topBanner.title}
+                        buttonText={topBanner.buttonText}
+                        imgLink={topBanner.image}
+                        link={topBanner.link}
+                    />
+                );
+            }
 
-            result.push(
-                <Banner
-                    text={bottomBanner.title}
-                    buttonText={bottomBanner.buttonText}
-                    imgLink={bottomBanner.image}
-                    link={bottomBanner.link}
-                />
+            const bottomBanner = (category.banners as BannerCategory[]).find(
+                ({ position }) => position === "bottom"
             );
+
+            if (bottomBanner) {
+                result.push(
+                    <Banner
+                        text={bottomBanner.title}
+                        buttonText={bottomBanner.buttonText}
+                        imgLink={bottomBanner.image}
+                        link={bottomBanner.link}
+                    />
+                );
+            }
 
             return result;
         }
 
-        return [<Banner />, <Banner />];
+        return [null, null];
     }, [category]);
 
     useEffect(() => {

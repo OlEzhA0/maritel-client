@@ -151,6 +151,7 @@ export const Header: React.FC<Props> = ({ visible }) => {
                                 dispatch(SetPopupCartStatus(!cartPopupStatus));
                             }}
                         />
+                        <span className="Header__CartItemCount">{cartItemsCount && `(${cartItemsCount})`}</span>
                         <img
                             src="/images/header/zoom.svg"
                             alt="zoom"

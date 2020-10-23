@@ -194,10 +194,17 @@
     &__Cart {
         width: 18px;
         height: 22.5px;
-
         &--mobile {
-            margin-right: 24px;
+            margin-right: 4px;
         }
+    }
+
+    &__CartItemCount {
+        margin-right: 14px;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.16rem;
+        line-height: 15px;
     }
 
     &__SearchIcon {

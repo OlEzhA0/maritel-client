@@ -107,15 +107,29 @@
         }
 
         &__ImgWrap {
-            width: 35%;
+            width: 30%;
             max-height: 150px;
             height: unset;
+        }
+
+        &__Inf {
+            width: 70%;
+        }
+
+        &__Title {
+            font-size: 12px;
+        }
+
+        &__SmallInfo {
+            margin-top: 8px;
+            font-weight: 500;
         }
 
         &__Price {
             position: absolute;
             right: 4%;
             bottom: 10%;
+            font-size: 13px;
         }
 
         &__LastPrice {
@@ -123,6 +137,7 @@
             right: 4%;
             bottom: 0;
             margin-bottom: 0;
+            font-size: 13px;
         }
 
         &__Del {
